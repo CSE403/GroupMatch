@@ -11,4 +11,9 @@ class Index extends \Saros\Application\Controller
 	{
 		$this->view->Version = \Saros\Version::getVersion();
 	}
+    
+    public function registerAction()
+    {
+        $this->view->Version = \Saros\Version::getVersion();
+    }
 }
