@@ -132,6 +132,7 @@ registerAction() is the User registration page</string>
     <void property="methods"> 
      <void property="text"> 
       <string>indexAction()
+addAction()
 solutionAction()</string> 
      </void> 
     </void> 
@@ -153,14 +154,15 @@ solutionAction()</string>
     <void property="text"> 
      <void property="text"> 
       <string>indexAction() displays the poll
+addAction() shows the page a user adds there preferences on
 solutionAction() is shows the solution</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>798.0</double> 
-     <double>739.0</double> 
+     <double>791.0</double> 
+     <double>759.0</double> 
     </void> 
    </object> 
   </void> 
