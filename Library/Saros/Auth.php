@@ -72,7 +72,7 @@ class Auth
 	{
 		if (is_null($this->storage))
 			$this->storage = new Auth\Storage\Session();
-
+            
 		return $this->storage;
 	}
 
@@ -85,8 +85,7 @@ class Auth
 			throw new Auth\Exception("You must set an authentication adapter before attempting to authenticate.");
 
 		$result = $this->adapter->authenticate();
-
-
+        
 		/*
 		To be safe, we need to make sure we don't have an identity stored
 		before we try to store a new one
@@ -104,7 +103,7 @@ class Auth
 
 	public function hasIdentity()
 	{
-		return $this->getStorage()->hasIdentity();
+		return $this->getStorage()->hasIdentity();   
 	}
 
 	public function getIdentity()

@@ -31,7 +31,7 @@ class Setup
 	static function doSetup($registry)
 	{
 		// Set up our config values
-		$registry->config->siteUrl = "";
+		$registry->config->siteUrl = "http://groupmatch.cs.washington.edu/";
 		$registry->config->rewriting = true;
                         
 		// Set the default theme

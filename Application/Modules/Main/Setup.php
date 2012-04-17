@@ -34,13 +34,12 @@ class Setup
 	public function doSetup($registry)
 	{
         $cfg = new \Spot\Config();
-        $cfg->addConnection('mysql', 'mysql://USERNAME:PASSWORD@HOSTNAME/DATABASE');
+        $cfg->addConnection('mysql', 'mysql://ewhite12:ym49pYZe@cubist.cs.washington.edu/ewhite12_groupMatch');
         $registry->mapper = new \Spot\Mapper($cfg);
 
         $auth = \Saros\Auth::getInstance();
 
         $authAdapter = new \Saros\Auth\Adapter\Spot\Plain($registry->mapper, '\Application\Entities\Users', "username", "password");
-
         $auth->setAdapter($authAdapter);
 	}
 }
