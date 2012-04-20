@@ -8,10 +8,11 @@ namespace Spot;
  * @author Vance Lucas <vance@vancelucas.com>
  * @link http://spot.os.ly
  */
-class Query implements \Countable, \IteratorAggregate
+class Query implements \Countable, \IteratorAggregate, QueryInterface
 {
     protected $_mapper;
     protected $_entityName;
+    protected $_cache;
     
     // Storage for query properties
     public $fields = array();
@@ -275,15 +276,27 @@ class Query implements \Countable, \IteratorAggregate
     /**
      * SPL Countable function
      * Called automatically when attribute is used in a 'count()' function call
+     * Caches results when there are no query changes
      *
      * @return int
      */
     public function count()
     {
-		// Execute query
-		$result = $this->mapper()->connection($this->entityName())->count($this);
+        $obj = $this;
+        // New scope with closure to get only PUBLIC properties of object instance (can't include cache property)
+        $cacheKey = function() use($obj) { return sha1(var_export(get_object_vars($obj), true)) . "_count"; };
+        $cacheResult = isset($this->_cache[$cacheKey()]) ? $this->_cache[$cacheKey()] : false;
+
+        // Check cache
+        if($cacheResult) {
+            $result = $cacheResult;
+        } else {
+        	// Execute query
+        	$result = $this->mapper()->connection($this->entityName())->count($this);
+            // Set cache
+            $this->_cache[$cacheKey()] = $result;
+        }
 		
-		//return count
         return is_numeric($result) ? $result : 0;
     }
     
@@ -320,7 +333,7 @@ class Query implements \Countable, \IteratorAggregate
      * @return mixed Spot_Entity on success, boolean false on failure
      */
     public function first()
-    {               
+    {
         $result = $this->limit(1)->execute();
         return ($result !== false) ? $result->first() : false;
     }

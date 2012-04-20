@@ -401,7 +401,6 @@ class Mapper
         // Run validation
         if($this->validate($entity)) {
             $pk = $this->primaryKey($entity);
-                        
             // No primary key, insert
             if(empty($pk)) {
                 $result = $this->insert($entity);

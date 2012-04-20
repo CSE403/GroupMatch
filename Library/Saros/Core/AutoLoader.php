@@ -37,7 +37,11 @@ class AutoLoader
     */
     public static function autoload($classname)
     {
-
+        // Skip PHPUnit files
+        if(false !== strpos($classname, 'PHPUnit_')) {
+            return false;
+        }
+        
         // Convert the class name to an array of parts
         $parts = explode("\\",$classname);
 

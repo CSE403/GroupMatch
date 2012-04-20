@@ -14,9 +14,9 @@
 class Tests_AllTests
 {
     public static function main()
-    {
+    {      
     	//$parameters = array('verbose' => true);
-        PHPUnit_TextUI_TestRunner::run(self::suite());//, $parameters);
+        \PHPUnit_TextUI_TestRunner::run(self::suite());//, $parameters);
 
     }
 
@@ -31,17 +31,24 @@ class Tests_AllTests
         {
             // Something like: Test\Application\Modules\Main\Controllers\Index.php
             $path =  "Test\\".$it->getInnerIterator()->getSubPathname();
-
+            
+            //echo $path."\n\n";
+            
             // Replace all of the \ with _
-            $className = str_replace('\\', "_", $path);
+            //$className = str_replace('\\', "_", $path);
+            
             // Take off the extension
-            $className = substr($className, 0, -4);
+            $className = substr($path, 0, -4);
 
+            echo $path."\n";
+            echo $className."\n\n";
+            
             require_once($path);
-            $suite->addTestSuite($className);
-
-        }
-
+            $obj = new $className;
+                     
+            $suite->addTestSuite($obj);
+        }                      
+        
         return $suite;
     }
 }

@@ -38,7 +38,7 @@ abstract class RelationAbstract
 
         // Checks ...
         if(null === $this->_entityName) {
-            throw new \InvalidArgumentException("Relation description key 'entity' not set.");
+            throw new \InvalidArgumentException("Relation description key 'entity' must be set to an Entity class name.");
         }
     }
     
@@ -119,8 +119,8 @@ abstract class RelationAbstract
     public function __toString()
     {
         // Load related records for current row
-        $success = $this->findAllRelation();
-        return ($success) ? "1" : "0";
+        $res = $this->execute();
+        return ($res) ? "1" : "0";
     }
     
     
@@ -138,7 +138,7 @@ abstract class RelationAbstract
      */
     public function execute()
     {
-        if(!$this->_collection) { 
+        if(!$this->_collection) {
             $this->_collection = $this->toQuery();
         }
         return $this->_collection;
@@ -150,6 +150,11 @@ abstract class RelationAbstract
      */
     public function __call($func, $args)
     {
-        return call_user_func_array(array($this->execute(), $func), $args);
+        $obj = $this->execute();
+        if(is_object($obj)) {
+            return call_user_func_array(array($obj, $func), $args);
+        } else {
+            return $obj;
+        }
     }
 }

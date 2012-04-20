@@ -1,4 +1,7 @@
 <?php
+
+namespace Test\Core;
+
 /**
  * Tests for Saros_Core_Registry
  *
@@ -10,7 +13,7 @@
  * @link http://sarosoftware.com
  * @link http://github.com/TheSavior/Saros-Framework
  */
-class Test_Core_Registry extends Saros_Test_TestCase
+class Registry extends \Saros\Test\TestCase
 {
 	protected $backupGlobals = false;
 
@@ -20,7 +23,7 @@ class Test_Core_Registry extends Saros_Test_TestCase
 	 * Setup/fixtures for each test
 	 */
 	//public function setUp()	{
-		//$this->registry = new Saros_Core_Registry();
+    	//$this->registry = new Saros_Core_Registry();
 	//}
 	public function tearDown() {}
 

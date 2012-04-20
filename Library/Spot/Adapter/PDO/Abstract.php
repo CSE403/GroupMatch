@@ -250,11 +250,13 @@ abstract class PDO_Abstract extends AdapterAbstract implements AdapterInterface
             if($stmt) {
                 // Execute
                 if($stmt->execute($binds)) {
-                    $result = $this->connection()->lastInsertId();
-                } else {       
+                    // Use 'id' if PK exists, otherwise returns true
+                    $id = $this->connection()->lastInsertId();
+                    $result = $id ? $id : true;
+                } else {
                     $result = false;
                 }
-            } else {    
+            } else {
                 $result = false;
             }
         } catch(\PDOException $e) {
@@ -266,6 +268,7 @@ abstract class PDO_Abstract extends AdapterAbstract implements AdapterInterface
             // Re-throw exception
             throw $e;
         }
+        
         return $result;
     }
 
@@ -285,7 +288,7 @@ abstract class PDO_Abstract extends AdapterAbstract implements AdapterInterface
             foreach($query->order as $oField => $oSort) {
                 $order[] = $oField . " " . $oSort;
             }
-        }   
+        }
         
         $sql = "
             SELECT " . $this->statementFields($query->fields) . "
@@ -294,8 +297,8 @@ abstract class PDO_Abstract extends AdapterAbstract implements AdapterInterface
             " . ($query->group ? 'GROUP BY ' . implode(', ', $query->group) : '') . "
             " . ($order ? 'ORDER BY ' . implode(', ', $order) : '') . "
             " . ($query->limit ? 'LIMIT ' . $query->limit : '') . " " . ($query->limit && $query->offset ? 'OFFSET ' . $query->offset: '') . "
-            ";            
-            
+            ";
+        
         // Unset any NULL values in binds (compared as "IS NULL" and "IS NOT NULL" in SQL instead)
         if($binds && count($binds) > 0) {
             foreach($binds as $field => $value) {

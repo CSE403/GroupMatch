@@ -4,7 +4,7 @@ namespace Saros\Test\Controllers;
 /**
 * This file should be inherited when testing controllers
 */
-abstract class TestCase extends PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
 	protected $object;
 	/**

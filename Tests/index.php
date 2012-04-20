@@ -13,16 +13,17 @@
  */
 
 error_reporting(E_ALL);
-// Require PHPUnit Files
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Framework/TestSuite.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
 
 define("ROOT_PATH",  realpath(dirname(dirname(__FILE__)))."/");
 
 // This is needed to allow us to load fixtures
 function autoload($classname)
 {
+    // Skip PHPUnit files
+    if(false !== strpos($classname, 'PHPUnit_')) {
+        return false;
+    }
+    
     $parts = explode("_",$classname);
 
 	$fileLocation = implode('/',$parts).".php";
@@ -39,16 +40,17 @@ function autoload($classname)
 }
 spl_autoload_register('autoload');
 
+
 require_once('Library/Saros/Core/AutoLoader.php');
-spl_autoload_register(array('Saros_Core_AutoLoader', 'autoload'));
+spl_autoload_register(array('Saros\Core\AutoLoader', 'autoload'));
 
 // I don't like calling this here. I'm not quite sure how to solve this
-Saros_Session::start();
+Saros\Session::start();
 
-// Include the spot tests
-require_once(ROOT_PATH."Library/Spot/tests/AllTests.php");
-Spot_Tests::main();
-echo "\n\n";
+// Include the spot tests                               
+//require_once(ROOT_PATH."Library/Spot/Tests/AllTests.php");
+//Spot_Tests::main();
+//echo "\n\n";
 
 // Run the Saros Framework tests
 Tests_AllTests::main();

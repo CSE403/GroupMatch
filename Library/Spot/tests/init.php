@@ -31,7 +31,7 @@ $adapter = $cfg->addConnection('test_mongodb', 'mongodb://localhost:28017', arra
  */
 $mapper = new \Spot\Mapper($cfg);
 function test_spot_mapper() {
-    global $mapper;
+    global $mapper;        
     return $mapper;
 }
 
@@ -40,6 +40,7 @@ function test_spot_mapper() {
  * Autoload test fixtures
  */
 function test_spot_autoloader($className) {
+    
     // Don't attempt to autoload 'PHPUnit_' or 'Spot' namespaced classes
     if(false !== strpos($className, 'PHPUnit_') || false !== strpos($className, 'Spot')) {
         return false;

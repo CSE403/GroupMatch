@@ -20,6 +20,7 @@ class Test_Session extends PHPUnit_Framework_TestCase
 	{
 		session_destroy();
 	}
+    
 	/**
 	*test get, set
 	* iterable, count

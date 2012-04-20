@@ -51,7 +51,7 @@ class HasMany extends RelationAbstract implements \Countable, \IteratorAggregate
      * @return \Spot\Entity\Collection
      */
     public function getIterator()
-    {       
+    {
         // Load related records for current row
         $data = $this->execute();
         return $data ? $data : array();
