@@ -35,7 +35,7 @@ class Manager
     {
         if(!is_string($entityName)) {
             throw new \Spot\Exception(__METHOD__ . " only accepts a string. Given (" . gettype($entityName) . ")");
-        }
+        }                                     
         
         if(!is_subclass_of($entityName, '\Spot\Entity')) {
             throw new \Spot\Exception($entityName . " must be subclass of '\Spot\Entity'.");

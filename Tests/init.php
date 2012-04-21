@@ -20,16 +20,23 @@ define("ROOT_PATH",  realpath(dirname(dirname(__FILE__)))."/");
 function autoload($classname)
 {
     // Skip PHPUnit files
-    if(false !== strpos($classname, 'PHPUnit_')) {
-        return false;
-    }
+    //if(false !== strpos($classname, 'PHPUnit_')) {
+    //    return false;
+    //}
     
     $parts = explode("_",$classname);
 
 	$fileLocation = implode('/',$parts).".php";
-
-    if (file_exists($fileLocation))
+    
+    //echo $fileLocation;
+    /*if (false !== strpos($classname, "Fixture")){
+        die(getcwd()."\\".$fileLocation);
+        die(var_dump(file_exists($fileLocation)));
         require_once($fileLocation);
+    }*/
+    
+    if (file_exists("Tests/".$fileLocation))
+        require_once("Tests/".$fileLocation);
     // We want to check for named libraries
     // It is a named library when $parts[0] matches a folder in Library
     else if(is_dir("Library/".$parts[0]))
@@ -53,7 +60,6 @@ Saros\Session::start();
 //echo "\n\n";
 
 // Run the Saros Framework tests
-Tests_AllTests::main();
 
 
 

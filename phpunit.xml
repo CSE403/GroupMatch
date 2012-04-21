@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<phpunit processIsolation="false" strict="false" backupGlobals="false" backupStaticAttributes="false" stopOnError="false" stopOnFailure="false" stopOnSkipped="false" stopOnIncomplete="false" tmp="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9InllcyI/Pjx0ZXN0c3VpdGVzPjx0ZXN0c3VpdGUgbmFtZT0iTmV3IFN1aXRlIj48ZGlyZWN0b3J5Lz48L3Rlc3RzdWl0ZT48L3Rlc3RzdWl0ZXM+">
+<phpunit processIsolation="false" strict="false" backupGlobals="false" backupStaticAttributes="false" stopOnError="false" stopOnFailure="false" stopOnSkipped="false" stopOnIncomplete="false" tmp="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiIHN0YW5kYWxvbmU9InllcyI/Pjx0ZXN0c3VpdGVzLz4=">
   <php/>
 </phpunit>

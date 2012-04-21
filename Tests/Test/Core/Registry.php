@@ -1,7 +1,5 @@
 <?php
-
 namespace Test\Core;
-
 /**
  * Tests for Saros_Core_Registry
  *
@@ -28,7 +26,7 @@ class Registry extends \Saros\Test\TestCase
 	public function tearDown() {}
 
 	/**
-     * @expectedException Saros_Core_Exception
+     * @expectedException \Saros\Core\Exception
      */
 	public function testNonExistentKeyThrows()
 	{
@@ -37,7 +35,7 @@ class Registry extends \Saros\Test\TestCase
 
 	public function testImplementsArrayAccess()
 	{
-		$this->assertTrue($this->object instanceof ArrayAccess);
+		$this->assertTrue($this->object instanceof \ArrayAccess);
 	}
 
 	public function testMagicFunctionSetGet()

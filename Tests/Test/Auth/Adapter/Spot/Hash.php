@@ -1,6 +1,5 @@
 <?php
 namespace Test\Auth\Adapter\Spot;
-
 /**
  * Tests for Saros_Core_Registry
  *
@@ -20,11 +19,10 @@ class Hash extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
     {
-        die("lol");
     	$cfg = new \Spot\Config();
 		$adapter = $cfg->addConnection('test_mysql', 'mysql://test:password@localhost/test');
 
-		$entity = "Fixture_Auth_UserEntity";
+		$entity = "\\Fixture\\Auth\\UserEntity";
 
 		$mapper = new \Spot\Mapper($cfg);
 		$mapper->migrate($entity);
@@ -39,10 +37,9 @@ class Hash extends \PHPUnit_Framework_TestCase
     }
 
 	public function testUserCanLogIn()
-	{
-        die("1");
+	{           
 		$test = $this->sharedFixture["Mapper"];
-
+        die(var_dump($test));
 		$user = $test->get($this->sharedFixture["EntityName"]);
 		$user->username = "Eli";
 		$user->salt = "3aca";
@@ -60,8 +57,7 @@ class Hash extends \PHPUnit_Framework_TestCase
 
 	// Find a way to make this and the test before it share code
 	public function testInvalidUserCantLogIn()
-	{
-        die("2");
+	{            
 		$test = $this->sharedFixture["Mapper"];
 
 		$user = $test->get($this->sharedFixture["EntityName"]);

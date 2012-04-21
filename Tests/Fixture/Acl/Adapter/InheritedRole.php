@@ -1,4 +1,4 @@
-<?php
+<?php  
 class Fixture_Acl_Adapter_InheritedRole implements Saros_Acl_RoleManager_Interface
 {
 	public function getUserPermissions()

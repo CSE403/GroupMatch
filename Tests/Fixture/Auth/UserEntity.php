@@ -1,4 +1,5 @@
 <?php
+namespace Fixture\Auth;
 /**
  * Blog Mapper
  *
@@ -6,16 +7,20 @@
  * @link http://spot.os.ly
  * @link http://github.com/actridge/Spot
  */
-class Fixture_Auth_UserEntity extends Spot_Entity_Abstract
+class UserEntity extends \Spot\Entity
 {
 		// table name
-	protected $_datasource = "saros_users";
+	protected static $_datasource = "saros_users";
 
-	// Field list
-	public $id = array("type" => "int", "primary" => true, "serial" => true);
-	public $username = array("type" => "string");
-	public $password = array("type" => "string");
-	public $salt = array("type" => "string");
-	public $email = array("type" => "string");
-	public $active = array("type" => "int");
+    public static function fields()
+    {
+        return array(
+            'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
+            'username' => array('type' => 'string'),
+            'password' => array('type' => 'string'),
+            'salt' => array('type' => 'string'),
+            'email' => array('type' => 'string'),
+            'active' => array('type' => 'int'),
+        );
+    }
 }

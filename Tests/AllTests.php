@@ -1,4 +1,7 @@
 <?php
+
+require_once dirname(__FILE__) . '/init.php';
+
 /**
  * All tests to be run
  *
@@ -15,8 +18,7 @@ class Tests_AllTests
 {
     public static function main()
     {      
-    	//$parameters = array('verbose' => true);
-        \PHPUnit_TextUI_TestRunner::run(self::suite());//, $parameters);
+        PHPUnit_TextUI_TestRunner::run(self::suite());
 
     }
 
@@ -24,6 +26,23 @@ class Tests_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Test Suite');
 
+        $path = dirname(__FILE__) . '/Test/';
+        $dirIterator = new RecursiveDirectoryIterator($path);
+        $Iterator = new RecursiveIteratorIterator($dirIterator);
+        $tests = new RegexIterator($Iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+        
+        foreach($tests as $file) {
+            $filename = current($file);
+            require $filename;
+            
+            // Class file name by naming standards
+            $fileClassName = substr(str_replace(DIRECTORY_SEPARATOR, '\\', substr($filename, strlen($path))), 0, -4);
+            $suite->addTestSuite('Test\\'.$fileClassName);
+        }
+        return $suite;
+        
+        
+        /*
         $it = new RecursiveIteratorIterator(
         		new RecursiveDirectoryIterator(dirname(__FILE__) . '/Test'));
 
@@ -50,5 +69,6 @@ class Tests_AllTests
         }                      
         
         return $suite;
+        */
     }
 }

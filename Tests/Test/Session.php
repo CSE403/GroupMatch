@@ -1,4 +1,5 @@
 <?php
+namespace Test;
 /**
  * Tests for Saros_Core_Registry
  *
@@ -10,7 +11,7 @@
  * @link http://sarosoftware.com
  * @link http://github.com/TheSavior/Saros-Framework
  */
-class Test_Session extends PHPUnit_Framework_TestCase
+class Session extends \PHPUnit_Framework_TestCase
 {
 	protected $backupGlobals = false;
 
@@ -31,7 +32,7 @@ class Test_Session extends PHPUnit_Framework_TestCase
 	*/
     public function testVarExists()
     {
-		$sess1 = new Saros_Session("testSet");
+		$sess1 = new \Saros\Session("testSet");
 		$sess1->name = "foo";
 
 		$this->assertSame("foo", $sess1->name);
@@ -39,22 +40,22 @@ class Test_Session extends PHPUnit_Framework_TestCase
 
     public function testSameInTwoInstances()
     {
-		$sess1 = new Saros_Session("testMultiple", true);
+		$sess1 = new \Saros\Session("testMultiple", true);
 		$sess1->name = "foo";
 
-		$sess2 = new Saros_Session("testMultiple", true);
+		$sess2 = new \Saros\Session("testMultiple", true);
 		$this->assertSame("foo", $sess2->name);
 
 		$this->assertSame("foo", $sess2['name']);
     }
 
     /**
-     * @expectedException Saros_Session_Exception
+     * @expectedException \Saros\Session\Exception
      */
 	public function testSameNamespaceThrows()
 	{
-		$sess1 = new Saros_Session("name");
-		$sess2 = new Saros_Session("name");
+		$sess1 = new \Saros\Session("name");
+		$sess2 = new \Saros\Session("name");
 	}
 
 }

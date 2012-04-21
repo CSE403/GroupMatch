@@ -1,5 +1,7 @@
 <?php
-class Fixture_Acl_Identity implements Saros_Auth_Identity_Interface
+namespace Fixture\Acl\Adapter;
+
+class Identity implements \Saros\Auth\Identity\IIdentity
 {
 	public function getIdentifier()
 	{
