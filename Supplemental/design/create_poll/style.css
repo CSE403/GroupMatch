@@ -1,0 +1,49 @@
+/*
+	Colors:
+		blue: 00AEF1
+		yellow: FBE93E
+*/
+#page_content section header {
+	min-height: 35px;
+}
+
+	#page_content section header button {
+		float: right;
+		font-size: 20px;
+	}
+	
+	
+	#page_content section header input {
+		width: 300px;
+		margin-top: 1px;
+	}
+
+ul {
+	width: 500px;
+	margin: 0 auto;
+}
+
+	ul #headers {
+		font-size: 20px;
+		font-weight: 200;
+	}
+	ul #answers_header {
+		float:left;
+		width: 320px;
+	}
+
+li {
+	margin-bottom: 10px;
+}
+
+ul input.answer {
+	width: 300px;
+}
+
+ul input[type="checkbox"] {
+	margin: 0 20px;
+}
+
+ul input.limit {
+	width: 50px;
+}
