@@ -24,6 +24,7 @@ input[type="text"], input[type="password"], input[type="email"] {
 	width: 300px;
 }
 
+
 /*******************************************************************************
 *	Top Bar
 *******************************************************************************/
@@ -37,7 +38,7 @@ header[id="top_bar"] {
 	/* positioning */
 	position: fixed;
 	top: 0;
-	z-index: 100;
+	/* z-index: 100; */
 	
 	/* spacing */
 	padding-top: 0px;
@@ -166,6 +167,10 @@ header[id="top_bar"] {
 		
 		header[id="top_bar"] .auth_control.login form > * {
 			margin-top: 5px;
+		}
+		
+		header[id="top_bar"] .auth_control input {
+			width: 178px;
 		}
 		
 		header[id="top_bar"] .auth_control form a {
