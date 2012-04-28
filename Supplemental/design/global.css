@@ -14,10 +14,14 @@ body {
 	font-family: Gill Sans, sans-serif;
 }
 
-input {
+input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
 	font-family: Helvetica;
 	font-weight: 100;
 	padding: 4px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 300px;
 }
 
 /*******************************************************************************
@@ -33,6 +37,7 @@ header[id="top_bar"] {
 	/* positioning */
 	position: fixed;
 	top: 0;
+	z-index: 100;
 	
 	/* spacing */
 	padding-top: 0px;
@@ -98,11 +103,12 @@ header[id="top_bar"] {
 			color: #DDD;
 			line-height: 40px;
 			text-decoration: none;
+			text-shadow: 0px -1px 1px #333;
 		}
 		
 		header[id="top_bar"] nav a:hover {
 			color: white;
-			cursor: hand;
+			text-shadow: 0px -1px 1px black;
 		}
 		
 		header[id="top_bar"] nav a.selected {
@@ -152,10 +158,14 @@ header[id="top_bar"] {
 			vertical-align: middle;
 			
 			/* spacing */
-			margin-top: 5px;
+			margin-top: 7px;
 			
 			/* font */
 			font-size: 15px;
+		}
+		
+		header[id="top_bar"] .auth_control.login form > * {
+			margin-top: 5px;
 		}
 		
 		header[id="top_bar"] .auth_control form a {
@@ -252,7 +262,6 @@ header[id="top_bar"] {
 	}
 
 	#page_content input {
-		width: 300px;
 		margin-bottom: 10px;
 	}
 	
@@ -297,9 +306,9 @@ section.form_error {
 *	Footer
 *******************************************************************************/	
 	
-footer {
-	/* height: 50px;
-	background: #FBE93E; */
+#page_container > footer {
+	min-height: 50px;
+	/* background: #FBE93E; */
 }
 
 /*******************************************************************************
