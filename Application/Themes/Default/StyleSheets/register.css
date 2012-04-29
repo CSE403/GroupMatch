@@ -1,0 +1,8 @@
+form[name="register"] {
+    min-height: 175px;
+    width: 300px;
+}
+
+form[name="register"] button {
+    float:right;
+}

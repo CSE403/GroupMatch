@@ -8,12 +8,11 @@ class Index extends \Saros\Application\Controller
     }
     
 	public function indexAction()
-	{
-		$this->view->Version = \Saros\Version::getVersion();
+	{                                                        
 	}
     
     public function registerAction()
     {
-        $this->view->Version = \Saros\Version::getVersion();
+        $this->view->headStyles()->addStyle("register");
     }
 }

@@ -9,11 +9,10 @@ class Poll extends \Saros\Application\Controller
     
     public function indexAction()
     {
-        $this->view->Version = \Saros\Version::getVersion();
+        $this->view->headStyles()->addStyle("poll");
     }
     
     public function solutionAction()
-    {
-        $this->view->Version = \Saros\Version::getVersion();
+    {                                                      
     }
 }
