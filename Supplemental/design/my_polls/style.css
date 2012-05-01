@@ -1,0 +1,57 @@
+/*
+	Colors:
+		blue: 00AEF1
+		yellow: FBE93E
+*/
+#page_content section header button {
+	font-size: 20px;
+}
+
+ul {
+	color: black;
+	width: 700px;
+	font-style: italic;
+}
+
+ul:hover {
+	color: #DDD;
+	text-shadow: 0px 0px 5px #555;
+}
+
+li {
+	padding: 5px 5px 15px 5px;
+	border-radius: 3px;
+}
+
+li:hover {
+	/* background: #DDD; */
+	color: black;
+	font-style: normal;
+	text-shadow: 0px 0px 0px #555;
+}
+
+ul header a {
+	font-size: 20px;
+	color: inherit;
+	font-weight: 200;
+	font-family: Helvetica;
+	text-decoration: none;
+}
+
+ul header a:hover {
+	/* font-style: italic; */
+	/* color: #3579BA; */
+	/* text-decoration: underline; */
+}
+
+ul footer {
+	margin-left: 20px;
+	color: inherit;
+	font-weight: 200;
+	/* font-family: Helvetica; */
+}
+
+ul button {
+	float: right;
+	font-size: 15px;
+}

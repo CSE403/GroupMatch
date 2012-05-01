@@ -1,0 +1,65 @@
+/*
+	Colors:
+		blue: 00AEF1
+		yellow: FBE93E
+*/
+#page_content section header {
+	min-height: 35px;
+}
+
+	#page_content section header button {
+		float: right;
+		margin-top: 7px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+form[name="create_poll"] {
+	width: 530px;
+}
+
+	form[name="create_poll"] input[type="number"] {
+		width: 55px;
+	}
+	
+	form[name="create_poll"] section {
+		/* spacing */
+		margin-bottom: 20px;
+		padding: 10px;
+		
+		background: #F5F5F5;
+		
+		/* border */
+		border-left: solid;
+		border-width: 1px;
+		border-color: #AAA;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+
+		form[name="create_poll"] section h1 {
+			/* spacing */
+			margin-bottom: 15px;
+			
+			/* text */
+			font-family: Helvetica;
+			font-weight: 100;
+			font-size: 20px;
+		}
+		
+		form[name="create_poll"] section input[type="number"] {
+			margin-left: 10px;
+		}
+		
+		form[name="create_poll"] section footer {
+			margin-left: 15px;
+			font-family: Helvetica Neue, Helvetica;
+		}
+
+li {
+	margin-bottom: 10px;
+}
+
+li input[type="checkbox"] {
+	margin: 0 20px;
+}

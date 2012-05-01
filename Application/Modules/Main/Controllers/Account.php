@@ -8,17 +8,17 @@ class Account extends \Saros\Application\Controller
         
         if (!$auth->hasIdentity()) {
             $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
-            $this->redirect($homeLink);
+            //$this->redirect($homeLink);
         }
     }
     
     public function indexAction()
     {
-        $this->view->Version = \Saros\Version::getVersion();
+        $this->view->headStyles()->addStyle("myPolls");
     }
     
     public function createAction()
     {
-        $this->view->Version = \Saros\Version::getVersion();
+        $this->view->headStyles()->addStyle("createPoll");
     }
 }

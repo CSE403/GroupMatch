@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../reset.css" />
+		<link rel="stylesheet" type="text/css" href="../global.css" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<header id="top_bar">
+			<h1>GroupMatch</h1>
+			<nav>
+				<a href="../">About</a>
+				<a href="../my_polls">Polls</a>
+				<a class="selected">Create</a>
+			</nav>
+			<div class="auth_control logout">
+				<div class="divider"></div>
+				<form name="logout">
+					<button class="red">Logout</button>
+				</form>
+			</div>
+		</header>
+		
+		<div id="page_container">
+			<div id="page_content">
+				<section>
+					<header>
+						<div><h1>Title</h1></div>
+						<button form="create_poll" type="submit" class="green">Create</button>
+						<input form="create_poll" name="title" type="text" placeholder="Tile or Question"/>
+					</header>
+					<section class="form_error">
+						This is an error message
+					</section>
+					<form name="create_poll" class="indent">
+						<section>
+							<h1>Description</h1>
+							<textarea rows="3" cols="52" maxlength="300" placeholder="Type a description here"></textarea>
+						</section>
+						<section>
+							<h1>Universal Participant Limit</h1>
+							<footer>
+								<input name="option_all_limit" type="checkbox"/> Participant limit per answer <input name="option_all_limit_amount" type="number" placeholder="10" disabled="disabled">
+							</footer>
+						</section>
+						<section>
+							<h1>Answer type</h1>
+							<footer>
+								<div><input name="answer_type" type="radio" checked="checked"/> Yes / No</div>
+								<div><input name="answer_type" type="radio"/> Yes / Neutral / No</div>
+								<div><input name="answer_type" type="radio"/> Uniquely rate each option</div>
+								<div><input name="answer_type" type="radio"/> Rate on scale between 1 and <input name="scale_max" type="number" placeholder="4" min="5" max="100" value="4" disabled="disabled"></div>
+							</footer>
+						</section>
+						<section>
+							<h1>Options / Unique Participant Limit</h1>
+							<footer>
+								<ul>
+									<li>
+										<input name="option_1" type="text" placeholder="Option"/>
+										<input name="option_1_limit" type="checkbox"/>
+										<input name="option_1_limit_amount" type="number" placeholder="10" min="1" disabled="disabled">
+									</li>
+									<li>
+										<input name="option_1" type="text" placeholder="Option"/>
+										<input name="option_1_limit" type="checkbox"/>
+										<input name="option_1_limit_amount" type="number" placeholder="10" min="1" disabled="disabled">
+									</li>
+									<li>
+										<input name="option_1" type="text" placeholder="Option"/>
+										<input name="option_1_limit" type="checkbox"/>
+										<input name="option_1_limit_amount" type="number" placeholder="10" min="1" disabled="disabled">
+									</li>
+									<li>
+										<input name="option_1" type="text" placeholder="Option"/>
+										<input name="option_1_limit" type="checkbox"/>
+										<input name="option_1_limit_amount" type="number" placeholder="10" min="1" disabled="disabled">
+									</li>
+									<li>
+										
+									</li>
+								</ul>
+								<button class="green">Add Answers</button>
+							</footer>
+						</section>
+					</form>
+					
+				</section>
+			</div>
+			<footer>
+				
+			</footer>
+		</div>
+	</body>
+</html>

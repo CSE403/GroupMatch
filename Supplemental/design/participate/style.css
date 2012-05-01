@@ -1,0 +1,70 @@
+/*
+	Colors:
+		blue: 00AEF1
+		yellow: FBE93E
+*/
+#page_content section header {
+	min-height: 35px;
+}
+
+form[name="participate_form"] {
+	width: 530px;
+	padding-bottom: 40px;
+}
+
+	form[name="participate_form"] input[type="number"] {
+		width: 55px;
+	}
+	
+	form[name="participate_form"] section {
+		/* spacing */
+		margin-bottom: 20px;
+		padding: 10px;
+		
+		background: #F5F5F5;
+		
+		/* border */
+		border-left: solid;
+		border-width: 1px;
+		border-color: #AAA;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+
+		form[name="participate_form"] section h1 {
+			/* spacing */
+			margin-bottom: 15px;
+			
+			/* text */
+			font-family: Helvetica;
+			font-weight: 100;
+			font-size: 20px;
+		}
+		
+		form[name="participate_form"] section input[type="number"] {
+			margin-left: 10px;
+		}
+		
+		form[name="participate_form"] section footer {
+			margin-left: 15px;
+		}
+	
+	form[name="participate_form"] button {
+		float: right;
+	}
+
+li {
+	padding: 7px;
+	margin-bottom: 10px;
+	border-radius: 3px;
+}
+
+li:hover {
+	background: #EEE;
+}
+
+	li header {
+		width: 250px;
+		float: left;
+		margin-right: 10px;
+	}

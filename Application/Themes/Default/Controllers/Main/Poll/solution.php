@@ -1,1 +1,1 @@
-  poll solution page
+poll solution

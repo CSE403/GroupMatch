@@ -1,22 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Saros Framework</title>
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->getThemeLocation()?>/Images/favicon.ico" />
-	<?php echo $this->headStyles()->addStyle("Main") ?>
-	<?php echo $this->headScripts() ?>
-</head>
-<body>
-	<div id="container">
-		<div id="main">
-			<?php
-            echo $this->content() 
-            ?>
-		</div>
-		<div id="footer">
-            <?php echo \Spot\Log::queryCount() ?> Queries
-		</div>
-	</div>
-</body>
+<html>
+    <head>
+        <!-- <script type="text/javascript" src="lib/anim.js"></script> -->
+        <?php echo $this->headStyles()->prependStyle("global")->prependStyle("reset") ?>
+    </head>
+    <body>
+        <header id="top_bar">
+            <h1>GroupMatch</h1>
+            <nav>
+                <?php
+                    $register = $GLOBALS["registry"]->utils->makeLink("Index", "register");
+                ?>
+                <a class="selected">About</a>
+                <a href="<?php echo $register ?>">Register</a>
+            </nav>
+            <div class="auth_control login">
+                <div class="divider"></div>
+                <form name="login">
+                    <button class="icon green" type="submit">Login</button>
+                    <input name="email" type="email" placeholder="Email" required="required">
+                    <input name="password" type="password" placeholder="Password" required="required">
+                    <button class="green" type="submit">Login</button>
+                    <a href="./forgot_password">Forgot Password</a>
+                </form>
+            </div>
+        </header>
+        
+        <div id="page_container">
+            <div id="page_content">
+                <?php
+                echo $this->content() 
+                ?>
+            </div>
+            <footer>
+                
+            </footer>
+        </div>
+    </body>
 </html>

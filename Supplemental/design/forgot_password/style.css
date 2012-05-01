@@ -1,0 +1,8 @@
+form[name="forgot_password"] {
+	min-height: 90px;
+	width: 300px;
+}
+
+form[name="forgot_password"] button {
+	float:right;
+}
