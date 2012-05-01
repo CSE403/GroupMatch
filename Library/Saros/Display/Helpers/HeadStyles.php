@@ -18,14 +18,30 @@ class HeadStyles extends HelperBase
 
 	public function addStyle($name)
 	{
-		$style = $this->display->getThemeLocation()."StyleSheets/".$name.".css";
-		if (!file_exists(ROOT_PATH.$style))
-			throw new \Saros\Display\Exception("Stylesheet ".$name." could not be found at ".ROOT_PATH.$style);
+	    $style = $this->verifyStyle($name);
 
 		$this->styles[] = $GLOBALS['registry']->config["siteUrl"].$style;
 
 		return $this;
 	}
+    
+    public function prependStyle($name) 
+    {
+        $style = $this->verifyStyle($name);
+
+        array_unshift($this->styles, $GLOBALS['registry']->config["siteUrl"].$style);
+
+        return $this;
+    }
+    
+    private function verifyStyle($name)
+    {
+        $style = $this->display->getThemeLocation()."StyleSheets/".$name.".css";
+        if (!file_exists(ROOT_PATH.$style))
+            throw new \Saros\Display\Exception("Stylesheet ".$name." could not be found at ".ROOT_PATH.$style);
+            
+        return $style;
+    }
 
 	public function __toString()
 	{
