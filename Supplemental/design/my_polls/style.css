@@ -19,8 +19,7 @@ ul:hover {
 }
 
 li {
-	padding: 5px;
-	margin-bottom: 10px;
+	padding: 5px 5px 15px 5px;
 	border-radius: 3px;
 }
 
@@ -42,7 +41,7 @@ ul header a {
 ul header a:hover {
 	/* font-style: italic; */
 	/* color: #3579BA; */
-	text-decoration: underline;
+	/* text-decoration: underline; */
 }
 
 ul footer {

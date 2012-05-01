@@ -7,22 +7,16 @@
 	min-height: 35px;
 }
 
-	#page_content section header button {
-		float: right;
-		margin-top: 7px;
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-form[name="create_poll"] {
+form[name="participate_form"] {
 	width: 530px;
+	padding-bottom: 40px;
 }
 
-	form[name="create_poll"] input[type="number"] {
+	form[name="participate_form"] input[type="number"] {
 		width: 55px;
 	}
 	
-	form[name="create_poll"] section {
+	form[name="participate_form"] section {
 		/* spacing */
 		margin-bottom: 20px;
 		padding: 10px;
@@ -37,7 +31,7 @@ form[name="create_poll"] {
 		border-bottom-right-radius: 3px;
 	}
 
-		form[name="create_poll"] section h1 {
+		form[name="participate_form"] section h1 {
 			/* spacing */
 			margin-bottom: 15px;
 			
@@ -47,19 +41,30 @@ form[name="create_poll"] {
 			font-size: 20px;
 		}
 		
-		form[name="create_poll"] section input[type="number"] {
+		form[name="participate_form"] section input[type="number"] {
 			margin-left: 10px;
 		}
 		
-		form[name="create_poll"] section footer {
+		form[name="participate_form"] section footer {
 			margin-left: 15px;
-			font-family: Helvetica Neue, Helvetica;
 		}
+	
+	form[name="participate_form"] button {
+		float: right;
+	}
 
 li {
+	padding: 7px;
 	margin-bottom: 10px;
+	border-radius: 3px;
 }
 
-li input[type="checkbox"] {
-	margin: 0 20px;
+li:hover {
+	background: #EEE;
 }
+
+	li header {
+		width: 250px;
+		float: left;
+		margin-right: 10px;
+	}

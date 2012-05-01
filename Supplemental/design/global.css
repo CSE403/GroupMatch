@@ -14,10 +14,15 @@ body {
 	font-family: Gill Sans, sans-serif;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+textarea {
+	resize: none;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea {
+	padding: 4px;
+	font-size: 17px;
 	font-family: Helvetica;
 	font-weight: 100;
-	padding: 4px;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
@@ -144,6 +149,8 @@ header[id="top_bar"] {
 		/* positioning */
 		position: relative;
 		float: right;
+		/* position: fixed;
+		right: 0px; */
 		
 		/* spacing */
 		margin-right: 5px;
@@ -215,6 +222,7 @@ header[id="top_bar"] {
 	
 	header[id="top_bar"] .auth_control.login {
 		/* positioning */
+		/* left: 0px; */
 		left: 577px;
 		
 		/* animation */
@@ -251,10 +259,6 @@ header[id="top_bar"] {
 	
 	/* spacing */
 	margin: 0px auto 0px auto;
-	
-	/* box-shadow: 0 0 10px 0px #555; */
-	/* padding: 20px; */
-	/* border: black solid 1px; */
 }
 
 #page_content {
