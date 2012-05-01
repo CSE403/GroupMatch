@@ -66,13 +66,13 @@
 		border-left-color: #3EC5F8;
 		border-radius: 3px;
 		
-		/* -webkit-transition: width 1s ease;
-		-webkit-transition-delay: .2s; */
+		-webkit-transition: width 1s ease;
+		-webkit-transition-delay: .2s;
 	}
-	/* 
+
 	#happy_meter #meter_value:hover {
 		width: 99.8%;
-	} */
+	}
 	
 #answer {
 	font-size: 30px;
