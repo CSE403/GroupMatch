@@ -1,16 +1,17 @@
 <?php
 namespace Application\Entities;
 
-class Users extends \Spot\Entity
+class Answer extends \Spot\Entity
 {
-	protected static $_datasource = 'users';
+    protected static $_datasource = 'answers';
 
     public static function fields()
     {
         return array(
             'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
-            'username' => array('type' => 'string'),
-            'password' => array('type' => 'string'),
+            'personId' => array('type' => 'int'),
+            'optionId' => array('type' => 'int'),
+            'priority' => array('type' => 'int'),
         );
     }
     

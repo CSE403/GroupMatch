@@ -1,9 +1,9 @@
 <?php
 namespace Application\Entities;
 
-class Options extends \Spot\Entity
+class Person extends \Spot\Entity
 {
-    protected static $_datasource = 'options';
+    protected static $_datasource = 'persons';
 
     public static function fields()
     {
@@ -11,7 +11,6 @@ class Options extends \Spot\Entity
             'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
             'pollId' => array('type' => 'int'),
             'name' => array('type' => 'string'),
-            'maxSize' => array('type' => 'int'),
         );
     }
     

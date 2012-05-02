@@ -1,17 +1,17 @@
 <?php
 namespace Application\Entities;
 
-class Answers extends \Spot\Entity
+class Option extends \Spot\Entity
 {
-    protected static $_datasource = 'answers';
+    protected static $_datasource = 'options';
 
     public static function fields()
     {
         return array(
             'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
-            'personId' => array('type' => 'int'),
-            'optionId' => array('type' => 'int'),
-            'priority' => array('type' => 'int'),
+            'pollId' => array('type' => 'int'),
+            'name' => array('type' => 'string'),
+            'maxSize' => array('type' => 'int'),
         );
     }
     

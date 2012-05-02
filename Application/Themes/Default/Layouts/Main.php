@@ -22,7 +22,6 @@
                 <div class="divider"></div>
                 <form name="login">
                     <?php
-                        
                         $loginLink = $GLOBALS["registry"]->utils->makeLink("Account");
                     ?>
                     <button class="icon green" type="submit">Login</button>
