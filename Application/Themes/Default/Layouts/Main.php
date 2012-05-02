@@ -1,6 +1,11 @@
 <html>
     <head>
-        <!-- <script type="text/javascript" src="lib/anim.js"></script> -->
+        <!-- jQuery  
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+        -->
+        <!-- our script  
+        <script type="text/javascript" src="lib/util.js"></script>
+        -->
         <?php echo $this->headStyles()->prependStyle("global")->prependStyle("reset") ?>
     </head>
     <body>
