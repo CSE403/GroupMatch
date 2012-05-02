@@ -21,10 +21,14 @@
             <div class="auth_control login">
                 <div class="divider"></div>
                 <form name="login">
+                    <?php
+                        
+                        $loginLink = $GLOBALS["registry"]->utils->makeLink("Account");
+                    ?>
                     <button class="icon green" type="submit">Login</button>
                     <input name="email" type="email" placeholder="Email" required="required">
                     <input name="password" type="password" placeholder="Password" required="required">
-                    <button class="green" type="submit">Login</button>
+                    <button onClick="location.href='<?= $loginLink ?>'" class="green" type="submit">Login</button>
                     <a href="./forgot_password">Forgot Password</a>
                 </form>
             </div>
