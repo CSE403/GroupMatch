@@ -31,11 +31,16 @@ class Setup
 	static function doSetup($registry)
 	{
 		// Set up our config values
+        
+        // This is the URL where you installed the app. This must end with a /
 		$registry->config->siteUrl = "http://groupmatch.cs.washington.edu/";
+        
+        // Let's use rewriting, our host supports it.
 		$registry->config->rewriting = true;
                         
 		// Set the default theme
 		$registry->display->setTheme("Default");
+        
 		// Set up the controller's template
 		$registry->display->setLayout("Main");
 	}

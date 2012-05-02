@@ -33,12 +33,18 @@ class Setup
 	 */
 	public function doSetup($registry)
 	{
+        // We need a new config object
         $cfg = new \Spot\Config();
+        // Lets add the mysql connection, we use the DSN (Database Specific Connection String) 
         $cfg->addConnection('mysql', 'mysql://ewhite12:ym49pYZe@cubist.cs.washington.edu/ewhite12_groupMatch');
+        
+        // Create the Spot Mapper that we will use to connect to the db
         $registry->mapper = new \Spot\Mapper($cfg);
 
+        // We need this auth instance to handle logins
         $auth = \Saros\Auth::getInstance();
 
+        // We are doing plain authentication against the User entity with the given fields for security
         $authAdapter = new \Saros\Auth\Adapter\Spot\Plain($registry->mapper, '\Application\Entities\Users', "username", "password");
         $auth->setAdapter($authAdapter);
 	}
