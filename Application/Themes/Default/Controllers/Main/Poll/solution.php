@@ -1,3 +1,11 @@
+<!-- 
+    Poll/solution.php
+    
+    This php webpage will pop up when the user navigates to it from a specific poll. Given that poll, 
+    and its user responses, this page will display the "most optimal" group assignments, as well as 
+    the "happiness meter", which sums up how well this assignment met all users wants for their group
+    assignments.
+-->
 <section>
 	<header>
 		<button class="green">Back to Poll</button>
