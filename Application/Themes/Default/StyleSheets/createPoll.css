@@ -1,8 +1,3 @@
-/*
-	Colors:
-		blue: 00AEF1
-		yellow: FBE93E
-*/
 #page_content section header {
 	min-height: 35px;
 }
@@ -53,6 +48,7 @@ form[name="create_poll"] {
 		
 		form[name="create_poll"] section footer {
 			margin-left: 15px;
+			font-family: Helvetica Neue, Helvetica;
 		}
 
 li {

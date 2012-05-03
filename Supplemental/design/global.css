@@ -29,7 +29,6 @@ input[type="text"], input[type="password"], input[type="email"] {
 	width: 300px;
 }
 
-
 /*******************************************************************************
 *	Top Bar
 *******************************************************************************/
@@ -212,7 +211,7 @@ header[id="top_bar"] {
 			-webkit-transition-delay: .5s;
 		}
 		
-		header[id="top_bar"] .auth_control:hover  a {
+		header[id="top_bar"] .auth_control:hover  a, header[id="top_bar"] .auth_control.stay a {
 			top: 35px;
 		}
 		
@@ -230,7 +229,8 @@ header[id="top_bar"] {
 		-webkit-transition-delay: .1s;
 	}
 	
-	header[id="top_bar"] .auth_control.login:hover {
+	
+	header[id="top_bar"] .auth_control.login:hover, header[id="top_bar"] .auth_control.login.stay {
 		left: 187px;
 	}
 	
@@ -241,7 +241,7 @@ header[id="top_bar"] {
 		-webkit-transition-delay: .2s;
 	}
 	
-	header[id="top_bar"] .auth_control.login:hover .icon {
+	header[id="top_bar"] .auth_control.login:hover .icon, header[id="top_bar"] .auth_control.login.stay .icon {
 		opacity: 0;
 		width: 0px;
 		margin: 0px;

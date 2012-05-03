@@ -1,3 +1,9 @@
+<!-- 
+    index.php
+    
+    This php script depicts the ZFR of the users main account index (the front page). Displayed in this page
+    are the polls that the user has created, as well as options to create new polls.
+-->
 <?php
     $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll");
 ?>
@@ -5,6 +11,11 @@
     <header>
         <h1>Poll Management</h1>
     </header>
+    <!-- 
+        All polls that the user has created will be displayed here. Each poll item on the user's page
+        gives the name of that poll and a link to the actual webpage of that poll, so the user can see
+        who has used his poll, and to see the current solution.
+    -->
     <ul class="indent">
         <li>
             <button class="red">Delete</button>
@@ -25,6 +36,7 @@
 </section>
 <section>
     <header>
+        <!-- Link to creating new polls-->
         <?php
             $createLink = $GLOBALS["registry"]->utils->makeLink("Account", "create");
         ?>

@@ -1,3 +1,9 @@
+<!-- 
+    Index/register.php
+    
+    This php webpage is for users to register with the website. After users input their information, a user account
+    will be created, and they will be redirected to their hompage.
+-->
 <section>
     <header>
         <h1>We just need a bit of information</h1>
