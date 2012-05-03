@@ -1,14 +1,11 @@
-/*
-	Colors:
-		blue: 00AEF1
-		yellow: FBE93E
-*/
 #page_content section header {
 	min-height: 35px;
 }
 
 	#page_content section header button {
 		float: right;
+		
+		/* spacing */
 		margin-top: 7px;
 		padding-left: 10px;
 		padding-right: 10px;

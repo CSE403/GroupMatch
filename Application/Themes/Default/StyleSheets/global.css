@@ -1,8 +1,15 @@
 /*
+	This file contains all of the shared styles across the various pages.
+	Each page's local styling is contained in it's self named css file.
+	  
 	Colors:
 		blue: 00AEF1
 		yellow: FBE93E
 */
+
+/*******************************************************************************
+*	Top level elements and global styles
+*******************************************************************************/
 
 ::selection {
 	color: white;
@@ -313,7 +320,6 @@ section.form_error {
 	
 #page_container > footer {
 	min-height: 50px;
-	/* background: #FBE93E; */
 }
 
 /*******************************************************************************
@@ -353,13 +359,6 @@ button.orange {
 	/* shadow */
 	box-shadow: 1px 1px 3px #DDD;
 }
-
-/* button.orange:hover {
-	
-	text-shadow: 0px -1px .5px #B38437;
-	background: -webkit-linear-gradient(top, #F3AB38, #ED9A15);
-	border-color: #9C6307;
-} */
 
 button.purple {
 	/* font */
