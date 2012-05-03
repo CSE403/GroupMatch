@@ -54,18 +54,28 @@ public class PollSolution implements Cloneable
 		Option curBestOption = null;
 		for (Option option : optionsToPeople.keySet())
 		{
-			if (curBestOption == null
-					|| person.getOptionValue(option) > person
-							.getOptionValue(curBestOption)
-					|| (person.getOptionValue(option) == person
+			if (OptionIsValid(option, person)
+					&& (curBestOption == null
+							|| person.getOptionValue(option) > person
+									.getOptionValue(curBestOption) || (person
+							.getOptionValue(option) == person
 							.getOptionValue(curBestOption) && optionsToPeople
 							.get(curBestOption).size() > optionsToPeople.get(
-							option).size()))
+							option).size())))
 			{
 				curBestOption = option;
 			}
 		}
 		return curBestOption;
+	}
+
+	private boolean OptionIsValid(Option option, Person person)
+	{
+		addPersonToOption(person, option);
+		boolean isValid = !hasConflicts();
+		removePersonFromOption(person, option);
+		return isValid;
+
 	}
 
 	public Map<Option, List<Person>> getSolutionMap()
@@ -80,7 +90,7 @@ public class PollSolution implements Cloneable
 	}
 
 	public void addPersonToOption(Person person, Option option)
-	{		
+	{
 		optionsToPeople.get(option).add(person);
 		starValue += person.getOptionValue(option);
 		if (optionsToPeople.get(option).size() == maxPerOption)

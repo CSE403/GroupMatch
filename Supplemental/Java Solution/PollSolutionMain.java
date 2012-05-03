@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,31 +29,28 @@ public class PollSolutionMain
 		}
 		List<Option> options = DB.getOptions(pollID);
 		PollSolution pollSolution = new PollSolution(options, persons.size());
-		List<Person> secondPassPerson = new ArrayList<Person>();
 		Option bestOption;
-		int i = 0;
 		for (Person person : persons)
 		{
 			bestOption = pollSolution.findBestOption(person);
 			pollSolution.addPersonToOption(person, bestOption);
-			if (pollSolution.hasConflicts())
-			{
-				secondPassPerson.add(person);
-				pollSolution.removePersonFromOption(person, bestOption);
-			} else
-			{
-				System.out.println(" " + i++ + "@" + System.currentTimeMillis());
-			}
 		}
-		for (Person person : secondPassPerson)
+		PollSolution curBestSolution = null;
+		for (int i = 1; i <= 4; i++)
 		{
-			bestOption = pollSolution.findBestOption(person);
-			pollSolution.addPersonToOption(person, bestOption);
-			if (pollSolution.hasConflicts())
-				pollSolution = move(pollSolution, 4, options);
-			System.out.println(" " + i++ + "@" + System.currentTimeMillis());
+			curBestSolution = null;
+			int j = 0;
+			while (curBestSolution == null
+					|| curBestSolution.getStarValue() < pollSolution
+							.getStarValue())
+			{
+				curBestSolution = pollSolution.clone();
+				pollSolution = move(pollSolution, i, options);
+				System.out.println("" + j++ + "@" + System.currentTimeMillis());
+			}
+			System.out.println("\t" + i + "@" + System.currentTimeMillis());
 		}
-		return pollSolution;
+		return curBestSolution;
 	}
 
 	private static PollSolution move(PollSolution pollSolution, int depth,
