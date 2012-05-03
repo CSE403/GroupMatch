@@ -1,17 +1,31 @@
 <?php       
     namespace Application\Modules\Main\Controllers;
-
+    /**
+        The poll controller houses all the logic needed for displaying the polls, as well as generating the
+        "best answer" based on the current poll entries.
+    */
     class Poll extends \Saros\Application\Controller
     {
+        /**
+            Initializes the poll page.
+            @ZFR: Doesn't initialize anything. The data is hard coded.
+        */
         public function init() {
 
         }
 
+        /**
+            Redirected the user to his/her poll page
+        */
         public function indexAction()
         {
             $this->view->headStyles()->addStyle("poll");
         }
-
+        
+        /**
+            On the user's poll page, there is a link to generate the current answer. This function
+            generates that answer, and then displays it on the same page as the "Happiness meter".
+        */
         public function solutionAction($pollId)
         {     
             // Verify that this exists
@@ -50,8 +64,10 @@
             $this->view->Solution = $pollSolution; 
         }
 
-        /**
-        * return \Application\Modules\Main\Models\PollSolution
+        /** 
+            Private method used by the solution solver, which finds the order of people that generates the 
+            most "happiness", but by moving people from group to group $deptch times.
+            return \Application\Modules\Main\Models\PollSolution
         */
         private function move(\Application\Modules\Main\Models\PollSolution $pollSolution, $depth, $options) {
             // PollSolutions we are working with 
