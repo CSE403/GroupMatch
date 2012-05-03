@@ -1,15 +1,21 @@
-/*
-	Colors:
-		blue: 00AEF1
-		yellow: FBE93E
-*/
 #page_content section header button {
 	font-size: 20px;
 }
 
+#page_content section section {
+	width: 700px;
+}
+
+#page_content h2 {
+	margin-bottom: 7px;
+	font-size: 20px;
+	font-weight: 100;
+	font-family: Helvetica;
+	font-style: italic;
+}
+
 ul {
 	color: black;
-	width: 700px;
 	font-style: italic;
 }
 
@@ -19,8 +25,7 @@ ul:hover {
 }
 
 li {
-	padding: 5px;
-	margin-bottom: 10px;
+	padding: 5px 5px 15px 5px;
 	border-radius: 3px;
 }
 
@@ -42,7 +47,7 @@ ul header a {
 ul header a:hover {
 	/* font-style: italic; */
 	/* color: #3579BA; */
-	text-decoration: underline;
+	/* text-decoration: underline; */
 }
 
 ul footer {

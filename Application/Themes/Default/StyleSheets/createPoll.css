@@ -4,8 +4,6 @@
 
 	#page_content section header button {
 		float: right;
-		
-		/* spacing */
 		margin-top: 7px;
 		padding-left: 10px;
 		padding-right: 10px;
@@ -50,6 +48,7 @@ form[name="create_poll"] {
 		
 		form[name="create_poll"] section footer {
 			margin-left: 15px;
+			font-family: Helvetica Neue, Helvetica;
 		}
 
 li {
