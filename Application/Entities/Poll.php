@@ -1,7 +1,7 @@
 <?php
 namespace Application\Entities;
 
-class Polls extends \Spot\Entity
+class Poll extends \Spot\Entity
 {
     protected static $_datasource = 'polls';
 

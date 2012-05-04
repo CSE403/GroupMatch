@@ -14,16 +14,20 @@ body {
 	font-family: Gill Sans, sans-serif;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+textarea {
+	resize: none;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea {
+	padding: 4px;
+	font-size: 17px;
 	font-family: Helvetica;
 	font-weight: 100;
-	padding: 4px;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
 	width: 300px;
 }
-
 
 /*******************************************************************************
 *	Top Bar
@@ -144,6 +148,8 @@ header[id="top_bar"] {
 		/* positioning */
 		position: relative;
 		float: right;
+		/* position: fixed;
+		right: 0px; */
 		
 		/* spacing */
 		margin-right: 5px;
@@ -205,7 +211,7 @@ header[id="top_bar"] {
 			-webkit-transition-delay: .5s;
 		}
 		
-		header[id="top_bar"] .auth_control:hover  a {
+		header[id="top_bar"] .auth_control:hover  a, header[id="top_bar"] .auth_control.stay a {
 			top: 35px;
 		}
 		
@@ -215,6 +221,7 @@ header[id="top_bar"] {
 	
 	header[id="top_bar"] .auth_control.login {
 		/* positioning */
+		/* left: 0px; */
 		left: 577px;
 		
 		/* animation */
@@ -222,7 +229,8 @@ header[id="top_bar"] {
 		-webkit-transition-delay: .1s;
 	}
 	
-	header[id="top_bar"] .auth_control.login:hover {
+	
+	header[id="top_bar"] .auth_control.login:hover, header[id="top_bar"] .auth_control.login.stay {
 		left: 187px;
 	}
 	
@@ -233,7 +241,7 @@ header[id="top_bar"] {
 		-webkit-transition-delay: .2s;
 	}
 	
-	header[id="top_bar"] .auth_control.login:hover .icon {
+	header[id="top_bar"] .auth_control.login:hover .icon, header[id="top_bar"] .auth_control.login.stay .icon {
 		opacity: 0;
 		width: 0px;
 		margin: 0px;
@@ -251,10 +259,6 @@ header[id="top_bar"] {
 	
 	/* spacing */
 	margin: 0px auto 0px auto;
-	
-	/* box-shadow: 0 0 10px 0px #555; */
-	/* padding: 20px; */
-	/* border: black solid 1px; */
 }
 
 #page_content {

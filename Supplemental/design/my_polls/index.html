@@ -1,5 +1,7 @@
 <html>
 	<head>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="../lib/util.js"></script>
 		<link rel="stylesheet" type="text/css" href="../reset.css" />
 		<link rel="stylesheet" type="text/css" href="../global.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
@@ -15,7 +17,7 @@
 			<div class="auth_control logout">
 				<div class="divider"></div>
 				<form name="logout">
-					<button class="red">Logout</button>
+					<button class="red" name="logout">Logout</button>
 				</form>
 			</div>
 		</header>
@@ -26,23 +28,26 @@
 					<header>
 						<h1>Poll Management</h1>
 					</header>
-					<ul class="indent">
-						<li>
-							<button class="red">Delete</button>
-							<header><a href="../poll">When should our team meet?</a></header>
-							<footer>www.groupmatch.com/poll/ogn3f0waf3lqvnlk230</footer>
-						</li>
-						<li>
-							<button class="red">Delete</button>
-							<header><a href="../poll">Group project preference</a></header>
-							<footer>www.groupmatch.com/poll/sw3jkdvb3ek9uthj5</footer>
-						</li>
-						<li>
-							<button class="red">Delete</button>
-							<header><a href="../poll">Volunteer at the homeless shelter</a></header>
-							<footer>www.groupmatch.com/poll/asw3v03u1u151208ndv</footer>
-						</li>
-					</ul>
+					<section class="indent">
+						<h2 id="no_polls_message" style="display:none;">You don't have any polls</h2>
+						<ul id="poll_list">
+							<li>
+								<button class="red" name="delete_poll">Delete</button>
+								<header><a href="../poll">When should our team meet?</a></header>
+								<footer>www.groupmatch.com/poll/ogn3f0waf3lqvnlk230</footer>
+							</li>
+							<li>
+								<button class="red" name="delete_poll">Delete</button>
+								<header><a href="../poll">Group project preference</a></header>
+								<footer>www.groupmatch.com/poll/sw3jkdvb3ek9uthj5</footer>
+							</li>
+							<li>
+								<button class="red" name="delete_poll">Delete</button>
+								<header><a href="../poll">Volunteer at the homeless shelter</a></header>
+								<footer>www.groupmatch.com/poll/asw3v03u1u151208ndv</footer>
+							</li>
+						</ul>
+					</section>
 				</section>
 			</div>
 			<footer>

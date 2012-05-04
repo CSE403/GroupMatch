@@ -1,3 +1,12 @@
+<!-- 
+    Index/index.php
+    
+    This php webpage is for the front page of the overall website. It gives an explanation as to why we exist, and why 
+    you should use our webpage.
+    
+    Users that have already logged in will have this frontpage replaced with their homepage the next time they come to 
+    the website.
+-->
 <section>
     <header>
         <h1>What is GroupMatch?</h1>
