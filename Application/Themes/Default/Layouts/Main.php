@@ -27,7 +27,7 @@
                     <input name="email" type="email" placeholder="Email" required="required">
                     <input name="password" type="password" placeholder="Password" required="required">
                     <button onClick="location.href='<?= $loginLink ?>'" class="green" type="submit">Login</button>
-                    <!-- <a href="./forgot_password">Forgot Password</a> -->
+                    <a href="">Forgot Password</a>
                 </form>
             </div>
             
