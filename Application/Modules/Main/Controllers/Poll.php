@@ -28,8 +28,10 @@ class Poll extends \Saros\Application\Controller
 	 */
 	public function solutionAction($pollId)
 	{
+		$this->view->headStyles()->addStyle("solution");
+		
 		// Verify that this exists
-		$pollId = intval($pollId);
+		/*$pollId = intval($pollId);
 
 		$mapper = $this->registry->mapper;
 
@@ -59,6 +61,7 @@ class Poll extends \Saros\Application\Controller
 
 		// Hand it off to the view
 		$this->view->Solution = $curBestSolution;
+		*/
 	}
 
 	/**
