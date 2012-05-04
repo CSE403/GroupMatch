@@ -8,7 +8,7 @@
 -->
 <section>
 	<header>
-		<a href="../"><button class="green">Back to Poll</button></a>
+		<a href="<?php echo $siteURLvariable; ?>/poll/index"><button class="green">Back to Poll</button></a>
 		<h1>Poll title here</h1>
 	</header>
 	<section id="report" class="indent">

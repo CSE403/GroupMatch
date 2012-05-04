@@ -10,6 +10,11 @@
     <body>
         <header id="top_bar">
             <h1>GroupMatch</h1>
+            <?php 
+            	if ($this->page && $this->page == "createPoll") {
+            		echo "createPoll";
+            	}
+            ?>
             <nav>
                 <?php
                     $register = $GLOBALS["registry"]->utils->makeLink("Index", "register");
@@ -27,9 +32,10 @@
                     <input name="email" type="email" placeholder="Email" required="required">
                     <input name="password" type="password" placeholder="Password" required="required">
                     <button onClick="location.href='<?= $loginLink ?>'" class="green" type="submit">Login</button>
-                    <a href="./forgot_password">Forgot Password</a>
+                    <!-- <a href="./forgot_password">Forgot Password</a> -->
                 </form>
             </div>
+            
         </header>
         
         <div id="page_container">

@@ -1,3 +1,9 @@
+<!--
+	Poll/participate.php
+	
+	This php webpage will pop up when the user navigates to it from a specific poll. 
+	This page allows a user to interact with the poll by entering their preferences.
+ -->
 <?php
     $content = $this->registry->config->siteUrl.$this->getThemeLocation()."Images/";
 ?>
@@ -50,7 +56,7 @@
 						</ul>
 					</footer>
 				</section>
-				<button class="green">submit</button>
+				<a href="<?php echo $siteURLvariable; ?>/poll/index"><button class="green">submit</button></a>
 			</form>
 		</section>
 	</div>

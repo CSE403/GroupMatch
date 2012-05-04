@@ -70,9 +70,9 @@
 		-webkit-transition-delay: .2s;
 	}
 
-	#happy_meter #meter_value:hover {
+	/* #happy_meter #meter_value:hover {
 		width: 99.8%;
-	}
+	} */
 	
 #answer {
 	font-size: 30px;

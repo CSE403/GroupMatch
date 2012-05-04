@@ -22,6 +22,9 @@ class Poll extends \Saros\Application\Controller
 		$this->view->headStyles()->addStyle("poll");
 	}
 
+	/**
+	 Append unique view style
+	 */
 	public function participateAction($pollId) {
 		$this->view->headStyles()->addStyle("participate");
 	}
