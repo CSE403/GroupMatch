@@ -7,6 +7,7 @@
 <?php
     $content = $this->registry->config->siteUrl.$this->getThemeLocation()."Images/";
 ?>
+
 <div id="page_container">
 	<div id="page_content">
 		<section>
@@ -56,7 +57,10 @@
 						</ul>
 					</footer>
 				</section>
-				<a href="<?php echo $registry->config->siteUrl; ?>/poll/index"><button class="green">submit</button></a>
+				<?php
+					$link = $GLOBALS["registry"]->utils->makeLink("Poll", "index");
+				?>
+				<a href="<?php echo $link; ?>"><button class="green">submit</button></a>
 			</form>
 		</section>
 	</div>

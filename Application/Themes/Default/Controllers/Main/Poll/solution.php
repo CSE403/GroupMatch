@@ -8,7 +8,10 @@
 -->
 <section>
 	<header>
-		<a href="<?php echo $registry->config->siteUrl; ?>/poll/index"><button class="green">Back to Poll</button></a>
+<?php
+    $link = $GLOBALS["registry"]->utils->makeLink("Poll", "index");
+?>
+		<a href="<?php echo $link; ?>"><button class="green">Back to Poll</button></a>
 		<h1>Poll title here</h1>
 	</header>
 	<section id="report" class="indent">

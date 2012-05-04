@@ -10,7 +10,10 @@
 ?>
 <section>
     <header>
-        <a href="<?php echo $registry->config->siteUrl; ?>/poll/solution/3"><button class="green">View Solution</button></a>
+		<?php
+			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution","3");
+		?>
+        <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
         <h1>When should our team meet?</h1>
     </header>
     <table>
@@ -42,7 +45,10 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr><td><a href="<?php echo $registry->config->siteUrl; ?>/poll/participate/3"><button class="orange">Participate</button></a><td></tr>
+			<?php
+				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate","3");
+			?>
+            <tr><td><a href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
         </tfoot>
     </table>
     
