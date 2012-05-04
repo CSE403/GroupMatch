@@ -8,7 +8,7 @@
 -->
 <section>
 	<header>
-		<button class="green">Back to Poll</button>
+		<a href="index"><button class="green">Back to Poll</button></a>
 		<h1>Poll title here</h1>
 	</header>
 	<section id="report" class="indent">
