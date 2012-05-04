@@ -10,11 +10,6 @@
     <body>
         <header id="top_bar">
             <h1>GroupMatch</h1>
-            <?php 
-            	if ($this->page && $this->page == "createPoll") {
-            		echo "createPoll";
-            	}
-            ?>
             <nav>
                 <?php
                     $register = $GLOBALS["registry"]->utils->makeLink("Index", "register");

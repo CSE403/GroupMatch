@@ -26,7 +26,6 @@ class Account extends \Saros\Application\Controller
     */
     public function indexAction()
     {
-    	$this->page = "myPolls";
         $this->view->headStyles()->addStyle("myPolls");
     }
     /**
@@ -35,7 +34,6 @@ class Account extends \Saros\Application\Controller
     */
     public function createAction()
     {
-    	$this->page = "createPoll";
         $this->view->headStyles()->addStyle("createPoll");
     }
 }
