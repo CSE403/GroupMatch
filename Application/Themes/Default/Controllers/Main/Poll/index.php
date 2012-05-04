@@ -24,21 +24,21 @@
         -->
             <tr class="alt">
                 <td class="participant">Justin Ryll</td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
             </tr>
             <tr>
                 <td class="participant">Hayden Jensen</td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
             </tr>
             <tr class="alt">
                 <td class="participant">Eli White</td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?= $content?>star_empty_small.png" width="20" height="20"/></td>
+                <td><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<? echo $content; ?>star_small.png" width="20" height="20"/><img src="<?= $content?>star_small.png" width="20" height="20"/></td>
             </tr>
         </tbody>
         <tfoot>
