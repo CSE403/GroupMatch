@@ -33,7 +33,7 @@ class Setup
 		// Set up our config values
         
         // This is the URL where you installed the app. This must end with a /
-		$registry->config->siteUrl = "http://localhost/3/GroupMatch/";
+		$registry->config->siteUrl = "http://groupmatch.cs.washington.edu/GroupMatch/";
         
         // Let's use rewriting, our host supports it.
 		$registry->config->rewriting = true;
