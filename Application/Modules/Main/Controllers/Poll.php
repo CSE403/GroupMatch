@@ -22,6 +22,10 @@ class Poll extends \Saros\Application\Controller
 		$this->view->headStyles()->addStyle("poll");
 	}
 
+	public function participateAction($pollId) {
+		$this->view->headStyles()->addStyle("participate");
+	}
+	
 	/**
 	 On the user's poll page, there is a link to generate the current answer. This function
 	 generates that answer, and then displays it on the same page as the "Happiness meter".

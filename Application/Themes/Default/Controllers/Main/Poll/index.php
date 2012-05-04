@@ -10,7 +10,7 @@
 ?>
 <section>
     <header>
-        <button class="green">View Solution</button>
+        <a href="solution/3"><button class="green">View Solution</button></a>
         <h1>When should our team meet?</h1>
     </header>
     <table>
@@ -42,7 +42,7 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr><td><button class="orange">Participate</button><td></tr>
+            <tr><td><a href="participate/3"><button class="orange">Participate</button></a><td></tr>
         </tfoot>
     </table>
     
