@@ -10,7 +10,7 @@
 ?>
 <section>
     <header>
-        <a href="<?php echo $siteURLvariable; ?>/poll/solution/3"><button class="green">View Solution</button></a>
+        <a href="<?php echo $registry->config->siteUrl; ?>/poll/solution/3"><button class="green">View Solution</button></a>
         <h1>When should our team meet?</h1>
     </header>
     <table>
@@ -42,7 +42,7 @@
             </tr>
         </tbody>
         <tfoot>
-            <tr><td><a href="<?php echo $siteURLvariable; ?>/poll/participate/3"><button class="orange">Participate</button></a><td></tr>
+            <tr><td><a href="<?php echo $registry->config->siteUrl; ?>/poll/participate/3"><button class="orange">Participate</button></a><td></tr>
         </tfoot>
     </table>
     

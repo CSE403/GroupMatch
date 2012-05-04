@@ -56,7 +56,7 @@
 						</ul>
 					</footer>
 				</section>
-				<a href="<?php echo $siteURLvariable; ?>/poll/index"><button class="green">submit</button></a>
+				<a href="<?php echo $registry->config->siteUrl; ?>/poll/index"><button class="green">submit</button></a>
 			</form>
 		</section>
 	</div>
