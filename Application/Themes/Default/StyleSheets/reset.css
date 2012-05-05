@@ -104,3 +104,8 @@ input, select {
 ul {
 	list-style-type: none;
 }
+
+button {
+	padding: 0px;
+	margin: 0px;
+}

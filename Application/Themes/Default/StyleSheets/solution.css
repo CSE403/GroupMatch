@@ -28,7 +28,11 @@
 		width: 400px;
 		height: 50px;
 
+		/* background */
+		background: linear-gradient(top, #8E97A4, #A4ACB8);
 		background: -webkit-linear-gradient(top, #8E97A4, #A4ACB8);
+		background: -moz-linear-gradient(top, #8E97A4, #A4ACB8);
+		background: -o-linear-gradient(top, #8E97A4, #A4ACB8);
 		
 		border: solid;
 		border-width: 1px;
@@ -54,9 +58,12 @@
 		width: 55%;
 		height: 49px;
 		
+		/* background */
 		background: #00AEF1;
+		background: linear-gradient(top, #3EC5F8, #00AEF1);
 		background: -webkit-linear-gradient(top, #3EC5F8, #00AEF1);
-		/* background: -webkit-linear-gradient(top, #A6E4FB 3%, #3EC5F8 3%, #00AEF1 97%, #00719D 98%, #A6E4FB 100%); */
+		background: -moz-linear-gradient(top, #3EC5F8, #00AEF1);
+		background: -o-linear-gradient(top, #3EC5F8, #00AEF1);
 		
 		border: solid;
 		border-width: 1px;
@@ -66,8 +73,16 @@
 		border-left-color: #3EC5F8;
 		border-radius: 3px;
 		
+		/* animation */
+		transition: width 1s ease;
 		-webkit-transition: width 1s ease;
+		-moz-transition: width 1s ease;
+		-o-transition: width 1s ease;
+		
+		transition-delay: .2s;
 		-webkit-transition-delay: .2s;
+		-moz-transition-delay: .2s;
+		-o-transition-delay: .2s;
 	}
 
 	/* #happy_meter #meter_value:hover {

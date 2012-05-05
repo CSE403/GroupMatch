@@ -21,7 +21,7 @@ class Index extends \Saros\Application\Controller
     */
     public function indexAction()
     {      
-    	
+    	$GLOBALS["page"] = "home";
     }
     
     /**
@@ -30,5 +30,6 @@ class Index extends \Saros\Application\Controller
     public function registerAction()
     {
         $this->view->headStyles()->addStyle("register");
+        $GLOBALS["page"] = "register";
     }
 }

@@ -37,13 +37,3 @@
 		</ul>
 	</section>
 </section>
-
-<section>
-    <header>
-        <!-- Link to creating new polls-->
-        <?php
-            $createLink = $GLOBALS["registry"]->utils->makeLink("Account", "create");
-        ?>
-        <h1><a href="<?= $createLink ?>">Create Poll</a></h1>
-    </header>
-</section>

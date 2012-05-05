@@ -48,7 +48,10 @@ header[id="top_bar"] {
 	padding-top: 0px;
 	
 	/* background */
+	background: linear-gradient(top, #393939, #272727);
 	background: -webkit-linear-gradient(top, #393939, #272727);
+	background: -moz-linear-gradient(top, #393939, #272727);
+	background: -o-linear-gradient(top, #393939, #272727);
 	
 	/* border */
 	border-bottom-style: solid;
@@ -131,8 +134,10 @@ header[id="top_bar"] {
 			cursor: hand;
 			
 			/* background */
+			background: linear-gradient(bottom, #00AEF1 5%, #272727 5%);
 			background: -webkit-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
-			/* background: -webkit-linear-gradient(bottom, #FBE93E 5%, #272727 5%); */
+			background: -webkit-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
+			background: -o-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
 			
 			/* border */
 			border-right-style: solid;
@@ -194,7 +199,10 @@ header[id="top_bar"] {
 			text-decoration: none;
 			
 			/* background */
+			background: linear-gradient(bottom, #DE473F, #CE281F);
 			background: -webkit-linear-gradient(bottom, #DE473F, #CE281F);
+			background: -moz-linear-gradient(bottom, #DE473F, #CE281F);
+			background: -o-linear-gradient(bottom, #DE473F, #CE281F);
 			
 			/* border */
 			border: solid;
@@ -207,8 +215,15 @@ header[id="top_bar"] {
 			box-shadow: 0px 2px 15px 0px #DDD;
 			
 			/* animation */
+			transition: top .2s;
 			-webkit-transition: top .2s;
+			-moz-transition: top .2s;
+			-o-transition: top .2s;
+			
+			transition-delay: .5s;
 			-webkit-transition-delay: .5s;
+			-moz-transition-delay: .5s;
+			-o-transition-delay: .5s;
 		}
 		
 		header[id="top_bar"] .auth_control:hover  a, header[id="top_bar"] .auth_control.stay a {
@@ -225,8 +240,15 @@ header[id="top_bar"] {
 		left: 577px;
 		
 		/* animation */
+		transition: left .5s;
 		-webkit-transition: left .5s;
+		-moz-transition: left .5s;
+		-o-transition: left .5s;
+		
+		transition-delay: .1s;
 		-webkit-transition-delay: .1s;
+		-moz-transition-delay: .1s;
+		-o-transition-delay: .1s;
 	}
 	
 	
@@ -237,8 +259,17 @@ header[id="top_bar"] {
 	header[id="top_bar"] .auth_control.login .icon {
 		width: 55px;
 		margin-right: 5px;
+		
+		/* animation */
+		transition: all .1s;
 		-webkit-transition: all .1s;
+		-moz-transition: all .1s;
+		-o-transition: all .1s;
+		
+		transition-delay: .2s;
 		-webkit-transition-delay: .2s;
+		-moz-transition-delay: .2s;
+		-o-transition-delay: .2s;
 	}
 	
 	header[id="top_bar"] .auth_control.login:hover .icon, header[id="top_bar"] .auth_control.login.stay .icon {
@@ -324,13 +355,20 @@ section.form_error {
 *	Buttons
 *******************************************************************************/
 
+button {
+	padding: 2px 5px 2px 5px;
+}
+
 button.green {
 	/* font */
 	color: white;
 	text-shadow: 0px -1px .5px #486133;
 	
 	/* background */
+	background: linear-gradient(top, #78A850, #558031);
 	background: -webkit-linear-gradient(top, #78A850, #558031);
+	background: -moz-linear-gradient(top, #78A850, #558031);
+	background: -o-linear-gradient(top, #78A850, #558031);
 	
 	/* border */
 	border-width: 1px;
@@ -347,7 +385,10 @@ button.orange {
 	text-shadow: 0px -1px .5px #B38740;
 	
 	/* background */
+	background: linear-gradient(top, #F3B045, #EDA024);
 	background: -webkit-linear-gradient(top, #F3B045, #EDA024);
+	background: -moz-linear-gradient(top, #F3B045, #EDA024);
+	background: -o-linear-gradient(top, #F3B045, #EDA024);
 	
 	/* border */
 	border-width: 1px;
@@ -358,20 +399,16 @@ button.orange {
 	box-shadow: 1px 1px 3px #DDD;
 }
 
-/* button.orange:hover {
-	
-	text-shadow: 0px -1px .5px #B38437;
-	background: -webkit-linear-gradient(top, #F3AB38, #ED9A15);
-	border-color: #9C6307;
-} */
-
 button.purple {
 	/* font */
 	color: white;
 	text-shadow: 0px -1px .5px #6B3F78;
 	
 	/* background */
+	background: linear-gradient(top, #A658BC, #883B9E);
 	background: -webkit-linear-gradient(top, #A658BC, #883B9E);
+	background: -moz-linear-gradient(top, #A658BC, #883B9E);
+	background: -o-linear-gradient(top, #A658BC, #883B9E);
 	
 	/* border */
 	border-width: 1px;
@@ -388,7 +425,10 @@ button.red {
 	text-shadow: 0px -1px .5px #9C3D38;
 	
 	/* background */
+	background: linear-gradient(top, #DE473F, #CE281F);
 	background: -webkit-linear-gradient(top, #DE473F, #CE281F);
+	background: -moz-linear-gradient(top, #DE473F, #CE281F);
+	background: -o-linear-gradient(top, #DE473F, #CE281F);
 	
 	/* border */
 	border-width: 1px;
