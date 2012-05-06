@@ -48,7 +48,7 @@ function autoload($classname)
 spl_autoload_register('autoload');
 
 
-require_once('Library/Saros/Core/AutoLoader.php');
+require_once(ROOT_PATH.'Library/Saros/Core/AutoLoader.php');
 spl_autoload_register(array('Saros\Core\AutoLoader', 'autoload'));
 
 // I don't like calling this here. I'm not quite sure how to solve this

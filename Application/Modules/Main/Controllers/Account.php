@@ -27,7 +27,7 @@ class Account extends \Saros\Application\Controller
     public function indexAction()
     {
         $this->view->headStyles()->addStyle("myPolls");
-        $GLOBALS["page"] = "myPolls";
+        $this->view->topBar()->setPage("myPolls");
     }
     /**
         This method is called whenever the user clicks the button on his/her homepage to 
@@ -36,6 +36,6 @@ class Account extends \Saros\Application\Controller
     public function createAction()
     {
         $this->view->headStyles()->addStyle("createPoll");
-        $GLOBALS["page"] = "createPoll";
+        $this->view->topBar()->setPage("createPoll");
     }
 }

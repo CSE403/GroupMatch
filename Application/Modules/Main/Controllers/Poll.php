@@ -20,7 +20,7 @@ class Poll extends \Saros\Application\Controller
 	public function indexAction()
 	{
 		$this->view->headStyles()->addStyle("poll");
-		$GLOBALS["page"] = "poll";
+        $this->view->topBar()->setPage("poll");
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Poll extends \Saros\Application\Controller
 	 */
 	public function participateAction($pollId) {
 		$this->view->headStyles()->addStyle("participate");
-		$GLOBALS["page"] = "participate";
+        $this->view->topBar()->setPage("participate");
 	}
 	
 	/**
@@ -38,7 +38,7 @@ class Poll extends \Saros\Application\Controller
 	public function solutionAction($pollId)
 	{
 		$this->view->headStyles()->addStyle("solution");
-		$GLOBALS["page"] = "solution";
+        $this->view->topBar()->setPage("solution");
 		
 		// Verify that this exists
 		/*$pollId = intval($pollId);
