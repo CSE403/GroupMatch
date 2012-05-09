@@ -25,8 +25,6 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 	// A boolean flag of whether the session has already been started
 	protected static $sessionStarted;
 
-	protected $loc;
-
 	/**
 	* Create a new namespaced Session object
 	*
@@ -63,13 +61,6 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 			self::$initNamespaces[$this->namespace] = true;
 		}
 
-
-		// Store a reference to this location in a var
-		// for easy access
-		$this->loc =& $_SESSION['_saros'][$this->namespace];
-
-
-
 		if (!self::$sessionStarted)
 			self::start();
 	}
@@ -100,7 +91,7 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 	}
     
     public function getData() {
-        return $this->loc;
+        return $_SESSION['_saros'][$this->namespace];
     }
 
 
@@ -110,25 +101,25 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 	public function &__get($key)
 	{
 		// $_SESSION['_saros'][$namespace][$key]
-		if (!isset($this->loc[$key]))
+		if (!isset($_SESSION['_saros'][$this->namespace][$key]))
 			throw new Session\Exception("The key '".$key."' has not been defined for session namespace '".$this->namespace."'");
 
-		return $this->loc[$key];
+		return $_SESSION['_saros'][$this->namespace][$key];
 	}
 
 	public function __set($key, $value)
 	{
-		$this->loc[$key] = $value;
+		$_SESSION['_saros'][$this->namespace][$key] = $value; 
 	}
 
 	public function __isset($key)
 	{
-		return isset($this->loc[$key]);
+		return isset($_SESSION['_saros'][$this->namespace][$key]);
 	}
 
 	public function __unset($key)
 	{
-		unset($this->loc[$key]);
+		unset($_SESSION['_saros'][$this->namespace][$key]);
 	}
 
 	/*
@@ -156,7 +147,7 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 	*/
 	public function count()
 	{
-		return count($this->loc);
+		return count($_SESSION['_saros'][$this->namespace]);
 	}
 
 	/*
@@ -164,11 +155,11 @@ class Session implements \ArrayAccess, \Countable, \IteratorAggregate
 	*/
 	public function getIterator()
 	{
-		return new \ArrayIterator($this->loc);
+		return new \ArrayIterator($_SESSION['_saros'][$this->namespace]);
 	}
     
     public function clear()
     {
-        $this->loc = array();
+        $_SESSION['_saros'][$this->namespace] = array();
     }
 }

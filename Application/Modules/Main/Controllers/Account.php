@@ -14,7 +14,7 @@ class Account extends \Saros\Application\Controller
     public function init() {
         $auth = \Saros\Auth::getInstance();
         
-        if (!$auth->hasIdentity()) {
+        if (!$auth->hasIdentity()) {         
             $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
             $this->redirect($homeLink);
         }
@@ -37,5 +37,13 @@ class Account extends \Saros\Application\Controller
     {
         $this->view->headStyles()->addStyle("createPoll");
         $this->view->topBar()->setPage("createPoll");
+    }
+    
+    public function logoutAction() {
+        $auth = \Saros\Auth::getInstance();
+        $auth->clearIdentity();
+        
+        $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
+        $this->redirect($homeLink);
     }
 }

@@ -83,24 +83,24 @@ class TopBar extends \Saros\Display\Helpers\HelperBase
                 <div class="divider"></div>
                 <?php 
                     $loginLink = $GLOBALS["registry"]->utils->makeLink("Index", "login");
+                    $logoutLink = $GLOBALS["registry"]->utils->makeLink("Account", "logout");
                     if (!$auth->hasIdentity()) 
                     {
                 ?>
-                        <form name="login">
+                        <form name="login">   
                             <form name="login">
-                             <button class="icon green" onClick="">Login</button>
+                             <button class="icon green" onClick="location.href='<?php echo $loginLink; ?>'">Login</button>
                              <input name="email" type="email" placeholder="Email" required="required">
                              <input name="password" type="password" placeholder="Password" required="required">
                              <button onClick="location.href='<?php echo $loginLink; ?>'" class="green" type="submit">Login</button>
-                             <a href="">Forgot Password</a>
                         </form>
                 <?php
                     }
                     else 
                     {
                 ?>
-                        <form name="logout">
-                            <button onClick="location.href='<?php echo $about; ?>'" class="red" type="submit" name="logout">Logout</button>
+                        <form name="logout" action="<?php echo $logoutLink; ?>">
+                            <button class="red" type="submit" name="logout">Logout</button>
                         </form>
                 <?php
                     }

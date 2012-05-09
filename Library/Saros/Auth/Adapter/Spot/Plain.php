@@ -118,7 +118,7 @@ class Plain implements \Saros\Auth\Adapter\IAdapter
 		$user = $this->mapper->all($this->entityName, array(
 													$this->identifierCol => $this->identifier
 													))->execute();
-
+                 
 		/**
 		* @todo figure out which we need.
 		* @todo Documentation needs to mention that we should ALWAYS compare based on the consts of Saros_Auth_Result
@@ -134,11 +134,10 @@ class Plain implements \Saros\Auth\Adapter\IAdapter
 			// We need to get the salt
 			assert(count($user) == 1);
 			$user = $user->first();
-
+            
 			$status = $this->validateUser($user);
-
 		}
-
+         
 		$identity = new \Saros\Auth\Identity\Spot($this->mapper, $user);
 
 		return new \Saros\Auth\Result($status, $identity);
@@ -152,8 +151,9 @@ class Plain implements \Saros\Auth\Adapter\IAdapter
 	*
 	* @see Saros_Auth_Result
 	*/
-	public function validateUser(Spot\Entity $user)
+	public function validateUser(\Spot\Entity $user)
 	{
+        
 		// Combine the salt and credential and sha1 it. Check against credentialCol
 		if($user->{$this->credentialCol} == $this->credential)
 			$status = \Saros\Auth\Result::SUCCESS;

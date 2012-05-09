@@ -25,32 +25,33 @@ class Index extends \Saros\Application\Controller
     }
     
     public function loginAction() {
+        
         $errors = array();
-        $this->view->Errors = $errors;
         
-        // If they didn't post, redirect
-        if($_SERVER["REQUEST_METHOD"] != "POST") {
-            // Don't process
-            return;
-        }
-        
-        
-        if (!isset($_POST["email"]) || !isset($_POST["password"]))
+        if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            $errors[] = "All fields are required";
-            return;
+            
+            if (!isset($_POST["email"]) || !isset($_POST["password"]))
+            {
+                $errors[] = "All fields are required";
+            }
+            else
+            {      
+                $result = $this->login($_POST["email"], $_POST["password"]);
+                
+                $auth = \Saros\Auth::getInstance();
+                if (!$auth->hasIdentity()) {
+                    $errors[] = "Invalid username and password";
+                }
+                else
+                {
+                    // We are logged in
+                    $accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
+                    $this->redirect($accountLink);
+                }
+            }
         }
-        
-        $result = $this->login($_POST["email"], $_POST["password"]);
-        
-        if (!$result->isSuccess()) {
-            $errors[] = "Invalid username and password";
-            return;
-        }
-        
-        // We are logged in
-        $accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
-        $this->redirect($accountLink);
+        $this->view->Errors = $errors;
     }
     
     /**
@@ -75,8 +76,10 @@ class Index extends \Saros\Application\Controller
     }
     
     private function login($username, $password) {
+        
         $auth = \Saros\Auth::getInstance();
-        $auth->getAdapter()->setCredential($username, $password);
-        return $auth->authenticate();
+        $auth->getAdapter()->setCredential($username, $password);        
+        $result = $auth->authenticate();
+        return $result;
     }
 }
