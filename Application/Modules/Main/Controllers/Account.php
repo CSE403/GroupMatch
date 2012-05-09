@@ -16,7 +16,7 @@ class Account extends \Saros\Application\Controller
         
         if (!$auth->hasIdentity()) {
             $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
-            //$this->redirect($homeLink);
+            $this->redirect($homeLink);
         }
     }
     

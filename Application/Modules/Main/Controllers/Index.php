@@ -24,6 +24,35 @@ class Index extends \Saros\Application\Controller
         $this->view->topBar()->setPage("home");
     }
     
+    public function loginAction() {
+        $errors = array();
+        $this->view->Errors = $errors;
+        
+        // If they didn't post, redirect
+        if($_SERVER["REQUEST_METHOD"] != "POST") {
+            // Don't process
+            return;
+        }
+        
+        
+        if (!isset($_POST["email"]) || !isset($_POST["password"]))
+        {
+            $errors[] = "All fields are required";
+            return;
+        }
+        
+        $result = $this->login($_POST["email"], $_POST["password"]);
+        
+        if (!$result->isSuccess()) {
+            $errors[] = "Invalid username and password";
+            return;
+        }
+        
+        // We are logged in
+        $accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
+        $this->redirect($accountLink);
+    }
+    
     /**
     	Redirects the user to the registration page if the user clicks on the "Register" button.
     */
@@ -31,5 +60,23 @@ class Index extends \Saros\Application\Controller
     {
         $this->view->headStyles()->addStyle("register");
         $this->view->topBar()->setPage("register");
+        
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            $user = new \Application\Entities\User();
+            $mapper = $this->registry->mapper;
+            
+            $user->username = $_POST["email"];
+            $user->password = $_POST["password"];
+        
+            $result = $mapper->insert($user);
+            
+            $this->login($user->username, $user->password);
+        }
+    }
+    
+    private function login($username, $password) {
+        $auth = \Saros\Auth::getInstance();
+        $auth->getAdapter()->setCredential($username, $password);
+        return $auth->authenticate();
     }
 }
