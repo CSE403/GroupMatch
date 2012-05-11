@@ -15,7 +15,7 @@ class Account extends \Saros\Application\Controller
         $auth = \Saros\Auth::getInstance();
         
         if (!$auth->hasIdentity()) {         
-            $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
+            $homeLink = $GLOBALS["registry"]->utils->makeLink("Index");
             $this->redirect($homeLink);
         }
     }
@@ -37,6 +37,11 @@ class Account extends \Saros\Application\Controller
     {
         $this->view->headStyles()->addStyle("createPoll");
         $this->view->topBar()->setPage("createPoll");
+        
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            die(var_dump($_POST));
+        }
     }
     
     public function logoutAction() {

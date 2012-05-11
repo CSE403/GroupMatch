@@ -5,6 +5,11 @@
     In this page, the user can specify different options for this poll, including the options users will have
     to choose from, as well as other details like specific option group limit.
 -->
+
+<?php
+    $createPage = $GLOBALS["registry"]->utils->makeLink("Account", "create");
+?>
+
 <section>
 	<header>
 		<div><h1>Title</h1></div>
@@ -14,7 +19,7 @@
 	<section class="form_error">
 		This is an error message
 	</section>
-	<form name="create_poll" class="indent">
+	<form action="<?php echo $createPage; ?>" method="post" name="create_poll" class="indent">
 		<section>
 			<h1>Description</h1>
 			<footer>
@@ -75,5 +80,7 @@
 				<button name="add_more_options" class="green">Add Answers</button><!--This button allows the user to add additional options to the poll-->
 			</footer>
 		</section>
+        
+        <button type="submit" class="green">Create</button>
 	</form>
 </section>

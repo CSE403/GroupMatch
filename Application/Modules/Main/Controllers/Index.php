@@ -12,7 +12,12 @@ class Index extends \Saros\Application\Controller
 		@ZFR: Does nothing.
 	*/
     public function init() {
-       
+        $auth = \Saros\Auth::getInstance();
+        
+        if ($auth->hasIdentity()) {         
+            $accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
+            $this->redirect($accountLink);
+        }
     }
     
     /**
@@ -30,7 +35,6 @@ class Index extends \Saros\Application\Controller
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            
             if (!isset($_POST["email"]) || !isset($_POST["password"]))
             {
                 $errors[] = "All fields are required";
