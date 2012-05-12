@@ -11,10 +11,10 @@ class Setup extends \Saros\Application\Controller
     {   
         $this->view->show(false);
         
-        $this->registry->mapper->migrate('\Application\Entities\Answers');
-        $this->registry->mapper->migrate('\Application\Entities\Options');
-        $this->registry->mapper->migrate('\Application\Entities\Persons');
-        $this->registry->mapper->migrate('\Application\Entities\Polls');  
-        $this->registry->mapper->migrate('\Application\Entities\Users');                                           
+        $this->registry->mapper->migrate('\Application\Entities\Answer');
+        $this->registry->mapper->migrate('\Application\Entities\Option');
+        $this->registry->mapper->migrate('\Application\Entities\Person');
+        $this->registry->mapper->migrate('\Application\Entities\Poll');  
+        $this->registry->mapper->migrate('\Application\Entities\User');                                           
     }
 }

@@ -6,15 +6,16 @@ namespace Application\Modules\Main\Controllers;
 */
 class Account extends \Saros\Application\Controller
 {
+    private $auth;
     /**
         Constructor for the controller. Called when the user tried to login to his/her account.
         Makes sure that he/she has the right authentication to be there, else redirects to the 
         websites front page.
     */
     public function init() {
-        $auth = \Saros\Auth::getInstance();
+        $this->auth = \Saros\Auth::getInstance();
         
-        if (!$auth->hasIdentity()) {         
+        if (!$this->auth->hasIdentity()) {         
             $homeLink = $GLOBALS["registry"]->utils->makeLink("Index");
             $this->redirect($homeLink);
         }
@@ -28,6 +29,11 @@ class Account extends \Saros\Application\Controller
     {
         $this->view->headStyles()->addStyle("myPolls");
         $this->view->topBar()->setPage("myPolls");
+        
+        $user = $this->registry->mapper->first('\Application\Entities\User', array('id' => $this->auth->getIdentity()->id));
+
+        $this->view->Polls = $user->polls;
+        //die(var_dump($this->auth->getIdentity()->polls));
     }
     /**
         This method is called whenever the user clicks the button on his/her homepage to 
@@ -40,13 +46,32 @@ class Account extends \Saros\Application\Controller
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-            die(var_dump($_POST));
+            //die(var_dump($_POST));
+            $poll = new \Application\Entities\Poll();
+            $poll->userId = $this->auth->getIdentity()->id;
+            $poll->question = $_POST["title"];
+            $poll->description = $_POST["description"];
+            
+            $pollId = $this->registry->mapper->insert($poll);
+            
+            foreach($_POST as $variable => $value){
+                $needle = "option_";
+                if (substr($variable, 0, strlen($needle)) === $needle) {
+                    $option = new \Application\Entities\Option();
+                    $option->pollId = $pollId;
+                    $option->name = $value;
+                    $this->registry->mapper->insert($option);   
+                }
+            }
+            
+            $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $pollId);
+            $this->redirect($pollLink);           
         }
     }
     
     public function logoutAction() {
-        $auth = \Saros\Auth::getInstance();
-        $auth->clearIdentity();
+        $this->auth = \Saros\Auth::getInstance();
+        $this->auth->clearIdentity();
         
         $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
         $this->redirect($homeLink);

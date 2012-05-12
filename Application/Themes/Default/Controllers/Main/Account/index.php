@@ -4,9 +4,7 @@
     This php script depicts the ZFR of the users main account index (the front page). Displayed in this page
     are the polls that the user has created, as well as options to create new polls.
 -->
-<?php
-    $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll");
-?>
+
 <section>
 	<header>
 		<h1>Poll Management</h1>
@@ -17,23 +15,31 @@
         who has used his poll, and to see the current solution.
     -->
 	<section class="indent">
+        <?php
+            if(!count($this->Polls)) {
+        ?>
 		<h2 id="no_polls_message" style="display:none;">You don't have any polls</h2>
+        <?php
+            }
+            else
+            { 
+        ?>
 		<ul id="poll_list">
-			<li>
-				<button class="red" name="delete_poll">Delete</button>
-				<header><a href="<?php echo $pollPage ?>">When should our team meet?</a></header>
-				<footer>www.groupmatch.com/poll/ogn3f0waf3lqvnlk230</footer>
-			</li>
-			<li>
-				<button class="red" name="delete_poll">Delete</button>
-				<header><a href="<?php echo $pollPage ?>">Group project preference</a></header>
-				<footer>www.groupmatch.com/poll/sw3jkdvb3ek9uthj5</footer>
-			</li>
-			<li>
-				<button class="red" name="delete_poll">Delete</button>
-				<header><a href="<?php echo $pollPage ?>">Volunteer at the homeless shelter</a></header>
-				<footer>www.groupmatch.com/poll/asw3v03u1u151208ndv</footer>
-			</li>
+            <?php
+                foreach($this->Polls as $poll) {
+                    $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $poll->id);
+                 ?>
+                 <li>
+                    <button class="red" name="delete_poll">Delete</button>
+                    <header><a href="<?php echo $pollPage ?>"><?php echo $poll->question?></a></header>
+                    <footer><?php echo $pollPage?></footer>
+                </li>
+                 <?php   
+                }
+            ?>
 		</ul>
+        <?php
+            }
+        ?>
 	</section>
 </section>

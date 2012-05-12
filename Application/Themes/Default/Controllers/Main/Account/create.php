@@ -23,7 +23,7 @@
 		<section>
 			<h1>Description</h1>
 			<footer>
-				<textarea rows="3" cols="50" maxlength="300" placeholder="Type a description here"></textarea>
+				<textarea name="description" rows="3" cols="50" maxlength="300" placeholder="Type a description here"></textarea>
 			</footer>
 		</section>
 		<section>

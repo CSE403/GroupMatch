@@ -14,11 +14,20 @@
 			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution","3");
 		?>
         <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
-        <h1>When should our team meet?</h1>
+        <h1><?php echo $this->Poll->question; ?></h1>
     </header>
     <table>
         <thead>
-            <tr><th></th><th>Tuesday 4pm</th><th>Thursday 5pm</th><th>Saturday 1pm</th></tr>
+            <tr>
+                <th></th>
+                <?php
+                    foreach($this->Poll->options as $option) {
+                        ?>
+                           <th><?php echo $option->name; ?></th>
+                        <?php
+                    }
+                ?>            
+            </tr>
         </thead>
         <tbody>
         <!-- 
@@ -46,7 +55,7 @@
         </tbody>
         <tfoot>
 			<?php
-				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate","3");
+				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate",$this->Poll->id);
 			?>
             <tr><td><a href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
         </tfoot>

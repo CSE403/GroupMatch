@@ -17,6 +17,12 @@ class Person extends \Spot\Entity
     public static function relations()
     {
         return array(
+            'answers' => array(
+                'type' => 'HasMany',
+                'entity' => '\Application\Entities\Answer',
+                'where' => array('personId' => ':entity.id'),
+                'order' => array('id' => 'ASC')
+            )
         );
     }
 }

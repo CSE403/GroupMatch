@@ -17,6 +17,12 @@ class User extends \Spot\Entity
     public static function relations()
     {
         return array(
+            'polls' => array(
+                'type' => 'HasMany',
+                'entity' => '\Application\Entities\Poll',
+                'where' => array('userId' => ':entity.id'),
+                'order' => array('id' => 'ASC')
+            )
         );
     }
 }

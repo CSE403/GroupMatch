@@ -17,7 +17,6 @@ class Option extends \Spot\Entity
     
     public static function relations()
     {
-        return array(
-        );
+        return array();
     }
 }
