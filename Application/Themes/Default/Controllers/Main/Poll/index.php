@@ -14,7 +14,7 @@
 			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution","3");
 		?>
         <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
-        <h1>When should our team meet?</h1>
+        <h1><?php echo $this->Poll->question; ?></h1>
     </header>
     <table>
         <thead>

@@ -17,10 +17,14 @@ class Poll extends \Saros\Application\Controller
 	/**
 	 Redirected the user to his/her poll page
 	 */
-	public function indexAction()
+	public function indexAction($pollId)
 	{
 		$this->view->headStyles()->addStyle("poll");
         $this->view->topBar()->setPage("poll");
+        
+        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+        
+        $this->view->Poll = $poll;
 	}
 
 	/**

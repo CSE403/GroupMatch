@@ -11,6 +11,7 @@ class Poll extends \Spot\Entity
             'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
             'userId' => array('type' => 'int'),
             'question' => array('type' => 'string'),
+            'description' => array('type' => 'string'),
         );
     }
     
