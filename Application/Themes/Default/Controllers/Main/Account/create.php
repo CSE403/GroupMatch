@@ -19,7 +19,7 @@
 	<section class="form_error">
 		This is an error message
 	</section>
-	<form action="<?php echo $createPage; ?>" method="post" name="create_poll" class="indent">
+	<form action="<?php echo $createPage; ?>" method="post" name="create_poll" class="indent" id="create_poll">
 		<section>
 			<h1>Description</h1>
 			<footer>
@@ -80,7 +80,5 @@
 				<button name="add_more_options" class="green">Add Answers</button><!--This button allows the user to add additional options to the poll-->
 			</footer>
 		</section>
-        
-        <button type="submit" class="green">Create</button>
 	</form>
 </section>

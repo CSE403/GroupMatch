@@ -4,62 +4,6 @@
  */
 $(function() {
 	/***************************************************************************
-	 * Auth control scripting
-	 **************************************************************************/
-	// positioning control
-	authEmail = $('.auth_control input[name="email"]');
-	authPassword = $('.auth_control input[name="password"]');
-	if (authEmail) {
-		authControl = $('.auth_control');
-		var emailFocused = false;
-		var passwordFocused = false;
-		stickAuth = function() {
-			if (!authControl.hasClass("stay")) {
-				authControl.addClass("stay");
-			}
-		};
-		freeAuth = function() {
-			if (authControl.hasClass("stay") && !emailFocused && !passwordFocused) {
-				authControl.removeClass("stay");
-			}
-		};
-		authEmail.focus(function() {
-			emailFocused = true;
-			stickAuth();
-		});
-		authPassword.focus(function() {
-			passwordFocused = true;
-			stickAuth();
-		});
-		authEmail.blur(function() {
-			emailFocused = false;
-			freeAuth();
-		});
-		authPassword.blur(function() {
-			passwordFocused = false;
-			freeAuth();
-		});
-	}
-	
-	// login button 
-	loginButton = $('.auth_control button[name="login"]');
-	if (loginButton) {
-		loginButton.click(function() {
-			//TODO make login call here
-			//TODO forward to poll page if successful
-		});
-	}
-	
-	// logout button
-	logoutButton = $('.auth_control button[name="logout"]');
-	if (logoutButton) {
-		logoutButton.click(function() {
-			//TODO make logout call here
-			//TODO forward to home page
-		});
-	}
-	
-	/***************************************************************************
 	 * Create poll scripting
 	 **************************************************************************/
 	

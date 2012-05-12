@@ -12,6 +12,11 @@
 body {
 	/* font */
 	font-family: Gill Sans, sans-serif;
+	font-family: Tahoma, sans-serif;
+	font-family: "Lucida Grande", sans-serif;
+	font-family: Verdana, Geneva, sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	
 }
 
 textarea {
@@ -21,12 +26,39 @@ textarea {
 input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea {
 	padding: 4px;
 	font-size: 17px;
-	font-family: Helvetica;
-	font-weight: 100;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 200;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
 	width: 300px;
+}
+
+button {
+	
+	margin: 0px;
+	padding: 3px 7px 3px 7px;
+	
+	color: white;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	
+	background: none;
+	border: none;
+}
+
+/* Firefox and Opera specific styles */
+@-moz-document url-prefix() {
+	button {
+		padding: 1px 5px 1px 5px;
+	}
+}
+
+@media not screen and (1)
+{
+	button {
+		padding: 4px 7px 4px 7px;
+	}
 }
 
 /*******************************************************************************
@@ -37,12 +69,15 @@ header[id="top_bar"] {
 	/* sizing */
 	height: 40px;
 	width: 100%;
-	min-width: 960px;
+	min-width: 500px;
+	z-index: 100;
 	
 	/* positioning */
 	position: fixed;
 	top: 0;
 	/* z-index: 100; */
+	
+	white-space:nowrap;
 	
 	/* spacing */
 	padding-top: 0px;
@@ -62,21 +97,38 @@ header[id="top_bar"] {
 	box-shadow: 0px 0px 10px 3px #555;
 }
 
+	header[id="top_bar"] nav {
+		display: inline-block;
+		white-space:nowrap;
+		font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		font-family: Verdana, Geneva, sans-serif;
+	}
+	
 	header[id="top_bar"] h1 {
+		
 		/* positioning */
 		float: left;
 		
 		/* spacing */
-		padding: 10px 20px 0px 10px;
+		padding: 0px 20px 0px 10px;
 		
+		white-space:nowrap;
 		
 		/* font */
+		font-family: Verdana, Geneva, sans-serif;
+		line-height: 40px;
 		font-size: 20px;
-		font-weight: 600;
+		font-weight: 900;
+		letter-spacing: -1px;
 		color: white;
 		text-shadow: 0px -1px 1px #000;
-		/* color: black;
-		text-shadow: 0px 1px .5px #3D3D3D; */
+		
+		/* transform */
+		transform:scaleY(.9);
+		-ms-transform:scaleY(.9);
+		-webkit-transform:scaleY(.9);
+		-moz-transform:scaleY(.9);
+		/* -o-transform:scaleY(.9); */
 	}
 
 	header[id="top_bar"] .divider {
@@ -97,10 +149,7 @@ header[id="top_bar"] {
 	}
 	
 		header[id="top_bar"] nav a {
-			/* sizing */
-			height: 40px;
-			
-			/* positioning */
+			/* positioning */ 
 			float: left;
 			
 			/* spacing */
@@ -109,9 +158,12 @@ header[id="top_bar"] {
 			
 			/* font */
 			color: #DDD;
+			font-size: 14px;
 			line-height: 40px;
+			letter-spacing: .5px;
 			text-decoration: none;
 			text-shadow: 0px -1px 1px #333;
+			white-space:nowrap;
 		}
 		
 		header[id="top_bar"] nav a:hover {
@@ -136,7 +188,7 @@ header[id="top_bar"] {
 			/* background */
 			background: linear-gradient(bottom, #00AEF1 5%, #272727 5%);
 			background: -webkit-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
-			background: -webkit-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
+			background: -moz-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
 			background: -o-linear-gradient(bottom, #00AEF1 5%, #272727 5%);
 			
 			/* border */
@@ -149,135 +201,27 @@ header[id="top_bar"] {
 /*******************************************************************************
 *	Auth Control
 *******************************************************************************/
-		header[id="top_bar"] .auth_control {
-		/* positioning */
-		position: relative;
-		float: right;
-		/* position: fixed;
-		right: 0px; */
+	
+	.auth_control {
+		display: table;
+		min-width: 80px;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		white-space:nowrap;
 		
-		/* spacing */
-		margin-right: 5px;
+		background: inherit;
+		border: inherit;
 	}
 	
-	header[id="top_bar"] .auth_control form {
-		float: left;
-		margin-left: 10px;
-	}
-
-		header[id="top_bar"] .auth_control form > * {
-			/* positioning */
-			vertical-align: middle;
-			
-			/* spacing */
-			margin-top: 7px;
-			
-			/* font */
-			font-size: 15px;
-		}
-		
-		header[id="top_bar"] .auth_control.login form > * {
-			margin-top: 5px;
-		}
-		
-		header[id="top_bar"] .auth_control input {
-			width: 178px;
-		}
-		
-		header[id="top_bar"] .auth_control form a {
-			/* positioning */
-			position: relative;
-			left: -227px;
-			top: -20px;
-			z-index: -100;
-			
-			/* spacing */
-			padding: 10px 20px 7px 20px;
-			
-			/* text */
-			color: white;
-			text-decoration: none;
-			
-			/* background */
-			background: linear-gradient(bottom, #DE473F, #CE281F);
-			background: -webkit-linear-gradient(bottom, #DE473F, #CE281F);
-			background: -moz-linear-gradient(bottom, #DE473F, #CE281F);
-			background: -o-linear-gradient(bottom, #DE473F, #CE281F);
-			
-			/* border */
-			border: solid;
-			border-width: 1px;
-			border-color: #88110B;
-			border-radius: 2px;
-			border-bottom-right-radius: 10px;
-			
-			/* shadow */
-			box-shadow: 0px 2px 15px 0px #DDD;
-			
-			/* animation */
-			transition: top .2s;
-			-webkit-transition: top .2s;
-			-moz-transition: top .2s;
-			-o-transition: top .2s;
-			
-			transition-delay: .5s;
-			-webkit-transition-delay: .5s;
-			-moz-transition-delay: .5s;
-			-o-transition-delay: .5s;
-		}
-		
-		header[id="top_bar"] .auth_control:hover  a, header[id="top_bar"] .auth_control.stay a {
-			top: 35px;
-		}
-		
-		header[id="top_bar"] .auth_control form a:hover {
-			text-decoration: underline;
-		}
-	
-	header[id="top_bar"] .auth_control.login {
-		/* positioning */
-		/* left: 0px; */
-		left: 577px;
-		
-		/* animation */
-		transition: left .5s;
-		-webkit-transition: left .5s;
-		-moz-transition: left .5s;
-		-o-transition: left .5s;
-		
-		transition-delay: .1s;
-		-webkit-transition-delay: .1s;
-		-moz-transition-delay: .1s;
-		-o-transition-delay: .1s;
+	.auth_control .button_shiv {
+		display:table-cell; 
+		vertical-align:middle;
 	}
 	
-	
-	header[id="top_bar"] .auth_control.login:hover, header[id="top_bar"] .auth_control.login.stay {
-		left: 187px;
-	}
-	
-	header[id="top_bar"] .auth_control.login .icon {
-		width: 55px;
-		margin-right: 5px;
-		
-		/* animation */
-		transition: all .1s;
-		-webkit-transition: all .1s;
-		-moz-transition: all .1s;
-		-o-transition: all .1s;
-		
-		transition-delay: .2s;
-		-webkit-transition-delay: .2s;
-		-moz-transition-delay: .2s;
-		-o-transition-delay: .2s;
-	}
-	
-	header[id="top_bar"] .auth_control.login:hover .icon, header[id="top_bar"] .auth_control.login.stay .icon {
-		opacity: 0;
-		width: 0px;
-		margin: 0px;
-		padding: 0px;
-		border: none;
+	.auth_control button {
+		margin-left: 8px;
+		margin-right: 8px;
 	}
 	
 /*******************************************************************************
@@ -297,6 +241,10 @@ header[id="top_bar"] {
 	margin-top: 60px;
 }
 
+	#page_content p {
+		margin-bottom: 13px;
+	}
+	
 	#page_content button, #page_content input {
 		font-size: 17px;
 	}
@@ -355,10 +303,6 @@ section.form_error {
 *	Buttons
 *******************************************************************************/
 
-button {
-	padding: 2px 5px 2px 5px;
-}
-
 button.green {
 	/* font */
 	color: white;
@@ -371,6 +315,7 @@ button.green {
 	background: -o-linear-gradient(top, #78A850, #558031);
 	
 	/* border */
+	border: solid;
 	border-width: 1px;
 	border-color: #2F5411;
 	border-radius: 3px;
@@ -391,6 +336,7 @@ button.orange {
 	background: -o-linear-gradient(top, #F3B045, #EDA024);
 	
 	/* border */
+	border: solid;
 	border-width: 1px;
 	border-color: #9C650C;
 	border-radius: 3px;
@@ -411,6 +357,7 @@ button.purple {
 	background: -o-linear-gradient(top, #A658BC, #883B9E);
 	
 	/* border */
+	border: solid;
 	border-width: 1px;
 	border-color: #561468;
 	border-radius: 3px;
@@ -431,6 +378,7 @@ button.red {
 	background: -o-linear-gradient(top, #DE473F, #CE281F);
 	
 	/* border */
+	border: solid;
 	border-width: 1px;
 	border-color: #88110B;
 	border-radius: 3px;
@@ -450,3 +398,4 @@ header[id="top_bar"] button:hover {
 button:active, header[id="top_bar"] button:active {
 	box-shadow: inset 0px 0px 7px 0px #555;
 }
+

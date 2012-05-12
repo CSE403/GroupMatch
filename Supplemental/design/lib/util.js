@@ -43,7 +43,7 @@ $(function() {
 	
 	// login button 
 	loginButton = $('.auth_control button[name="login"]');
-	if (logoutButton) {
+	if (loginButton) {
 		loginButton.click(function() {
 			//TODO make login call here
 			//TODO forward to poll page if successful
