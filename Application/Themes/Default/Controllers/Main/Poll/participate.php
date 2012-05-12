@@ -30,29 +30,17 @@
 						<ul>
 							<li>
 								<header>
-									<div>(Yes / No) example</div>
-								</header>
-								<input name="answer_1" type="radio" value="1" required="required" /> Yes <input name="answer_1" type="radio" value="-1"/> No 
-							</li>
-							<li>
-								<header>
-									<div>(Yes / Neutral / No) example</div>
-								</header>
-								<input name="answer_2" type="radio" value="1" required="required"/> Yes / <input name="answer_2" type="radio" value="0"/> Neutral / <input name="answer_2" type="radio" value="-1"/> No
-							</li>
-							<li>
-								<header>
 									<div>(Uniquely rate each) example</div>
 								</header>
 								<!-- max would be the polls number of options -->
-								<input name="answer_3" type="number" min="1" max="4" required="required" />
+								<input name="answer_3" type="number" min="1" max="4" required="required" placeholder="1" />
 							</li>
 							<li>
 								<header>
 									<div>(Rate on scale) example</div>
 								</header>
 								<!-- max would be the polls scale value -->
-								<input name="answer_3" type="number" min="1" max="5" required="required" />
+								<input name="answer_3" type="number" min="1" max="5" required="required" placeholder="1" />
 							</li>
 						</ul>
 					</footer>
