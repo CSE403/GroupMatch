@@ -30,7 +30,9 @@ class Index extends \Saros\Application\Controller
     }
     
     public function loginAction() {
-        
+    	$this->view->headStyles()->addStyle("login");
+    	$accountLink = $GLOBALS["registry"]->utils->makeLink("login");
+    	
         $errors = array();
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
