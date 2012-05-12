@@ -29,30 +29,87 @@
                 ?>            
             </tr>
         </thead>
-        <tbody>
         <!-- 
+			Meter rules:
+				width: between 0% and 99% (do not give a 100% width, it will overflow it's background)
+				
+				Setting width: 0%, will still leave a nub in the bar, this is due to the border.
+				If you need positivly no color bar in the meter, set border: none.
+				
+				color: add color class to meter div:
+					green:	60 - 100
+					yellow:	35 - 60
+					red:	< 35
+		 -->
+		 <!-- 
             Each participants answers will be stored here. On the page, it will be depicted as a row of (in this case)
             stars depicting how much the user want that option.
         -->
-            <tr class="alt">
-                <td class="participant">Justin Ryll</td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_small.png" width="20" height="20"/></td>
-            </tr>
-            <tr>
-                <td class="participant">Hayden Jensen</td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_small.png" width="20" height="20"/></td>
-            </tr>
-            <tr class="alt">
-                <td class="participant">Eli White</td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_empty_small.png" width="20" height="20"/><img src="<?php echo $content?>star_empty_small.png" width="20" height="20"/></td>
-                <td><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content; ?>star_small.png" width="20" height="20"/><img src="<?php echo $content?>star_small.png" width="20" height="20"/></td>
-            </tr>
-        </tbody>
+		<tbody>
+			<tr class="alt">
+				<td class="participant">Justin Ryll</td>
+				<td>
+					<div class="meter red">
+						<div class="numeric_value">9</div>
+						<div class="meter_background"><div class="meter_value" style="width: 8%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter yellow">
+						<div class="numeric_value">44</div>
+						<div class="meter_background"><div class="meter_value" style="width: 43%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter green">
+						<div class="numeric_value">93</div>
+						<div class="meter_background"><div class="meter_value" style="width: 92%;"></div></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="participant">Hayden Jensen</td>
+				<td>
+					<div class="meter red">
+						<div class="numeric_value">34</div>
+						<div class="meter_background"><div class="meter_value" style="width: 33%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter green">
+						<div class="numeric_value">61</div>
+						<div class="meter_background"><div class="meter_value" style="width: 60%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter green">
+						<div class="numeric_value">100</div>
+						<div class="meter_background"><div class="meter_value" style="width: 99%;"></div></div>
+					</div>
+				</td>
+			</tr>
+			<tr class="alt">
+				<td class="participant">Eli White</td>
+				<td>
+					<div class="meter yellow">
+						<div class="numeric_value">52</div>
+						<div class="meter_background"><div class="meter_value" style="width: 53%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter yellow">
+						<div class="numeric_value">41</div>
+						<div class="meter_background"><div class="meter_value" style="width: 40%;"></div></div>
+					</div>
+				</td>
+				<td>
+					<div class="meter green">
+						<div class="numeric_value">88</div>
+						<div class="meter_background"><div class="meter_value" style="width: 87%;"></div></div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
         <tfoot>
 			<?php
 				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate",$this->Poll->id);
