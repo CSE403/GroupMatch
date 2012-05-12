@@ -12,7 +12,7 @@
 	<div id="page_content">
 		<section>
 			<header>
-				<h1>Poll title here</h1>
+				<h1><?php echo $this->Poll->question; ?></h1>
 			</header>
 			<section class="form_error">
 				This is an error message
@@ -21,7 +21,7 @@
 				<section>
 					<h1>Description</h1>
 					<footer>
-						Poll description here
+						<?php echo $this->Poll->description; ?>
 					</footer>
 				</section>
 				<section>

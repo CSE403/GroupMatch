@@ -33,6 +33,9 @@ class Poll extends \Saros\Application\Controller
 	public function participateAction($pollId) {
 		$this->view->headStyles()->addStyle("participate");
         $this->view->topBar()->setPage("participate");
+        
+        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+        $this->view->Poll = $poll;
 	}
 	
 	/**

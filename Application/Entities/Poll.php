@@ -18,6 +18,21 @@ class Poll extends \Spot\Entity
     public static function relations()
     {
         return array(
+            'options' => array(
+                'type' => 'HasMany',
+                'entity' => '\Application\Entities\Option',
+                'where' => array('pollId' => ':entity.id'),
+                'order' => array('id' => 'ASC')
+            )
+        );
+        
+        return array(
+            'participants' => array(
+                'type' => 'HasMany',
+                'entity' => '\Application\Entities\Person',
+                'where' => array('pollId' => ':entity.id'),
+                'order' => array('id' => 'ASC')
+            )
         );
     }
 }
