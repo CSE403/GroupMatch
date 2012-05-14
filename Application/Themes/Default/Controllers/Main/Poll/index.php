@@ -64,7 +64,7 @@
                         <?php
                             
                             foreach($participant->answers as $answer) {
-                                $percent = (int)(($answer->priority/4)*100);
+                                $percent = (int)(($answer->priority/count($this->Poll->options))*100);
                                 
                                 $color = "red";
                                 if ($percent >= 60) {

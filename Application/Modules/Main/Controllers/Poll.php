@@ -45,17 +45,20 @@ class Poll extends \Saros\Application\Controller
             // let's create a new participant
             $person = new \Application\Entities\Person();
             $person->pollId = $pollId;
-            $person->name = "testuser".rand(0,100);
+            $person->name = $_POST["participant_name"];
             $personId = $this->registry->mapper->insert($person);
             
             // now lets do all of their priorities.
             foreach($_POST as $optionId => $priority) {
-                // key is the option id, value is the priority
-                $answer = new \Application\Entities\Answer();
-                $answer->personId = $personId;
-                $answer->optionId = $optionId;
-                $answer->priority = $priority;
-                $this->registry->mapper->insert($answer);
+                $needle = "option_";
+                if (substr($optionId, 0, strlen($needle)) === $needle) {
+                    // key is the option id, value is the priority
+                    $answer = new \Application\Entities\Answer();
+                    $answer->personId = $personId;
+                    $answer->optionId = $optionId;
+                    $answer->priority = $priority;
+                    $this->registry->mapper->insert($answer);
+                }
             }
             
             $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
