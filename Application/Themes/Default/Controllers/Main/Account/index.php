@@ -27,7 +27,7 @@
 		<ul id="poll_list">
             <?php
                 foreach($this->Polls as $poll) {
-                    $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $poll->id);
+                    $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $poll->guid);
                  ?>
                  <li>
                     <button class="red" name="delete_poll">Delete</button>

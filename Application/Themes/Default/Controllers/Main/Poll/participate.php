@@ -18,7 +18,7 @@
 				This is an error message
 			</section>
             <?php
-                $link = $GLOBALS["registry"]->utils->makeLink("Poll", "participate", $this->Poll->id);
+                $link = $GLOBALS["registry"]->utils->makeLink("Poll", "participate", $this->Poll->guid);
             ?>
 			<form action="<?php echo $link; ?>" method="post" name="participate_form" class="indent">
 				<section>

@@ -11,7 +11,7 @@
 <section>
     <header>
 		<?php
-			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution","3");
+			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution",$this->Poll->guid);
 		?>
         <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
         <h1><?php echo $this->Poll->question; ?></h1>
@@ -46,73 +46,52 @@
             stars depicting how much the user want that option.
         -->
 		<tbody>
-			<tr class="alt">
-				<td class="participant">Justin Ryll</td>
-				<td>
-					<div class="meter red">
-						<div class="numeric_value">9</div>
-						<div class="meter_background"><div class="meter_value" style="width: 8%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter yellow">
-						<div class="numeric_value">44</div>
-						<div class="meter_background"><div class="meter_value" style="width: 43%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter green">
-						<div class="numeric_value">93</div>
-						<div class="meter_background"><div class="meter_value" style="width: 92%;"></div></div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td class="participant">Hayden Jensen</td>
-				<td>
-					<div class="meter red">
-						<div class="numeric_value">34</div>
-						<div class="meter_background"><div class="meter_value" style="width: 33%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter green">
-						<div class="numeric_value">61</div>
-						<div class="meter_background"><div class="meter_value" style="width: 60%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter green">
-						<div class="numeric_value">100</div>
-						<div class="meter_background"><div class="meter_value" style="width: 99%;"></div></div>
-					</div>
-				</td>
-			</tr>
-			<tr class="alt">
-				<td class="participant">Eli White</td>
-				<td>
-					<div class="meter yellow">
-						<div class="numeric_value">52</div>
-						<div class="meter_background"><div class="meter_value" style="width: 53%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter yellow">
-						<div class="numeric_value">41</div>
-						<div class="meter_background"><div class="meter_value" style="width: 40%;"></div></div>
-					</div>
-				</td>
-				<td>
-					<div class="meter green">
-						<div class="numeric_value">88</div>
-						<div class="meter_background"><div class="meter_value" style="width: 87%;"></div></div>
-					</div>
-				</td>
-			</tr>
+        
+            <?php
+                // Used for zebra striping
+                $counter = 0;
+                
+                foreach($this->Poll->participants as $participant) {
+                    
+                    $classStr = "";
+                    if ($counter % 2 == 0) {
+                        $classStr = ' class="alt"';
+                    }
+                    $counter++;
+                    ?>
+                    <tr <?php echo $classStr; ?>>
+                        <td class="participant"><?php echo $participant->name; ?></td>
+                        <?php
+                            
+                            foreach($participant->answers as $answer) {
+                                $percent = (int)(($answer->priority/4)*100);
+                                
+                                $color = "red";
+                                if ($percent >= 60) {
+                                    $color = "green";
+                                }
+                                elseif($percent >= 35) {
+                                    $color = "yellow";
+                                }
+                                
+                                ?>
+                                <td>
+                                    <div class="meter <?php echo $color; ?>">
+                                        <div class="numeric_value"><?php echo $percent; ?></div>
+                                        <div class="meter_background"><div class="meter_value" style="width: <?php echo max(0, $percent);?>"></div></div>
+                                    </div>
+                                </td>
+                                <?php
+                            }
+                        ?>
+                    </tr>
+                    <?php
+                }
+            ?>
 		</tbody>
         <tfoot>
 			<?php
-				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate",$this->Poll->id);
+				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate",$this->Poll->guid);
 			?>
             <tr><td><a href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
         </tfoot>

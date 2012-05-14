@@ -12,6 +12,7 @@ class Poll extends \Spot\Entity
             'userId' => array('type' => 'int'),
             'question' => array('type' => 'string'),
             'description' => array('type' => 'string'),
+            'guid' => array('type' => 'string'),
             'isUnique' => array('type' => 'string'),
         );
         // unique is either true or false, but Spot doesn't seem to work right now with ints
@@ -25,10 +26,7 @@ class Poll extends \Spot\Entity
                 'entity' => '\Application\Entities\Option',
                 'where' => array('pollId' => ':entity.id'),
                 'order' => array('id' => 'ASC')
-            )
-        );
-        
-        return array(
+            ),
             'participants' => array(
                 'type' => 'HasMany',
                 'entity' => '\Application\Entities\Person',

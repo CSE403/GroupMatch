@@ -13,15 +13,22 @@ class Poll extends \Saros\Application\Controller
 	public function init() {
 
 	}
+    
+    // Gets a poll ID given a guid
+    private function getPollId($guid) {
+        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('guid' => $guid));
+        return $poll->id;
+    }
 
 	/**
 	 Redirected the user to his/her poll page
 	 */
-	public function indexAction($pollId)
+	public function indexAction($guid)
 	{
 		$this->view->headStyles()->addStyle("poll");
         $this->view->topBar()->setPage("poll");
         
+        $pollId = $this->getPollId($guid);
         $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
         
         $this->view->Poll = $poll;
@@ -30,7 +37,9 @@ class Poll extends \Saros\Application\Controller
 	/**
 	 Append unique view style
 	 */
-	public function participateAction($pollId) {
+	public function participateAction($guid) {
+        $pollId = $this->getPollId($guid);
+        
 		if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             // let's create a new participant
@@ -39,19 +48,18 @@ class Poll extends \Saros\Application\Controller
             $person->name = "testuser".rand(0,100);
             $personId = $this->registry->mapper->insert($person);
             
-            /*
             // now lets do all of their priorities.
-            foreach($_POST as $key => $value) {
+            foreach($_POST as $optionId => $priority) {
                 // key is the option id, value is the priority
-                $person = new \Application\Entities\Person();
-                $person->pollId = $pollId;
-                $person->name = "testuser".rand(0,100);
-                $personId = $this->registry->mapper->insert($person);
-                
+                $answer = new \Application\Entities\Answer();
+                $answer->personId = $personId;
+                $answer->optionId = $optionId;
+                $answer->priority = $priority;
+                $this->registry->mapper->insert($answer);
             }
-            */
             
-            die(var_dump($_POST));
+            $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
+            $this->redirect($pollLink);            
         }
         
         $this->view->headStyles()->addStyle("participate");
@@ -65,11 +73,12 @@ class Poll extends \Saros\Application\Controller
 	 On the user's poll page, there is a link to generate the current answer. This function
 	 generates that answer, and then displays it on the same page as the "Happiness meter".
 	 */
-	public function solutionAction($pollId)
+	public function solutionAction($guid)
 	{
 		$this->view->headStyles()->addStyle("solution");
         $this->view->topBar()->setPage("solution");
 		
+        $pollId = $this->getPollId($guid);
 		// Verify that this exists
 		/*$pollId = intval($pollId);
 

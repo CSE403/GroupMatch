@@ -46,12 +46,17 @@ class Account extends \Saros\Application\Controller
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
+            $guid = uniqid('', true);
+            // verify that this is unique
+            
+            
             //die(var_dump($_POST["answer_type"] == "unique" ? "true" : "false"));
             //die(var_dump($_POST));
             $poll = new \Application\Entities\Poll();
             $poll->userId = $this->auth->getIdentity()->id;
             $poll->question = $_POST["title"];
             $poll->description = $_POST["description"];
+            $poll->guid = $guid;
             $poll->isUnique = $_POST["answer_type"] == "unique" ? "true" : "false";
             
             $pollId = $this->registry->mapper->insert($poll);
@@ -70,7 +75,7 @@ class Account extends \Saros\Application\Controller
                 }
             }
             
-            $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $pollId);
+            $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
             $this->redirect($pollLink);           
         }
     }
