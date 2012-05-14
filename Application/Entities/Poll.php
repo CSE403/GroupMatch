@@ -12,7 +12,9 @@ class Poll extends \Spot\Entity
             'userId' => array('type' => 'int'),
             'question' => array('type' => 'string'),
             'description' => array('type' => 'string'),
+            'isUnique' => array('type' => 'string'),
         );
+        // unique is either true or false, but Spot doesn't seem to work right now with ints
     }
     
     public static function relations()

@@ -40,10 +40,8 @@
 			<!--Specify how users of the poll will give his or her answers to your options.-->
 			<h1>Answer type</h1>
 			<footer>
-				<div><input name="answer_type" type="radio" value="1" checked="checked" /> Yes / No</div>
-				<div><input name="answer_type" type="radio" value="2" /> Yes / Neutral / No</div>
-				<div><input name="answer_type" type="radio" value="3" /> Uniquely rate each option</div>
-				<div><input name="answer_type" type="radio" value="4" /> Rate on scale between 1 and <input name="scale_max" type="number" placeholder="4" min="4" max="100" value="4" disabled="disabled" /></div>
+				<div><input name="answer_type" type="radio" value="unique" /> Uniquely rate each option</div>
+				<div><input name="answer_type" type="radio" value="scale" /> Rate on scale between 1 and 5<!--<input name="scale_max" type="number" placeholder="4" min="4" max="100" value="4" disabled="disabled" />--></div>
 			</footer>
 		</section>
 		<section>

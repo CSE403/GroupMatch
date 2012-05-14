@@ -31,7 +31,30 @@ class Poll extends \Saros\Application\Controller
 	 Append unique view style
 	 */
 	public function participateAction($pollId) {
-		$this->view->headStyles()->addStyle("participate");
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+            // let's create a new participant
+            $person = new \Application\Entities\Person();
+            $person->pollId = $pollId;
+            $person->name = "testuser".rand(0,100);
+            $personId = $this->registry->mapper->insert($person);
+            
+            /*
+            // now lets do all of their priorities.
+            foreach($_POST as $key => $value) {
+                // key is the option id, value is the priority
+                $person = new \Application\Entities\Person();
+                $person->pollId = $pollId;
+                $person->name = "testuser".rand(0,100);
+                $personId = $this->registry->mapper->insert($person);
+                
+            }
+            */
+            
+            die(var_dump($_POST));
+        }
+        
+        $this->view->headStyles()->addStyle("participate");
         $this->view->topBar()->setPage("participate");
         
         $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));

@@ -46,15 +46,21 @@ class Account extends \Saros\Application\Controller
         
         if($_SERVER["REQUEST_METHOD"] == "POST")
         {
+            //die(var_dump($_POST["answer_type"] == "unique" ? "true" : "false"));
             //die(var_dump($_POST));
             $poll = new \Application\Entities\Poll();
             $poll->userId = $this->auth->getIdentity()->id;
             $poll->question = $_POST["title"];
             $poll->description = $_POST["description"];
+            $poll->isUnique = $_POST["answer_type"] == "unique" ? "true" : "false";
             
             $pollId = $this->registry->mapper->insert($poll);
             
             foreach($_POST as $variable => $value){
+                // If they didn't set it's name, then skip it
+                if ($value == "")
+                    continue;
+                    
                 $needle = "option_";
                 if (substr($variable, 0, strlen($needle)) === $needle) {
                     $option = new \Application\Entities\Option();

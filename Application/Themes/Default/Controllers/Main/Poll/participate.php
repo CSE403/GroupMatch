@@ -17,7 +17,10 @@
 			<section class="form_error">
 				This is an error message
 			</section>
-			<form name="participate_form" class="indent">
+            <?php
+                $link = $GLOBALS["registry"]->utils->makeLink("Poll", "participate", $this->Poll->id);
+            ?>
+			<form action="<?php echo $link; ?>" method="post" name="participate_form" class="indent">
 				<section>
 					<h1>Description</h1>
 					<footer>
@@ -27,28 +30,38 @@
 				<section>
 					<h1>Directions go here</h1>
 					<footer>
-						<ul>
-							<li>
-								<header>
-									<div>(Uniquely rate each) example</div>
-								</header>
-								<!-- max would be the polls number of options -->
-								<input name="answer_3" type="number" min="1" max="4" required="required" placeholder="1" />
-							</li>
-							<li>
-								<header>
-									<div>(Rate on scale) example</div>
-								</header>
-								<!-- max would be the polls scale value -->
-								<input name="answer_3" type="number" min="1" max="5" required="required" placeholder="1" />
-							</li>
+                        <ul>
+                        <?php
+                        foreach($this->Poll->options as $option) {
+                            if ($this->Poll->isUnique) {
+                                    ?>
+                                    <li>
+                                        <header>
+                                            <div><?php echo $option->name; ?></div>
+                                        </header>
+                                        <!-- max would be the polls number of options -->
+                                        <input name="<?php echo $option->id; ?>" type="number" min="1" max="4" required="required" placeholder="1" />
+                                    </li>
+                                    <?php
+                                }   
+                                else
+                                {
+                                    ?>
+                                    <li>
+                                        <header>
+                                            <div><?php echo $option->name; ?></div>
+                                        </header>
+                                        <!-- max would be the polls scale value -->
+                                        <input name="<?php echo $option->id; ?>" type="number" min="1" max="5" required="required" placeholder="1" />
+                                    </li>
+                                    <?php
+                                }
+                            }
+                        ?>  
 						</ul>
 					</footer>
 				</section>
-				<?php
-					$link = $GLOBALS["registry"]->utils->makeLink("Poll", "index");
-				?>
-				<a href="<?php echo $link; ?>"><button class="green">submit</button></a>
+				<button type="submit" class="green">submit</button>
 			</form>
 		</section>
 	</div>
