@@ -28,7 +28,13 @@
 					</footer>
 				</section>
 				<section>
-					<h1>Directions go here</h1>
+					<h1>Your Name</h1>
+					<footer>
+						<input name="participant_name" type="text" placeholder="Name" required="required" />
+					</footer>
+				</section>
+				<section>
+					<h1>Poll Directions go here</h1>
 					<footer>
                         <ul>
                         <?php
