@@ -78,6 +78,13 @@ class Index extends \Saros\Application\Controller
             $result = $mapper->insert($user);
             
             $this->login($user->username, $user->password);
+            
+            $auth = \Saros\Auth::getInstance();
+            if ($auth->hasIdentity()) {
+                // We are logged in
+                $accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
+                $this->redirect($accountLink);
+            }
         }
     }
     
