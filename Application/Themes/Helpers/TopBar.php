@@ -40,25 +40,25 @@ class TopBar extends \Saros\Display\Helpers\HelperBase
             <?php
                 }else if ($this->pageName == "myPolls") {
             ?>
-                    <a href="<?php echo $about; ?>">About</a>
+                    <!--<a href="<?php echo $about; ?>">About</a>-->
                     <a class="selected">Polls</a>
                     <a href="<?php echo $create; ?>">Create</a>
             <?php
                 }else if ($this->pageName == "createPoll") {    
             ?>
-                    <a href="<?php echo $about; ?>">About</a>
+                    <!--<a href="<?php echo $about; ?>">About</a>-->
                     <a href="<?php echo $polls; ?>">Polls</a>
                     <a class="selected">Create</a>
             <?php
                 }else if ($this->pageName == "poll") {
                ?>
-                    <a href="<?php echo $about; ?>">About</a>
+                    <!--<a href="<?php echo $about; ?>">About</a>-->
                     <a href="<?php echo $polls; ?>">Polls</a>
                     <a href="<?php echo $create; ?>">Create</a>
             <?php
                 }else if ($this->pageName == "solution") { 
                ?>
-                    <a href="<?php echo $about; ?>">About</a>
+                    <!--<a href="<?php echo $about; ?>">About</a>-->
                     <a href="<?php echo $polls; ?>">Polls</a>
                     <a href="<?php echo $create; ?>">Create</a>
             <?php 

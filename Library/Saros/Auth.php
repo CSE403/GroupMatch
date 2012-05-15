@@ -78,6 +78,7 @@ class Auth
 
 	public function authenticate(Auth\Adapter\IAdapter $adapter = null)
 	{
+        
 		if (!is_null($adapter))
 			$this->setAdapter($adapter);
 
@@ -97,7 +98,7 @@ class Auth
 			$this->getStorage()->writeIdentity($result->getIdentity());
 
         $this->lastCode = $result->getCode();
-        
+         
 		return $result;
 	}
 

@@ -45,8 +45,7 @@ class Index extends \Saros\Application\Controller
             {      
                 $result = $this->login($_POST["email"], $_POST["password"]);
                 
-                $auth = \Saros\Auth::getInstance();
-                if (!$auth->hasIdentity()) {
+                if (!$result->isSuccess()) {
                     $errors[] = "Invalid username and password";
                 }
                 else

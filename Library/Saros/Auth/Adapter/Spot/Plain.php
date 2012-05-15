@@ -123,6 +123,9 @@ class Plain implements \Saros\Auth\Adapter\IAdapter
 		* @todo figure out which we need.
 		* @todo Documentation needs to mention that we should ALWAYS compare based on the consts of Saros_Auth_Result
 		*/
+        $identity = null;
+        
+        //die(var_dump(count($user)));
 		if (!$user || count($user) == 0)
 			$status = \Saros\Auth\Result::UNKNOWN_USER;
 		// If there is more than one user, its a problem
@@ -136,9 +139,8 @@ class Plain implements \Saros\Auth\Adapter\IAdapter
 			$user = $user->first();
             
 			$status = $this->validateUser($user);
+            $identity = new \Saros\Auth\Identity\Spot($this->mapper, $user);
 		}
-         
-		$identity = new \Saros\Auth\Identity\Spot($this->mapper, $user);
 
 		return new \Saros\Auth\Result($status, $identity);
 	}

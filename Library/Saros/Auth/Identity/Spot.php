@@ -19,7 +19,7 @@ class Spot implements IIdentity
 
 	public function __construct(\Spot\Mapper $mapper, \Spot\Entity $user)
 	{
-		$this->mapper = $mapper;
+        $this->mapper = $mapper;
 		$this->user = $user;
         
 	}
