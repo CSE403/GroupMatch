@@ -110,5 +110,8 @@
             <tr><td><a href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
         </tfoot>
     </table>
-    
+    <footer>
+        <div class="fb-comments" data-num-posts="5" data-width="850"></div>
+    </footer>
 </section>
+
