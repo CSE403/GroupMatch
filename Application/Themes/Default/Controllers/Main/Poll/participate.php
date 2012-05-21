@@ -14,19 +14,42 @@ This page allows a user to interact with the poll by entering their preferences.
             <header>
                 <h1><?php echo $this->Poll->question; ?></h1>
             </header>
-            <!--<section class="form_error">
-                This is an error message
-            </section>-->
+			
+            <?php
+				if (count($this->Errors) > 0) {
+			?>
+				<section class="form_error">
+					<ul>
+					<?php
+						 foreach($this->Errors as $error) {
+							 ?>
+								  <li><?php echo $error; ?></li>
+							 <?php
+						 }
+					?>
+					</ul>
+				</section>
+			<?php   
+				}
+			?>
+			
             <?php
                 $link = $GLOBALS["registry"]->utils->makeLink("Poll", "participate", $this->Poll->guid);
             ?>
             <form action="<?php echo $link; ?>" method="post" name="participate_form" class="indent">
-                <section>
-                    <h1>Description</h1>
-                    <footer>
-                        <?php echo $this->Poll->description; ?>
-                    </footer>
-                </section>
+				<input type="hidden" name="isUnique" id="isUnique" value="<?php echo ($this->Poll->isUnique == true) ? 1 : 0; ?>">
+				<?php 
+					if(!empty($this->Poll->description)) { 
+				?>
+					<section>
+						<h1>Description</h1>
+						<footer>
+							<?php echo $this->Poll->description; ?>
+						</footer>
+					</section>
+				<?php 
+					} 
+				?>
                 <section>
                     <h1>Your Name</h1>
                     <footer>
@@ -34,7 +57,7 @@ This page allows a user to interact with the poll by entering their preferences.
                     </footer>
                 </section>
                 <section>
-                    <h1>Poll Directions go here</h1>
+                    <h1>Please rate all of the options below.  The higher the rating, the better the score.</h1>
                     <footer>
                         <ul>
                             <?php

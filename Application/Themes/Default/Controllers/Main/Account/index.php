@@ -4,10 +4,10 @@
     This php script depicts the ZFR of the users main account index (the front page). Displayed in this page
     are the polls that the user has created, as well as options to create new polls.
 -->
-
 <section>
 	<header>
 		<h1>Poll Management</h1>
+		All created polls are listed below.  To create a new poll, click on the "Create" button above.
 	</header>
 	<!-- 
         All polls that the user has created will be displayed here. Each poll item on the user's page

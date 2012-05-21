@@ -44,40 +44,93 @@ class Account extends \Saros\Application\Controller
         $this->view->headStyles()->addStyle("createPoll");
         $this->view->topBar()->setPage("createPoll");
         
+		$errors = array();
         if($_SERVER["REQUEST_METHOD"] == "POST")
-        {
-            $guid = uniqid('', true);
-            // verify that this is unique
-            
-            
-            //die(var_dump($_POST["answer_type"] == "unique" ? "true" : "false"));
-            //die(var_dump($_POST));
-            $poll = new \Application\Entities\Poll();
-            $poll->userId = $this->auth->getIdentity()->id;
-            $poll->question = $_POST["title"];
-            $poll->description = $_POST["description"];
-            $poll->guid = $guid;
-            $poll->isUnique = $_POST["answer_type"] == "unique" ? "true" : "false";
-            
-            $pollId = $this->registry->mapper->insert($poll);
-            
-            foreach($_POST as $variable => $value){
-                // If they didn't set it's name, then skip it
-                if ($value == "")
-                    continue;
-                    
-                $needle = "option_";
-                if (substr($variable, 0, strlen($needle)) === $needle) {
-                    $option = new \Application\Entities\Option();
-                    $option->pollId = $pollId;
-                    $option->name = $value;
-                    $this->registry->mapper->insert($option);   
-                }
-            }
-            
-            $pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
-            $this->redirect($pollLink);           
+        {	
+			
+			//check if everything is valid or not
+			$question = $_POST["title"];
+			if(empty($question))
+				$errors[] = "No question/title added.";
+			
+			$answer_type = isset($_POST["answer_type"]) ? $_POST["answer_type"] : false;
+			if($answer_type === false)
+				$errors[] = "No answer type selected.";
+				
+			//must have at least two categories
+			$count = 0;
+			$min_answers = 2;
+			foreach($_POST as $variable => $value){
+				// If they didn't set it's name, then skip it
+				if ($value == "")
+					continue;
+					
+				$needle = "option_";
+				$limit = "limit_";
+				$all = "all_";
+				if(substr($variable, 0, strlen($needle)) === $needle &&
+					substr($variable,strlen($needle),strlen($limit)) !== $limit &&
+					substr($variable,strlen($needle),strlen($all)) !== $all) 
+				{
+					$count++;
+					
+					if($count >= $min_answers)
+						break;
+				}
+			}
+			if($count < $min_answers)
+				$errors[] = "There must be at least 2 answers to the poll";
+			
+			//if no errors, add in the stuff
+			if(empty($errors)) {
+				$guid = uniqid('', true);
+				// verify that this is unique	
+				
+				//die(var_dump($_POST["answer_type"] == "unique" ? "true" : "false"));
+				//die(var_dump($_POST));
+				$poll = new \Application\Entities\Poll();
+				$poll->userId = $this->auth->getIdentity()->id;
+				$poll->question = $question;
+				
+				$poll->description = $_POST["description"];
+				do {
+					$poll->guid = $guid;
+				} while($this->registry->mapper->first("\Application\Entities\Poll", array("guid" => $poll->guid)) !== false);
+				
+				$poll->isUnique = $answer_type == "unique" ? "true" : "false";
+				
+				$pollId = $this->registry->mapper->insert($poll);
+				
+				$universal_max_size = isset($_POST["option_all_limit"]) ? $_POST["option_all_limit_amount"] : null;
+				foreach($_POST as $variable => $value) {
+					// If they didn't set it's name, then skip it
+					if ($value == "")
+						continue;
+						
+					$needle = "option_";
+					$limit = "limit_";
+					$amount = "amount_";
+					$ola = $needle.$limit.$amount;
+					$all = "all_";
+					if(substr($variable, 0, strlen($needle)) === $needle &&
+						substr($variable,strlen($needle),strlen($limit)) !== $limit &&
+						substr($variable,strlen($needle),strlen($all)) !== $all) 
+					{
+						$index = substr($variable, strlen($needle));
+						$option = new \Application\Entities\Option();
+						$option->pollId = $pollId;
+						$option->name = $value;
+						$option->maxSize = isset($_POST[$ola.$index]) ? $_POST[$ola.$index] : $universal_max_size;
+						$this->registry->mapper->insert($option);   
+					}
+				}
+				
+				$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
+				$this->redirect($pollLink);           
+			}
         }
+		$this->view->Test = $_POST;
+		$this->view->Errors = $errors;
     }
     
     public function logoutAction() {

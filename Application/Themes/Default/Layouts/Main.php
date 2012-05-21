@@ -1,7 +1,7 @@
 <html>
     <head>
         <!-- jQuery -->  
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
         <?php 
         	echo $this->headScripts()->addScript("util"); 
         	echo $this->headStyles()->prependStyle("global")->prependStyle("reset"); 

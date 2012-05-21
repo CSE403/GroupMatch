@@ -2,6 +2,13 @@
  * This script is responsible for the behavioral style of the various pages.
  * Each page's section is marked with a heading.
  */
+ 
+ 
+ //returns true if n is a real positive integer, otherwise false
+ function isPosInt(n) {
+	return $.isNumeric(n) && n > 0 && n.split('.').length == 1;
+ }
+ 
 $(function() {
 	/***************************************************************************
 	 * Create poll scripting
@@ -15,9 +22,11 @@ $(function() {
 		limitAllCheckbox.click(function() {
 			if ($(this).attr("checked")) {
 				limitAllNumberbox.removeAttr("disabled");
+				limitAllNumberbox.attr("required","required");
 				limitAllNumberbox.focus();
 			}else {
 				limitAllNumberbox.attr("disabled", "disabled");
+				limitAllNumberbox.removeAttr("required");
 			}
 		});
 		
@@ -50,10 +59,17 @@ $(function() {
 		limitCheckboxes = $('input[name*="option_limit"]');
 		if (limitCheckboxes != null) {
 			limitCheckboxes.click(function() {
-				if ($(this).attr("checked")) {
-					$(this).next().removeAttr("disabled").focus();
-				}else {
-					$(this).next().attr("disabled", "disabled");
+				var index = $(this).attr("name").split("_");
+				index = index[index.length-1];
+				if($(this).attr("checked")) {	
+					if($.isNumeric(index) && index > 2) //make first two option boxes always required
+						$(this).prev().attr("required","required");
+					$(this).next().removeAttr("disabled")
+							.attr("required","required").focus();
+				} else {
+					if(!$.isNumeric(index) && index > 2) //make first two option boxes required
+						$(this).prev().removeAttr("required");
+					$(this).next().attr("disabled", "disabled").removeAttr("required");
 				}
 			});
 		}
@@ -81,6 +97,20 @@ $(function() {
 		});
 	}
 	
+	createPollForm = $("#create_poll");
+	if(createPollForm) {
+		createPollForm.submit(function() {
+			var errors = false;
+			$(':input[name*="amount"]').each(function() {
+				if(!isPosInt($(this).val())) {
+					$(this).val('');
+					errors = true;
+				}
+			});
+			if(errors)
+				return false;
+		});
+	}
 	/***************************************************************************
 	 * Poll management scripting
 	 **************************************************************************/
@@ -112,4 +142,53 @@ $(function() {
 			  });
 		});
 	}
+	
+	/***************************************************************************
+	 * Poll Participant Scripting
+	 **************************************************************************/
+	 
+	 //ensures that all options are within the valid range before submissione
+	 //if they are not all valid values on submit, they are turned into ''
+	 var participate_form = $('form[name="participate_form"]');
+	 var unique = $('#isUnique').val();
+	 if(participate_form) {
+		participate_form.submit(function() {
+			var error = false;
+			var ratings = $(':input[name*="option"]');
+			if(unique == 1) { //if unique rating scale...
+				var max = ratings.length;
+				var values = [];
+				ratings.each(function(index) {
+					var v = $(this).val();
+					if(!isPosInt(v) || v > max) {
+						$(this).val('');
+						error = true;
+					}
+					values[index] = v;
+				});
+				ratings.each(function(index) {
+					var v = $(this).val();
+					for(i = 0; i < values.length; i++) {
+						if(i != index && v == values[i]) {
+							error = true;
+							$(this).val('');
+						}
+					}
+				});
+			} else { //if on scale from 1 - 5
+				var max = 5;
+				ratings.each(function() {
+					var v = $(this).val();
+					if(!isPosInt(v) || v > max) {
+						$(this.val(''));
+						error = true;
+					}
+				});
+			}
+			if(error)
+				return false;
+		});
+	 }
+	 
+
 });

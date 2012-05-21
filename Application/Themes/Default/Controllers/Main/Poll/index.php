@@ -11,6 +11,7 @@
 <section>
     <header>
 		<?php
+			
 			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution",$this->Poll->guid);
 		?>
         <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
@@ -26,7 +27,12 @@
                            <th><?php echo $option->name; ?></th>
                         <?php
                     }
-                ?>            
+					if($this->isOwner) {
+					?>
+						<th></th>
+					<?php
+					}
+                ?>   				
             </tr>
         </thead>
         <!-- 
@@ -37,9 +43,9 @@
 				If you need positivly no color bar in the meter, set border: none.
 				
 				color: add color class to meter div:
-					green:	60 - 100
-					yellow:	35 - 60
-					red:	< 35
+					green:	67 - 100
+					yellow:	33 - 67
+					red:	< 33
 		 -->
 		 <!-- 
             Each participants answers will be stored here. On the page, it will be depicted as a row of (in this case)
@@ -67,10 +73,10 @@
                                 $percent = (int)(($answer->priority/count($this->Poll->options))*100);
                                 
                                 $color = "red";
-                                if ($percent >= 60) {
+                                if ($percent >= 67) {
                                     $color = "green";
                                 }
-                                elseif($percent >= 35) {
+                                elseif($percent >= 33) {
                                     $color = "yellow";
                                 }
                                 
@@ -84,6 +90,14 @@
                                 <?php
                             }
                         ?>
+						<?php 
+							if($this->isOwner) {
+								$link = $GLOBALS["registry"]->utils->makeLink("Poll","deleteParticipant", $this->Poll->guid, $participant->id);
+						?>
+							<td class="participant"><a href="<?php echo $link; ?>"><button class="red">Delete</button></td>
+						<?php 
+							}
+						?>
                     </tr>
                     <?php
                 }

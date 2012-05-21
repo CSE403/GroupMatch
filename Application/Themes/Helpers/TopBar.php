@@ -38,6 +38,11 @@ class TopBar extends \Saros\Display\Helpers\HelperBase
                     <a href="<?php echo $about; ?>">About</a>
                     <a class="selected">Create Account</a>
             <?php
+                }else if ($this->pageName == "login") {
+            ?>
+                    <a href="<?php echo $about; ?>">About</a>
+                    <a href="<?php echo $register; ?>">Create Account</a>
+            <?php
                 }else if ($this->pageName == "myPolls") {
             ?>
                     <!--<a href="<?php echo $about; ?>">About</a>-->
