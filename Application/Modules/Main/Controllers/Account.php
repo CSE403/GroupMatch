@@ -82,10 +82,7 @@ class Account extends \Saros\Application\Controller
 				$errors[] = "There must be at least 2 answers to the poll";
 			
 			//if no errors, add in the stuff
-			if(empty($errors)) {
-				$guid = uniqid('', true);
-				// verify that this is unique	
-				
+			if(empty($errors)) {				
 				//die(var_dump($_POST["answer_type"] == "unique" ? "true" : "false"));
 				//die(var_dump($_POST));
 				$poll = new \Application\Entities\Poll();
@@ -94,7 +91,7 @@ class Account extends \Saros\Application\Controller
 				
 				$poll->description = $_POST["description"];
 				do {
-					$poll->guid = $guid;
+					$poll->guid = uniqid('', true);
 				} while($this->registry->mapper->first("\Application\Entities\Poll", array("guid" => $poll->guid)) !== false);
 				
 				$poll->isUnique = $answer_type == "unique" ? "true" : "false";
