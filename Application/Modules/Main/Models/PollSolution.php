@@ -1,6 +1,6 @@
 <?php
 namespace Application\Modules\Main\Models;
-
+     
 class PollSolution
 {
 	private $starValue;
@@ -20,15 +20,15 @@ class PollSolution
 	 * @return PollSolution
 	 */
 	public function __construct(\Spot\Entity\Collection $options, $numParticipants) {
-		$numParticipants = intval($numParticants);
-
+        $numParticipants = intval($numParticipants);
+        
 		$this->numOptionsAtMax = 0;
 		$this->totalOverMax = 0;
 		$this->optionsToPeople = array(); //new HashMap<Option, List<Person>>();
 		$this->starValue = 0;
-		$this->numRequiredAtLargeSize = numParticipants % count(options);
-		$this->maxPerOption = numParticipants / count(options) + 1;
-
+		$this->numRequiredAtLargeSize = $numParticipants % count($options);
+		$this->maxPerOption = $numParticipants / count($options) + 1;
+                  
 		foreach($options as $option) {
 			$optionsToPeople[$option] = array();
 		}
@@ -76,7 +76,7 @@ class PollSolution
 				}
 			}
 		}
-
+        
 		return $curBestOption;
 	}
 	/**
@@ -101,15 +101,16 @@ class PollSolution
 
 	public function addPersonToOption(\Application\Entities\Person $person, \Application\Entities\Option $option)
 	{
+        
 		$mapper = $GLOBALS["registry"]->mapper;
 
 		// Add person to the map with option as key
 		$this->optionsToPeople[$option][] = $person;
-
+           
 		$optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
 		 
 		$this->starValue += $optionValue;
-
+      
 		if (count($this->optionsToPeople[$option]) == $this->maxPerOption){
 			$this->numOptionsAtMax++;
 		}
