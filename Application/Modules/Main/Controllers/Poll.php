@@ -124,8 +124,9 @@ class Poll extends \Saros\Application\Controller
 	
 	/*
 		Deletes a participant from a poll
+		Does validitiy checking to ensure that only the owner may delete the poll
 	*/
-	function deleteParticipantAction($guid=null, $personId=null) {
+	public function deleteParticipantAction($guid=null, $personId=null) {
 		$pollId = $this->getPollId($guid);
 		if($this->isOwner($pollId)) {
 			//personIds are unique to each poll and have no correlation to who is logged in
