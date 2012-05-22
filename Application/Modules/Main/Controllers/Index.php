@@ -122,10 +122,10 @@ class Index extends \Saros\Application\Controller
 	 *  @return true if the email is valid, false otherwise
 	 */
 	private function isEmail($email) {
-	  $regexp="/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i";
-	  if ( !preg_match($regexp, $email) ) {
-		   return false;
-	  }
-	  return true;
+		$regexp="/^[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}$/i";
+		if ( !preg_match($regexp, $email) ) {
+			return false;
+		}
+		return true;
 	}
 }
