@@ -149,17 +149,19 @@ class Poll extends \Saros\Application\Controller
 		
         $pollId = $this->getPollId($guid);
 		// Verify that this exists
-		/*$pollId = intval($pollId);
-
+		
+        $pollId = intval($pollId);
+        
 		$mapper = $this->registry->mapper;
 
-		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId));
-		$options = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId));
-
+		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId))->execute();
+		$options = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
+               
 		$pollSolution = new \Application\Modules\Main\Models\PollSolution($options, count($people));
 
 		foreach($people as $person) {
 			$option = $pollSolution->findBestOption($person);
+            
 			$pollSolution->addPersonToOption($person, $option);
 		}
 
@@ -179,7 +181,7 @@ class Poll extends \Saros\Application\Controller
 
 		// Hand it off to the view
 		$this->view->Solution = $curBestSolution;
-		*/
+		
 	}
 
 	/**
