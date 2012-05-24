@@ -28,10 +28,12 @@
     <?php   
         }
     ?>
+	
     <form name="register" action="" method="post" class="indent">
         <div><input name="email" type="email" placeholder="Email" required="required"/></div>
-        <div><input name="password" type="password" placeholder="Password" required="required"/></div>
-        <div><input name="re_password" type="password" placeholder="Retype Password" required="required"/></div>
+        <div><input name="password" type="password" placeholder="Password" required="required" pattern=".{<?php echo $this->pw_min_len; ?>,}"/></div>
+        <div><input name="re_password" type="password" placeholder="Retype Password" required="required" pattern=".{<?php echo $this->pw_min_len; ?>,}"/></div>
         <div><button class="green" type="submit">Create Account</button></div>
     </form>
+	<div style="padding:5px;">(Note: Passwords must be at least 6 characters long.)</div>
 </section>
