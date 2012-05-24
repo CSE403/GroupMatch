@@ -137,4 +137,8 @@ class Account extends \Saros\Application\Controller
         $homeLink = $GLOBALS["registry"]->utils->makeLink("Index", "index");
         $this->redirect($homeLink);
     }
+    
+    public function deleteAction() {
+    	
+    }
 }

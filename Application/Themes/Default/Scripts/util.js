@@ -138,7 +138,7 @@ $(function() {
 					 );
 			    }
 			    
-			    //TODO make call to remove poll here 
+			    //TODO make call to remove poll here
 			  });
 		});
 	}

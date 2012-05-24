@@ -26,11 +26,15 @@
         ?>
 		<ul id="poll_list">
             <?php
+           	 	$deletePage = $GLOBALS["registry"]->utils->makeLink("Account", "delete");
                 foreach($this->Polls as $poll) {
                     $pollPage = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $poll->guid);
                  ?>
                  <li>
-                    <button class="red" name="delete_poll">Delete</button>
+                    <form action="<?php echo $deletePage; ?>" method="post">
+                    	<input type="text" value="<?php echo $poll->guid?>" style="display:none;">
+                    	<button action="<?php echo $deletePage?>" class="red" name="delete_poll">Delete</button>
+                    </form>
                     <header><a href="<?php echo $pollPage ?>"><?php echo $poll->question?></a></header>
                     <footer><?php echo $pollPage?></footer>
                 </li>

@@ -32,7 +32,9 @@
 						<h2 id="no_polls_message" style="display:none;">You don't have any polls</h2>
 						<ul id="poll_list">
 							<li>
-								<button class="red" name="delete_poll">Delete</button>
+								<form action="<?php echo $createPage; ?>" method="post">
+									<button class="red" name="delete_poll">Delete</button>
+								</form>
 								<header><a href="../poll">When should our team meet?</a></header>
 								<footer>www.groupmatch.com/poll/ogn3f0waf3lqvnlk230</footer>
 							</li>
