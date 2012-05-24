@@ -5,24 +5,28 @@ import java.util.Map;
 
 public class PollSolution implements Cloneable
 {
-
+	private int maxRating;
+	private int totalPeople;
 	private int starValue;
-	private int maxPerOption;
-	private int numRequiredAtLargeSize;
-	private int numOptionsAtMax;
+	private int numPossiblePeople;
 	private int totalOverMax;
 	private Map<Option, List<Person>> optionsToPeople;
+	private List<Person> peopleNotPlaced;
 
-	public PollSolution(List<Option> options, int numParticipants)
+	public PollSolution(List<Option> options, int numParticipants, int maxRating)
 	{
-		numOptionsAtMax = 0;
+		this.maxRating = maxRating;
+		peopleNotPlaced = new ArrayList<Person>();
+		numPossiblePeople = 0;
 		totalOverMax = 0;
 		optionsToPeople = new HashMap<Option, List<Person>>();
 		starValue = 0;
-		numRequiredAtLargeSize = numParticipants % options.size();
-		maxPerOption = numParticipants / options.size() + 1;
 		for (Option option : options)
+		{
+			numPossiblePeople += option.maxSize;
 			optionsToPeople.put(option, new ArrayList<Person>());
+		}
+		totalPeople = numPossiblePeople;
 	}
 
 	public PollSolution clone()
@@ -31,6 +35,7 @@ public class PollSolution implements Cloneable
 		try
 		{
 			toReturn = (PollSolution) super.clone();
+			toReturn.peopleNotPlaced = new ArrayList<Person>(peopleNotPlaced);
 			toReturn.optionsToPeople = new HashMap<Option, List<Person>>();
 			for (Option option : optionsToPeople.keySet())
 			{
@@ -59,9 +64,9 @@ public class PollSolution implements Cloneable
 							|| person.getOptionValue(option) > person
 									.getOptionValue(curBestOption) || (person
 							.getOptionValue(option) == person
-							.getOptionValue(curBestOption) && optionsToPeople
-							.get(curBestOption).size() > optionsToPeople.get(
-							option).size())))
+							.getOptionValue(curBestOption) && curBestOption.maxSize
+							- optionsToPeople.get(curBestOption).size() > option.maxSize
+							- optionsToPeople.get(option).size())))
 			{
 				curBestOption = option;
 			}
@@ -91,26 +96,41 @@ public class PollSolution implements Cloneable
 
 	public void addPersonToOption(Person person, Option option)
 	{
-		optionsToPeople.get(option).add(person);
-		starValue += person.getOptionValue(option);
-		if (optionsToPeople.get(option).size() == maxPerOption)
-			numOptionsAtMax++;
-		else if (optionsToPeople.get(option).size() > maxPerOption)
-			totalOverMax++;
+		if (option == null)
+			peopleNotPlaced.add(person);
+		else
+		{
+			optionsToPeople.get(option).add(person);
+			starValue += person.getOptionValue(option);
+			numPossiblePeople--;
+			if (optionsToPeople.get(option).size() > option.maxSize)
+				totalOverMax++;
+		}
 	}
 
 	public void removePersonFromOption(Person person, Option option)
 	{
-		optionsToPeople.get(option).remove(person);
-		starValue -= person.getOptionValue(option);
-		if (optionsToPeople.get(option).size() == maxPerOption - 1)
-			numOptionsAtMax--;
-		else if (optionsToPeople.get(option).size() >= maxPerOption)
-			totalOverMax--;
+		if (option == null)
+			peopleNotPlaced.remove(person);
+		else
+		{
+			optionsToPeople.get(option).remove(person);
+			starValue -= person.getOptionValue(option);
+			numPossiblePeople++;
+			if (optionsToPeople.get(option).size() >= option.maxSize)
+				totalOverMax--;
+		}
+	}
+	
+	public ArrayList<Person> getPeopleNotPlaced()
+	{
+		return new ArrayList<Person>(peopleNotPlaced);
 	}
 
 	public List<Person> getPeopleForOption(Option option)
 	{
+		if(option == null)
+			return new ArrayList<Person>(peopleNotPlaced);
 		return new ArrayList<Person>(optionsToPeople.get(option));
 	}
 
@@ -122,10 +142,14 @@ public class PollSolution implements Cloneable
 	public boolean possibleToMakeValidIn(int depth)
 	{
 		int totalShifts = totalOverMax;
-		if (numOptionsAtMax > numRequiredAtLargeSize)
+		if (numPossiblePeople > 0)
 		{
-			totalShifts += numOptionsAtMax - numRequiredAtLargeSize;
+			totalShifts += Math.min(numPossiblePeople, peopleNotPlaced.size());
 		}
 		return totalShifts <= depth;
+	}
+	
+	public int getHappiness(){
+		return (starValue*100)/(totalPeople*maxRating);
 	}
 }

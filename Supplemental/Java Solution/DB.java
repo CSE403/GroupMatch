@@ -5,6 +5,9 @@ import java.util.Random;
 public class DB
 {
 
+	public static boolean getIsUniqueFlag(String pollID){
+		return true;
+	}
 	public static List<Person> getPersons(String pollID)
 	{
 		List<Person> persons = new ArrayList<Person>();
@@ -68,30 +71,31 @@ public class DB
 				rand.nextInt(6)));
 		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "45",
 				rand.nextInt(6)));
-		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "46",
-				rand.nextInt(6)));
-		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "47",
-				rand.nextInt(6)));
-		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "48",
-				rand.nextInt(6)));
-		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "49",
-				rand.nextInt(6)));
+//		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "46",
+//				rand.nextInt(6)));
+//		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "47",
+//				rand.nextInt(6)));
+//		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "48",
+//				rand.nextInt(6)));
+//		answers.add(new Answer(Long.toString(rand.nextLong()), personID, "49",
+//				rand.nextInt(6)));
 		return answers;
 	}
 
 	public static List<Option> getOptions(String pollID)
 	{
+		Random rand = new Random();
 		List<Option> options = new ArrayList<Option>();
-		options.add(new Option("40", pollID, "a?", 0));
-		options.add(new Option("41", pollID, "b?", 0));
-		options.add(new Option("42", pollID, "c?", 0));
-		options.add(new Option("43", pollID, "d?", 0));
-		options.add(new Option("44", pollID, "e?", 0));
-		options.add(new Option("45", pollID, "f?", 0));
-		options.add(new Option("46", pollID, "g?", 0));
-		options.add(new Option("47", pollID, "h?", 0));
-		options.add(new Option("48", pollID, "i?", 0));
-		options.add(new Option("49", pollID, "j?", 0));
+		options.add(new Option("40", pollID, "a?", rand.nextInt(6)));
+		options.add(new Option("41", pollID, "b?", rand.nextInt(6)));
+		options.add(new Option("42", pollID, "c?", rand.nextInt(6)));
+		options.add(new Option("43", pollID, "d?", rand.nextInt(6)));
+		options.add(new Option("44", pollID, "e?", rand.nextInt(6)));
+		options.add(new Option("45", pollID, "f?", rand.nextInt(6)));
+//		options.add(new Option("46", pollID, "g?", rand.nextInt(6)));
+//		options.add(new Option("47", pollID, "h?", rand.nextInt(6)));
+//		options.add(new Option("48", pollID, "i?", rand.nextInt(6)));
+//		options.add(new Option("49", pollID, "j?", rand.nextInt(6)));
 		return options;
 	}
 

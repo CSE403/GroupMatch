@@ -10,7 +10,8 @@ public class PollSolutionMain
 		System.out.println("done");
 		for (Option option : map.keySet())
 		{
-			String toPrint = option.name + "\n";
+			String toPrint = option.name + " allows " + option.maxSize
+					+ " people" + "\n";
 			for (Person person : map.get(option))
 			{
 				toPrint += "\t" + person.name + " has value of: "
@@ -18,6 +19,12 @@ public class PollSolutionMain
 			}
 			System.out.println(toPrint);
 		}
+		String toPrint =  " The empty set: \n";
+		for (Person person : pollSolution.getPeopleNotPlaced())
+		{
+			toPrint += "\t" + person.name +"\n";
+		}
+		System.out.println(toPrint);
 	}
 
 	public static PollSolution generatePollSolution(String pollID)
@@ -28,7 +35,9 @@ public class PollSolutionMain
 			person.setAnswers(DB.getAnswers(person.ID));
 		}
 		List<Option> options = DB.getOptions(pollID);
-		PollSolution pollSolution = new PollSolution(options, persons.size());
+		int maxSize = DB.getIsUniqueFlag(pollID) ? options.size() : 5;
+		PollSolution pollSolution = new PollSolution(options, persons.size(), maxSize);
+		options.add(null);
 		Option bestOption;
 		for (Person person : persons)
 		{
@@ -36,7 +45,8 @@ public class PollSolutionMain
 			pollSolution.addPersonToOption(person, bestOption);
 		}
 		PollSolution curBestSolution = null;
-		for (int i = 1; i <= 4; i++)
+		for (int i = 1; i <= 20 / Math.log(persons.size() * options.size()
+				* options.size() + 1) + 1; i++)
 		{
 			curBestSolution = null;
 			int j = 0;
@@ -62,8 +72,10 @@ public class PollSolutionMain
 			return pollSolution.clone();
 		if (depth == 0)
 			return toReturn;
+
 		for (Option option : options)
 		{
+
 			for (Person person : pollSolution.getPeopleForOption(option))
 			{
 				pollSolution.removePersonFromOption(person, option);
