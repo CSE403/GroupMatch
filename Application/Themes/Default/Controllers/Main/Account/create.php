@@ -53,14 +53,14 @@
 			<!--Specify how users of the poll will give his or her answers to your options.-->
 			<h1>Answer type</h1>
 			<footer>
-				<div><input name="answer_type" type="radio" value="unique" required="required"/> Uniquely rate each option (Each option has a rating, but no ratings may be duplicated.)</div>
-				<div><input name="answer_type" type="radio" value="scale" required="required"/> Rate on scale between 1 and 5<!--<input name="scale_max" type="number" placeholder="4" min="4" max="100" value="4" disabled="disabled" />--></div>
+				<div><input name="answer_type" type="radio" value="unique" required="required"/><div>Uniquely rate each option (Each option has a rating, but no ratings may be duplicated.)</div></div>
+				<div><input name="answer_type" type="radio" value="scale" required="required"/><div>Rate on scale between 1 and 5<!--<input name="scale_max" type="number" placeholder="4" min="4" max="100" value="4" disabled="disabled" />--></div></div>
 			</footer>
 		</section>
 		<section>
 			<!-- The options that the user will create will be displayed here.-->
 			<h1>Options / Unique Participant Limit</h1>
-			All blank answers will be ignored.
+			<p>All blank answers will be ignored.</p>
 			<footer>
 				<ul id="option_list">
 					<li>

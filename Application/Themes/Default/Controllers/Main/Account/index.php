@@ -18,11 +18,11 @@
         <?php
             if(!count($this->Polls)) {
         ?>
-		<h2 id="no_polls_message" style="display:none;">You don't have any polls</h2>
+		<h2 id="no_polls_message">You don't have any polls</h2>
         <?php
             }
             else
-            { 
+            {
         ?>
 		<ul id="poll_list">
             <?php
