@@ -68,7 +68,7 @@ class Index extends \Saros\Application\Controller
     {
         $this->view->headStyles()->addStyle("register");
         $this->view->topBar()->setPage("register");
-        
+        $this->view->pw_min_len = 6;
 		$errors = array();
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = new \Application\Entities\User();
@@ -78,6 +78,10 @@ class Index extends \Saros\Application\Controller
 			$user->password = $_POST["password"];
 			$password2 = $_POST["re_password"];
 			
+			
+			if(strlen($user->password) < $this->view->pw_min_len) {
+				$errors[] = "Passwords must be at least " . $this->view->pw_min_len . " characters long.";
+			}
 			
 			if($password2 !== $user->password) {
 				$errors[] = "Passwords do not match.";
