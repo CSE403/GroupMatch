@@ -3,14 +3,17 @@ namespace Application\Modules\Main\Models;
      
 class PollSolution
 {
+    private $maxRating;
+    private $totalPeople;
 	private $starValue;
-	private $maxPerOption;
-	private $numRequiredAtLargeSize;
-	private $numOptionsAtMax;
-	private $totalOverMax;
-
+    private $numPossiblePeople;
+    private $totalOverMax;
+    
 	// Map<Option, List<Person>>
 	private $optionsToPeople;
+    
+    // List<Person>
+    private $peopleNotPlaced;
 
 	/**
 	 * put your comment there...
@@ -19,19 +22,20 @@ class PollSolution
 	 * @param int $numParticipants
 	 * @return PollSolution
 	 */
-	public function __construct(\Spot\Entity\Collection $options, $numParticipants) {
-        $numParticipants = intval($numParticipants);
+	public function __construct(\Spot\Entity\Collection $options, $numParticipants, $maxRating) {
+        $this->maxRating = intval($maxRating);
         
-		$this->numOptionsAtMax = 0;
-		$this->totalOverMax = 0;
-		$this->optionsToPeople = array(); //new HashMap<Option, List<Person>>();
-		$this->starValue = 0;
-		$this->numRequiredAtLargeSize = $numParticipants % count($options);
-		$this->maxPerOption = $numParticipants / count($options) + 1;
+        $this->peopleNotPlaced = array();
+        $this->numPossiblePeople = 0;
+        $this->totalOverMax = 0;
+        $this->optionsToPeople = array(); //new HashMap<Option, List<Person>>();
+        $this->starValue = 0;
                   
 		foreach($options as $option) {
-			$optionsToPeople[$option] = array();
+            $this->numPossiblePeople += $option->maxSize == null ? PHP_INT_MAX : $option->maxSize;
+			$this->optionsToPeople[$option->id] = array();
 		}
+        $this->totalPeople = $numParticipants;
 	}
 
 	/**
@@ -52,29 +56,21 @@ class PollSolution
 
 		$curBestOption = null;
 
-		foreach($this->optionsToPeople as $option)
-		{
-			if($this->OptionIsValid($option, $person)){
-				if ($curBestOption == null) {
-					$curBestOption = $option;
-				}
-				else
-				{
-					$betterOptionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
-					$curBestOptionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $curBestOption->id));
-					$isBetterOption = $betterOptionValue->priority > $person;
-					$numPeopleAtBetter = count($optionsToPeople[$option]);
-					$numPeopleAtCurBest = count($optionsToPeople[$curBestOption]);
-
-					if ($betterOptionValue > $curBestOptionValue
-							|| ($betterOptionValue == $curBestOptionValue
-									&& $numPeopleAtBetter > $numPeopleAtCurBest)
-					)
-					{
-						$curBestOption = $option;
-					}
-				}
-			}
+        
+		foreach($this->optionsToPeople as $optionId => $values)
+		{                                              
+            $option = $mapper->first('\Application\Entities\Option', array('id' => $optionId));
+            die("opt: ".$optionId.", per: ".$person->id);
+            //die(var_dump($option));
+            die(var_dump($mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $optionId))));
+			if($this->OptionIsValid($option, $person)
+                && ($curBestOption == null
+                        || $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id))->priority > $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $curBestOption->id))->priority
+                        || ($mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id))->priority == $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $curBestOption->id))->priority
+                                && ($curBestOption->maxSize == null ? PHP_INT_MAX : $curBestOption->maxSize) - count($this->optionsToPeople[$curBestOption->id]) > ($options->maxSize == null ? PHP_INT_MAX : $option->maxSize) - count($this->optionsToPeople[$options->id]))))
+            {
+                $curBestOption = $option;  
+            }
 		}
         
 		return $curBestOption;
@@ -86,7 +82,7 @@ class PollSolution
 	{
 		$this->addPersonToOption($person, $option);
 		$isValid = !$this->hasConflicts();
-		$this->removePersonFromOption(person, option);
+		$this->removePersonFromOption($person, $option);
 		return $isValid;
 
 	}
@@ -99,51 +95,67 @@ class PollSolution
 		return $this->optionsToPeople;
 	}
 
-	public function addPersonToOption(\Application\Entities\Person $person, \Application\Entities\Option $option)
-	{
-        
-		$mapper = $GLOBALS["registry"]->mapper;
+	public function addPersonToOption(\Application\Entities\Person $person, \Application\Entities\Option $option = null)
+	{    
+        if ($option == null) {
+            $this->peopleNotPlaced[] = $person;
+        }
+        else
+        {
+            $mapper = $GLOBALS["registry"]->mapper;
+            
+		    // Add person to the map with option as key
+		    $this->optionsToPeople[$option->id][] = $person;
+               
+		    $optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
+		     
+		    $this->starValue += $optionValue;
 
-		// Add person to the map with option as key
-		$this->optionsToPeople[$option][] = $person;
-           
-		$optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
-		 
-		$this->starValue += $optionValue;
-      
-		if (count($this->optionsToPeople[$option]) == $this->maxPerOption){
-			$this->numOptionsAtMax++;
-		}
-		elseif (count($this->optionsToPeople[$option]) > $this->maxPerOption){
-			$this->totalOverMax++;
-		}
+		    if (count($this->optionsToPeople[$option->id]) > $option->maxSize == null ? PHP_INT_MAX : $option->maxSize){
+			    $this->totalOverMax++;
+		    }
+        }
 	}
 
-	public function removePersonFromOption(\Application\Entities\Person $person, \Application\Entities\Option $option)
+	public function removePersonFromOption(\Application\Entities\Person $person, \Application\Entities\Option $option = null)
 	{
-		$mapper = $GLOBALS["registry"]->mapper;
+        if ($option == null) {
+            $this->unsetValue($this->peopleNotPlaced, $person);
+        }
+        else
+        {
+            $mapper = $GLOBALS["registry"]->mapper;
+            
+            //die(var_dump(in_array($person, $this->optionsToPeople[$option->id])));
+            // Remove person to the map with option as key
+            $optionArray = $this->optionsToPeople[$option->id];
+            
+            $this->unsetValue($optionArray, $person);
+               
+            $optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
+             
+            $this->starValue -= $optionValue;
 
-		// Remove person to the map with option as key
-		unset($this->optionsToPeople[$option][$person]);
-
-		$optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
-		 
-		$this->starValue -= $optionValue;
-
-		if (count($this->optionsToPeople[$option]) == $this->maxPerOption-1){
-			$this->numOptionsAtMax--;
-		}
-		elseif (count($this->optionsToPeople[$option]) >= $this->maxPerOption){
-			$this->totalOverMax--;
-		}
+            if (count($this->optionsToPeople[$option->id]) >= $option->maxSize == null ? PHP_INT_MAX : $option->maxSize){
+                $this->totalOverMax--;
+            }
+        }
 	}
+    
+    public function getPeopleNotPlaced() {
+        return clone $this->peopleNotPlaced;
+    }
 
 	/**
 	 * returns array of Person
 	 */
-	public function getPeopleForOption(\Application\Entities\Option $option)
+	public function getPeopleForOption(\Application\Entities\Option $option = null)
 	{
-		return clone $this->optionsToPeople[$option];
+        if (!$option)
+        {
+            return unserialize(serialize($this->peopleNotPlaced));
+        }
+		return unserialize(serialize($this->optionsToPeople[$option->id]));
 	}
 
 	public function getStarValue()
@@ -158,16 +170,29 @@ class PollSolution
 	public function possibleToMakeValidIn($depth)
 	{
 		$totalShifts = $this->totalOverMax;
-		if ($this->numOptionsAtMax > $this->numRequiredAtLargeSize)
+		if ($this->numPossiblePeople > 0)
 		{
-			$totalShifts += $this->numOptionsAtMax - $this->numRequiredAtLargeSize;
+			$totalShifts += min($this->numPossiblePeople, count($this->peopleNotPlaced));
 		}
 		return $totalShifts <= $depth;
 	}
+   
+    public function getHappiness()
+    {     
+       return ($this->starValue*100)/($this->totalPeople*$this->maxRating);
+    }
 
 	public function __clone()
 	{
 		// This may not work
 		return unserialize(serialize($this));
 	}
+    
+    private function unsetValue(array $array, $value, $strict = TRUE)
+    {
+        if(($key = array_search($value, $array, $strict)) !== FALSE) {
+            unset($array[$key]);
+        }
+        return $array;
+    }
 }

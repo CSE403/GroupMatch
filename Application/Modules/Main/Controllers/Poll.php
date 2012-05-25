@@ -153,28 +153,39 @@ class Poll extends \Saros\Application\Controller
         $pollId = intval($pollId);
         
 		$mapper = $this->registry->mapper;
-
+        
+        $poll = $mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+        
 		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId))->execute();
-		$options = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
-               
-		$pollSolution = new \Application\Modules\Main\Models\PollSolution($options, count($people));
+		$realOptions = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
+           
+        $options = array();
+        foreach($realOptions as $option) {
+            $options[] = $option;
+        }
+        $options[] = null;       
+        
+        $maxSize = $poll->isUnique ? count($realOptions) : 5;
+		$pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
 
 		foreach($people as $person) {
 			$option = $pollSolution->findBestOption($person);
             
 			$pollSolution->addPersonToOption($person, $option);
 		}
-
+                                
 		$curBestSolution = null;
-		for ($i = 1; $i <= 4; $i++)
+        
+		for ($i = 1; $i <= 1 / log(count($people) * count($options)+1, M_E) +1; $i++)
 		{
 			$curBestSolution = null;
+            
 			while ($curBestSolution == null
 					|| $curBestSolution->getStarValue() < $pollSolution
 					->getStarValue())
 			{
-				$curBestSolution = $pollSolution->clone();
-				$pollSolution = move(pollSolution, i, options);
+				$curBestSolution = clone $pollSolution;
+				$pollSolution = $this->move($pollSolution, $i, $options);
 			}
 		}
 
@@ -216,10 +227,10 @@ class Poll extends \Saros\Application\Controller
 						}
 					}
 					 
-					$pollSolution->removePersonToOption($person, $optionAdd);
+					$pollSolution->removePersonFromOption($person, $optionAdd);
 				}
 
-				$pollSolution->addPersonFromOption($person, $option);
+				$pollSolution->addPersonToOption($person, $option);
 			}
 		}
 
