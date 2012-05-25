@@ -77,7 +77,7 @@ This page allows a user to interact with the poll by entering their preferences.
                                         <div><?php echo $option->name; ?></div>
                                     </header>
                                     <?php
-                                        if ($this->Poll->isUnique) {
+                                        if ($this->Poll->isUnique == "true") {
                                         ?>
                                         <!-- max would be the polls number of options -->
                                             <input name="option_<?php echo $option->id; ?>" type="number" min="1" max="<?php echo count($this->Poll->options); ?>" required="required" placeholder="1" />

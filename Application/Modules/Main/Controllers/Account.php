@@ -140,20 +140,26 @@ class Account extends \Saros\Application\Controller
     }
     
 	//deletes a poll if you are the owner
-    /*public function deleteAction() {
-		
-		$pollId = $this->getPollId($guid);
-		
-		if($this->isOwner($pollId) {
-			$this->registry->mapper->delete("\Application\Entities\Poll", array("id" => $pollId));
-			$this->registry->mapper->
-			$this->registry->mapper->delete("\Application\Entities\Option", array("pollId" => $pollId));
-			$this->registry->mapper->delete("\Application\Entities\Person", array("pollId" => $pollId));
-			$this->registry->mapper->delete("\Application\Entities\Answer", array("personId" => $personId));
+    public function deleteAction() {
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+			$guid = $_POST["description"];
+			$pollId = $this->getPollId($guid);
+			
+			if($this->isOwner($pollId) {
+				$poll =  $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+				foreach($poll->participants as $participant) {
+					$this->registry->mapper->delete('\Application\Entities\Answer', array('personId' => $participant->id));
+				}
+				$this->registry->mapper->delete('\Application\Entities\Person', array('pollId' => $pollId));
+				$this->registry->mapper->delete('\Application\Entities\Option', array('pollId' => $pollId));
+				$this->registry->mapper->delete('\Application\Entities\Poll', array('id' => $pollId));
+			}
+		} else {
+			$accountHome = $GLOBALS["registry"]->utils->makeLink("Account", "index");
+			$this->redirect($accountHome);
 		}
-		$accountHome = $GLOBALS["registry"]->utils->makeLink("Account", "index");
-		$this->redirect($accountHome);
-    }*/
+    }
 	
 	// Gets a poll ID given a guid
 	// redirects if invalid guid

@@ -126,16 +126,22 @@ class Poll extends \Saros\Application\Controller
 		Deletes a participant from a poll
 		Does validitiy checking to ensure that only the owner may delete the poll
 	*/
-	public function deleteParticipantAction($guid=null, $personId=null) {
-		$pollId = $this->getPollId($guid);
-		if($this->isOwner($pollId)) {
-			//personIds are unique to each poll and have no correlation to who is logged in
-			//so it is ok to delete with respect to this
-			$this->registry->mapper->delete('\Application\Entities\Answer', array('personId' => $personId));
-			$this->registry->mapper->delete('\Application\Entities\Person', array('id' => $personId));
+	public function deleteParticipantAction() {
+		if($_SERVER["REQUEST_METHOD"] == "POST")
+        {
+			$guid = $_POST["guid"];
+			$personId = $_POST["personId"];
+			$pollId = $this->getPollId($guid);
+			if($this->isOwner($pollId)) {
+				//personIds are unique to each poll and have no correlation to who is logged in
+				//so it is ok to delete with respect to this
+				$this->registry->mapper->delete('\Application\Entities\Answer', array('personId' => $personId));
+				$this->registry->mapper->delete('\Application\Entities\Person', array('id' => $personId));
+			}
+		} else {
+			$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
+			$this->redirect($pollLink);
 		}
-		$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
-		$this->redirect($pollLink);
 	}
 	
 	/**
