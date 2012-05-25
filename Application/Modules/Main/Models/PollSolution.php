@@ -60,14 +60,14 @@ class PollSolution
 		foreach($this->optionsToPeople as $optionId => $values)
 		{                                              
             $option = $mapper->first('\Application\Entities\Option', array('id' => $optionId));
-            die("opt: ".$optionId.", per: ".$person->id);
+            //die("opt: ".$optionId.", per: ".$person->id);
             //die(var_dump($option));
-            die(var_dump($mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $optionId))));
+            //die(var_dump($mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $optionId))));
 			if($this->OptionIsValid($option, $person)
                 && ($curBestOption == null
                         || $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id))->priority > $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $curBestOption->id))->priority
                         || ($mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id))->priority == $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $curBestOption->id))->priority
-                                && ($curBestOption->maxSize == null ? PHP_INT_MAX : $curBestOption->maxSize) - count($this->optionsToPeople[$curBestOption->id]) > ($options->maxSize == null ? PHP_INT_MAX : $option->maxSize) - count($this->optionsToPeople[$options->id]))))
+                                && ($curBestOption->maxSize == null ? PHP_INT_MAX : $curBestOption->maxSize) - count($this->optionsToPeople[$curBestOption->id]) > ($option->maxSize == null ? PHP_INT_MAX : $option->maxSize) - count($this->optionsToPeople[$option->id]))))
             {
                 $curBestOption = $option;  
             }
@@ -108,8 +108,8 @@ class PollSolution
 		    $this->optionsToPeople[$option->id][] = $person;
                
 		    $optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
-		     
-		    $this->starValue += $optionValue;
+
+		    $this->starValue += $optionValue->priority;
 
 		    if (count($this->optionsToPeople[$option->id]) > $option->maxSize == null ? PHP_INT_MAX : $option->maxSize){
 			    $this->totalOverMax++;
@@ -134,7 +134,7 @@ class PollSolution
                
             $optionValue = $mapper->first('\Application\Entities\Answer', array('personId' => $person->id, 'optionId' => $option->id));
              
-            $this->starValue -= $optionValue;
+            $this->starValue -= $optionValue->priority;
 
             if (count($this->optionsToPeople[$option->id]) >= $option->maxSize == null ? PHP_INT_MAX : $option->maxSize){
                 $this->totalOverMax--;
