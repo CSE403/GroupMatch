@@ -68,9 +68,9 @@
                     <tr <?php echo $classStr; ?>>
                         <td class="participant"><?php echo $participant->name; ?></td>
                         <?php
-                            
+                            $divide = $this->Poll->isUnique == "true" ? count($this->Poll->options) : 5;
                             foreach($participant->answers as $answer) {
-                                $percent = (int)(($answer->priority/count($this->Poll->options))*100);
+                                $percent = (int)(($answer->priority/$divide)*100);
                                 
                                 $color = "red";
                                 if ($percent >= 67) {

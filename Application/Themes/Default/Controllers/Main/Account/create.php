@@ -54,7 +54,7 @@
 			<h1>Answer type</h1>
 			<footer>
 				<div><input name="answer_type" type="radio" value="unique" required="required"/><div>Uniquely rate each option (Each option has a rating, but no ratings may be duplicated.)</div></div>
-				<div><input name="answer_type" type="radio" value="scale" required="required"/><div>Rate on scale between 1 and 5<!--<input name="scale_max" type="number" placeholder="4" min="4" max="100" value="4" disabled="disabled" />--></div></div>
+				<div><input name="answer_type" type="radio" value="scale" required="required"/><div>Rate on scale between 1 and 5</div></div>
 			</footer>
 		</section>
 		<section>
@@ -74,17 +74,17 @@
 						<input name="option_limit_amount_2" type="number" placeholder="10" min="1" disabled="disabled" />
 					</li>
 					<li>
-						<input name="option_3" type="text" placeholder="Option" />
+						<input name="option_3" type="text" placeholder="Option"/>
 						<input name="option_limit_3" type="checkbox" />
 						<input name="option_limit_amount_3" type="number" placeholder="10" min="1" disabled="disabled" />
 					</li>
 					<li>
-						<input name="option_4" type="text" placeholder="Option" />
+						<input name="option_4" type="text" placeholder="Option"/>
 						<input name="option_limit_4" type="checkbox" />
 						<input name="option_limit_amount_4" type="number" placeholder="10" min="1" disabled="disabled" />
 					</li>
 					<li>
-						<input name="option_5" type="text" placeholder="Option" />
+						<input name="option_5" type="text" placeholder="Option"/>
 						<input name="option_limit_5" type="checkbox" />
 						<input name="option_limit_amount_5" type="number" placeholder="10" min="1" disabled="disabled" />
 					</li>

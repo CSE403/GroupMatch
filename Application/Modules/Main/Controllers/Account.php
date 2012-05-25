@@ -118,6 +118,8 @@ class Account extends \Saros\Application\Controller
 						$option->pollId = $pollId;
 						$option->name = $value;
 						$option->maxSize = isset($_POST[$ola.$index]) ? $_POST[$ola.$index] : $universal_max_size;
+						if($option->maxSize == null)
+							$option->maxSize = 4294967295; //max integer size in database
 						$this->registry->mapper->insert($option);   
 					}
 				}
@@ -126,10 +128,9 @@ class Account extends \Saros\Application\Controller
 				$this->redirect($pollLink);           
 			}
         }
-		$this->view->Test = $_POST;
 		$this->view->Errors = $errors;
     }
-    
+	
     public function logoutAction() {
         $this->auth = \Saros\Auth::getInstance();
         $this->auth->clearIdentity();
@@ -138,7 +139,43 @@ class Account extends \Saros\Application\Controller
         $this->redirect($homeLink);
     }
     
-    public function deleteAction() {
-    	
+	//deletes a poll if you are the owner
+    /*public function deleteAction() {
+		
+		$pollId = $this->getPollId($guid);
+		
+		if($this->isOwner($pollId) {
+			$this->registry->mapper->delete("\Application\Entities\Poll", array("id" => $pollId));
+			$this->registry->mapper->
+			$this->registry->mapper->delete("\Application\Entities\Option", array("pollId" => $pollId));
+			$this->registry->mapper->delete("\Application\Entities\Person", array("pollId" => $pollId));
+			$this->registry->mapper->delete("\Application\Entities\Answer", array("personId" => $personId));
+		}
+		$accountHome = $GLOBALS["registry"]->utils->makeLink("Account", "index");
+		$this->redirect($accountHome);
+    }*/
+	
+	// Gets a poll ID given a guid
+	// redirects if invalid guid
+    private function getPollId($guid) {
+        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('guid' => $guid));
+		if(empty($poll)) {
+			$homePage = $GLOBALS["registry"]->utils->makeLink("Index", "index");
+			$this->redirect($homePage);
+		}
+        return $poll->id;
     }
+	
+	//returns true if the current person is logged in and is the owner of teh poll,
+	//otherwise returns false;
+	private function isOwner($pollId) {
+		$this->auth = \Saros\Auth::getInstance();
+        
+        if (!$this->auth->hasIdentity())      
+            return false;
+		
+		$this->auth = \Saros\Auth::getInstance();
+		$userId = $this->auth->getIdentity()->id;
+		return (bool) $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId, 'userId' => $userId));
+	}
 }

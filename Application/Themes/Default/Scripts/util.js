@@ -101,8 +101,21 @@ $(function() {
 	if(createPollForm) {
 		createPollForm.submit(function() {
 			var errors = false;
-			$(':input[name*="amount"]').each(function() {
-				if(!isPosInt($(this).val())) {
+			
+			//check universal limit
+			if(limitAllCheckbox.attr('checked') && !isPosInt(limitAllNumberbox.val())) {
+				limitAllNumberbox.val('');
+				errors = true;
+			}
+			
+			var ola = 'option_limit_amount_';
+			var ol = 'option_limit_';
+			//check individual limits
+			$(':input[name*="' + ola + '"]').each(function() {
+				var i = $(this).attr("name");
+				i = i.substring(ola.length, i.length);
+				
+				if($(':input[name="' + ol + i + '"]').attr("checked") && !isPosInt($(this).val())) {
 					$(this).val('');
 					errors = true;
 				}
@@ -111,6 +124,7 @@ $(function() {
 				return false;
 		});
 	}
+	
 	/***************************************************************************
 	 * Poll management scripting
 	 **************************************************************************/
@@ -177,10 +191,10 @@ $(function() {
 				});
 			} else { //if on scale from 1 - 5
 				var max = 5;
-				ratings.each(function() {
+				ratings.each(function(index) {
 					var v = $(this).val();
 					if(!isPosInt(v) || v > max) {
-						$(this.val(''));
+						$(this).val('');
 						error = true;
 					}
 				});
@@ -190,5 +204,4 @@ $(function() {
 		});
 	 }
 	 
-
 });

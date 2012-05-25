@@ -105,7 +105,7 @@ class Poll extends \Saros\Application\Controller
 						// key is the option id, value is the priority
 						$answer = new \Application\Entities\Answer();
 						$answer->personId = $personId;
-						$answer->optionId = $optionId;
+						$answer->optionId = substr($optionId,strlen($needle));
 						$answer->priority = $priority;
 						$this->registry->mapper->insert($answer);
 					}
