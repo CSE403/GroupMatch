@@ -94,7 +94,13 @@
 							if($this->isOwner) {
 								$link = $GLOBALS["registry"]->utils->makeLink("Poll","deleteParticipant", $this->Poll->guid, $participant->id);
 						?>
-							<td class="participant"><a href="<?php echo $link; ?>"><button class="red">Delete</button></td>
+							<td class="participant">
+								<form action="<?php echo $link; ?>">
+									<input name="guid" type="text" value="<?php echo $this->Poll->guid; ?>" style="display: none;" />
+									<input name="personId" type="text" value="<?php echo $participant->id; ?>" style="display: none;" />
+									<button type="submit" class="red">Delete</button>
+								</form>
+							</td>
 						<?php 
 							}
 						?>

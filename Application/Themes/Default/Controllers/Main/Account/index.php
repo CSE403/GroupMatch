@@ -33,8 +33,7 @@
                  <li>
                     <form action="<?php echo $deletePage; ?>" method="post">
                     	<input type="text" name="guid" value="<?php echo $poll->guid; ?>" style="display:none;">
-                    	<input type="text" name="personId" value="<?php echo $poll->userId; ?>" style="display:none;">
-                    	<button action="<?php echo $deletePage; ?>" class="red" name="delete_poll">Delete</button>
+                    	<button type="submit" class="red" name="delete_poll">Delete</button>
                     </form>
                     <header><a href="<?php echo $pollPage ?>"><?php echo $poll->question?></a></header>
                     <footer><?php echo $pollPage?></footer>
