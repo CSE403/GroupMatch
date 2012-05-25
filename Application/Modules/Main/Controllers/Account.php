@@ -146,7 +146,7 @@ class Account extends \Saros\Application\Controller
 			$guid = $_POST["description"];
 			$pollId = $this->getPollId($guid);
 			
-			if($this->isOwner($pollId) {
+			if($this->isOwner($pollId)) {
 				$poll =  $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
 				foreach($poll->participants as $participant) {
 					$this->registry->mapper->delete('\Application\Entities\Answer', array('personId' => $participant->id));
