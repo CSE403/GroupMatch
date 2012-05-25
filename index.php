@@ -10,9 +10,7 @@
  * @link http://sarosoftware.com
  * @link http://github.com/TheSavior/Saros-Framework
  */
- 
- ini_set('memory_limit', '128M');
- 
+
 // Lets turn on error reporting
 error_reporting(E_ALL|E_STRICT);
 ini_set('display_errors', 'on');
