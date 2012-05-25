@@ -66,7 +66,8 @@ This page allows a user to interact with the poll by entering their preferences.
 							$instructions = "Please rate each of the following on a scale from 1 to 5.";
 						}
 					?>
-                    <h1><?php echo $instructions; ?> The higher the rating, the better the score.</h1>
+                    <h1>Your Response</h1>
+                    <div id="instructions"><?php echo $instructions; ?> The higher the rating, the better the score.</div>
                     <footer>
                         <ul>
                             <?php

@@ -14,7 +14,7 @@
 			
 			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution",$this->Poll->guid);
 		?>
-        <a href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
+        <a id="solution_link" href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
         <h1><?php echo $this->Poll->question; ?></h1>
     </header>
     <table>
@@ -111,7 +111,7 @@
         </tfoot>
     </table>
     <footer>
-        <div class="fb-comments" data-num-posts="5" data-width="850"></div>
+        <div class="fb-comment-frame"><div class="fb-comments" data-num-posts="5" data-width="550"></div></div>
     </footer>
 </section>
 

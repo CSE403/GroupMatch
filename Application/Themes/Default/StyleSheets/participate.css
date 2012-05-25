@@ -43,10 +43,16 @@ form[name="participate_form"] {
 		form[name="participate_form"] section footer {
 			margin-left: 15px;
 		}
+		
+		#instructions {
+			padding-left: 20px;
+			margin-bottom: 20px;
+		}
 	
 	form[name="participate_form"] button {
 		float: right;
 	}
+
 
 li {
 	padding: 7px;
