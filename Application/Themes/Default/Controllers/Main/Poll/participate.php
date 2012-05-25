@@ -37,7 +37,7 @@ This page allows a user to interact with the poll by entering their preferences.
                 $link = $GLOBALS["registry"]->utils->makeLink("Poll", "participate", $this->Poll->guid);
             ?>
             <form action="<?php echo $link; ?>" method="post" name="participate_form" class="indent">
-				<input type="hidden" name="isUnique" id="isUnique" value="<?php echo ($this->Poll->isUnique == true) ? 1 : 0; ?>">
+				<input type="hidden" name="isUnique" id="isUnique" value="<?php echo ($this->Poll->isUnique == "true" ? 1 : 0); ?>">
 				<?php 
 					if(!empty($this->Poll->description)) { 
 				?>
@@ -57,7 +57,16 @@ This page allows a user to interact with the poll by entering their preferences.
                     </footer>
                 </section>
                 <section>
-                    <h1>Please rate all of the options below.  The higher the rating, the better the score.</h1>
+					<?php 
+						$instructions = "";
+						if($this->Poll->isUnique == "true") {
+							$instructions = "Rate each of following on a scale from 1 to " . count($this->Poll->options)
+												. ", giving each option a unique score.  In other words, do not give any two options the same score.";
+						} else {
+							$instructions = "Please rate each of the following on a scale from 1 to 5.";
+						}
+					?>
+                    <h1><?php echo $instructions; ?> The higher the rating, the better the score.</h1>
                     <footer>
                         <ul>
                             <?php
