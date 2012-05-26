@@ -102,6 +102,35 @@ class Index extends \Saros\Application\Controller
 				
 				$auth = \Saros\Auth::getInstance();
 				if ($auth->hasIdentity()) {
+				$to      = $pollOwner->username;
+					$subject = "Welcome to GroupMatch";
+					$message = "Welcome to GroupMatch.  Our website is dedicated to making your " . 
+								"process of matching people to preferences extremely easy.  "
+								"To get started, login to your account using the following information:" .
+								"\n\n" .
+								"USERNAME: " . $user->username;
+								"\n\n" .
+								"PASSWORD: " . $user->password;
+								"\n\n" .
+								"(Note: This username and password combination has been sent you for record ".
+								"keeping purposes.  Please save this email.)".
+								"\n\n" .
+								"From that point you can begin creating polls and sending out links to " . 
+								"the people that you want to respond to the polls.  To view the optimal " .
+								"way to group the people that have responded to your polls into the categories " .
+								"that you have chosen, simply visit the poll page, and click the 'View Solution' button." .
+								"\n\n" .
+								"Thanks for Joining GroupMatch!";
+		
+					$headers   = array();
+					$headers[] = "MIME-Version: 1.0";
+					$headers[] = "Content-type: text/plain; charset=iso-8859-1";
+					$headers[] = "From: GroupMatch <no-reply@groupmatch.cs.washington.edu>";
+					$headers[] = "Reply-To:  GroupMatch <no-reply@groupmatch.cs.washington.edu>";
+					$headers[] = "X-Mailer: PHP/".phpversion();
+					$headers = implode("\r\n", $headers);
+					mail($to, $subject, $message, $headers);
+				
 					// We are logged in
 					$accountLink = $GLOBALS["registry"]->utils->makeLink("Account");
 					$this->redirect($accountLink);

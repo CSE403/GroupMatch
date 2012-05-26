@@ -117,8 +117,8 @@ class Poll extends \Saros\Application\Controller
 
 				$to      = $pollOwner->username;
 				$subject = "Someone has responded to your poll";
-				$message = $person->name . " has responded to your poll entitled '" . $poll->question . "'.  
-							To view the response, visit " . $pollLink . ".";
+				$message = $person->name . " has responded to your poll entitled '" . $poll->question . "'."
+							."  To view the response, visit " . $pollLink . ".";
 	
 				$headers   = array();
 				$headers[] = "MIME-Version: 1.0";
