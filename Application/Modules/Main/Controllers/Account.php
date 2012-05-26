@@ -141,6 +141,7 @@ class Account extends \Saros\Application\Controller
     
 	//deletes a poll if you are the owner
     public function deleteAction() {
+        $this->view->show(false);
 		if($_SERVER["REQUEST_METHOD"] == "POST")
         {
 			$guid = $_POST["guid"];

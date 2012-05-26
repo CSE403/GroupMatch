@@ -17,6 +17,13 @@ class Option extends \Spot\Entity
     
     public static function relations()
     {
-        return array();
+        return array(
+            'answers' => array(
+                'type' => 'HasMany',
+                'entity' => '\Application\Entities\Answer',
+                'where' => array('optionId' => ':entity.id'),
+                'order' => array('id' => 'ASC')
+            )
+        );
     }
 }

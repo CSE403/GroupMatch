@@ -179,24 +179,26 @@ class Poll extends \Saros\Application\Controller
             
 			$pollSolution->addPersonToOption($person, $option);
 		}
-                                
-		$curBestSolution = null;
-        
-		for ($i = 1; $i <= 1 / log(count($people) * count($options)+1, M_E) +1; $i++)
+             
+		for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
 		{
 			$curBestSolution = null;
-            
-			while ($curBestSolution == null
-					|| $curBestSolution->getStarValue() < $pollSolution
-					->getStarValue())
+            $j = 0;
+			while (($curBestSolution == null
+					|| $curBestSolution->getStarValue() < $pollSolution->getStarValue()))
 			{
 				$curBestSolution = clone $pollSolution;
 				$pollSolution = $this->move($pollSolution, $i, $options);
+                $j++;
 			}
 		}
 
-
+        if ($curBestSolution == null) {
+            $curBestSolution = clone $pollSolution;
+        }
+        
 		// Hand it off to the view
+        $this->view->Poll = $poll;
 		$this->view->Solution = $curBestSolution;
 		
 	}
@@ -216,7 +218,7 @@ class Poll extends \Saros\Application\Controller
 		}
 
 		if($depth == 0){
-			return toReturn;
+			return $toReturn;
 		}
 
 		foreach($options as $option) {
@@ -229,7 +231,7 @@ class Poll extends \Saros\Application\Controller
 						$curBest = $this->move($pollSolution, $depth-1, $options);
 						if ($toReturn == null
 								|| ($curBest != null && $curBest->getStarValue() > $toReturn->getStarValue())) {
-							$toReturn = $curBest;
+                                    $toReturn = $curBest;
 						}
 					}
 					 
@@ -238,8 +240,7 @@ class Poll extends \Saros\Application\Controller
 
 				$pollSolution->addPersonToOption($person, $option);
 			}
-		}
-
+		}            
 		return $toReturn;
 	}
 	
