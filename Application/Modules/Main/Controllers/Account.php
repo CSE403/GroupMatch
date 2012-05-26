@@ -143,7 +143,7 @@ class Account extends \Saros\Application\Controller
     public function deleteAction() {
 		if($_SERVER["REQUEST_METHOD"] == "POST")
         {
-			$guid = $_POST["description"];
+			$guid = $_POST["guid"];
 			$pollId = $this->getPollId($guid);
 			
 			if($this->isOwner($pollId)) {
