@@ -45,7 +45,6 @@ class Poll extends \Saros\Application\Controller
 	 */
 	public function participateAction($guid=null) {
         $pollId = $this->getPollId($guid);
-
 		
 		$errors = array();
 		if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -113,7 +112,7 @@ class Poll extends \Saros\Application\Controller
 				
 				//email the poll creator that someone has participated in his poll
 				$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
-				$pollOwner = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $poll->userId));
+				$pollOwner = $this->registry->mapper->first('\Application\Entities\User', array('id' => $poll->userId));
 				$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
 
 				$to      = $pollOwner->username;
@@ -127,8 +126,8 @@ class Poll extends \Saros\Application\Controller
 				$headers[] = "From: GroupMatch <no-reply@groupmatch.cs.washington.edu>";
 				$headers[] = "Reply-To:  GroupMatch <no-reply@groupmatch.cs.washington.edu>";
 				$headers[] = "X-Mailer: PHP/".phpversion();
-
-				mail($to, $subject, $message, implode("\r\n", $headers));
+				$headers = implode("\r\n", $headers);
+				mail($to, $subject, $message, $headers);
 				
 				//redirect back to poll index page
 				$this->redirect($pollLink);            
@@ -168,7 +167,7 @@ class Poll extends \Saros\Application\Controller
 	 On the user's poll page, there is a link to generate the current answer. This function
 	 generates that answer, and then displays it on the same page as the "Happiness meter".
 	 */
-	public function solutionAction($guid=null)
+	/*public function solutionAction($guid=null)
 	{
 		$this->view->headStyles()->addStyle("solution");
         $this->view->topBar()->setPage("solution");
@@ -221,14 +220,14 @@ class Poll extends \Saros\Application\Controller
         $this->view->Poll = $poll;
 		$this->view->Solution = $curBestSolution;
 		
-	}
+	}*/
 
 	/**
 	 Private method used by the solution solver, which finds the order of people that generates the
 	 most "happiness", but by moving people from group to group $deptch times.
 	 return \Application\Modules\Main\Models\PollSolution
 	 */
-	private function move(\Application\Modules\Main\Models\PollSolution $pollSolution, $depth, $options) {
+	/*private function move(\Application\Modules\Main\Models\PollSolution $pollSolution, $depth, $options) {
 		// PollSolutions we are working with
 		$toReturn = null;
 		$curBest = null;
@@ -262,7 +261,7 @@ class Poll extends \Saros\Application\Controller
 			}
 		}            
 		return $toReturn;
-	}
+	}*/
 	
 	//returns true if the current person is logged in and is the owner of teh poll,
 	//otherwise returns false;
