@@ -92,10 +92,10 @@
                         ?>
 						<?php 
 							if($this->isOwner) {
-								$link = $GLOBALS["registry"]->utils->makeLink("Poll","deleteParticipant", $this->Poll->guid, $participant->id);
+								$link = $GLOBALS["registry"]->utils->makeLink("Poll","deleteParticipant");
 						?>
 							<td class="participant">
-								<form action="<?php echo $link; ?>">
+								<form action="<?php echo $link; ?>" method="post">
 									<input name="guid" type="text" value="<?php echo $this->Poll->guid; ?>" style="display: none;" />
 									<input name="personId" type="text" value="<?php echo $participant->id; ?>" style="display: none;" />
 									<button type="submit" class="red">Delete</button>

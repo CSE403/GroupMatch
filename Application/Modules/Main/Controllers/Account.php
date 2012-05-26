@@ -141,7 +141,6 @@ class Account extends \Saros\Application\Controller
     
 	//deletes a poll if you are the owner
     public function deleteAction() {
-        $this->view->show(false);
 		if($_SERVER["REQUEST_METHOD"] == "POST")
         {
 			$guid = $_POST["guid"];
@@ -156,10 +155,9 @@ class Account extends \Saros\Application\Controller
 				$this->registry->mapper->delete('\Application\Entities\Option', array('pollId' => $pollId));
 				$this->registry->mapper->delete('\Application\Entities\Poll', array('id' => $pollId));
 			}
-		} else {
-			$accountHome = $GLOBALS["registry"]->utils->makeLink("Account", "index");
-			$this->redirect($accountHome);
 		}
+		$accountHome = $GLOBALS["registry"]->utils->makeLink("Account", "index");
+		$this->redirect($accountHome);
     }
 	
 	// Gets a poll ID given a guid

@@ -110,7 +110,27 @@ class Poll extends \Saros\Application\Controller
 						$this->registry->mapper->insert($answer);
 					}
 				}
+				
+				//email the poll creator that someone has participated in his poll
+				$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+				$pollOwner = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $poll->userId));
 				$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
+
+				$to      = $pollOwner->username;
+				$subject = "Someone has responded to your poll";
+				$message = $person->name . " has responded to your poll entitled '" . $poll->question . "'.  
+							To view the response, visit " . $pollLink . ".";
+	
+				$headers   = array();
+				$headers[] = "MIME-Version: 1.0";
+				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
+				$headers[] = "From: GroupMatch <no-reply@groupmatch.cs.washington.edu>";
+				$headers[] = "Reply-To:  GroupMatch <no-reply@groupmatch.cs.washington.edu>";
+				$headers[] = "X-Mailer: PHP/".phpversion();
+
+				mail($to, $subject, $message, implode("\r\n", $headers));
+				
+				//redirect back to poll index page
 				$this->redirect($pollLink);            
 			}
         }
@@ -127,6 +147,7 @@ class Poll extends \Saros\Application\Controller
 		Does validitiy checking to ensure that only the owner may delete the poll
 	*/
 	public function deleteParticipantAction() {
+		$guid = "";
 		if($_SERVER["REQUEST_METHOD"] == "POST")
         {
 			$guid = $_POST["guid"];
@@ -138,10 +159,9 @@ class Poll extends \Saros\Application\Controller
 				$this->registry->mapper->delete('\Application\Entities\Answer', array('personId' => $personId));
 				$this->registry->mapper->delete('\Application\Entities\Person', array('id' => $personId));
 			}
-		} else {
-			$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
-			$this->redirect($pollLink);
 		}
+		$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
+		$this->redirect($pollLink);
 	}
 	
 	/**
