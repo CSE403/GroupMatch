@@ -55,8 +55,8 @@ class Poll extends \Saros\Application\Controller
 			if(empty($name)) 
 				$errors[] = "Participant name is required";
 				
-			$unique = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId))->unique;
-			if($unique == true) {
+			$unique = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId))->isUnique;
+			if($unique == "true") {
 				$max = 0;
 				foreach($_POST as $optionId => $priority) {
 					$needle = "option_";
@@ -69,14 +69,14 @@ class Poll extends \Saros\Application\Controller
 				foreach($_POST as $optionId => $priority) {
 					$needle = "option_";
 					if (substr($optionId, 0, strlen($needle)) === $needle) {
-						if(!is_numeric($priority) || $priority <= 0 || $priority > max) {
+						if(!is_numeric($priority) || $priority <= 0 || $priority > $max) {
 							$errors[] = $priority . " is an invalid rating.";
 						}
 						$options[] = $priority;
 					}
 				}
 				
-				if(count(array_flip($options)) != max)
+				if(count(array_flip($options)) != $max)
 					$errors[] = "Non-unique ratings exist";
 
 			} else {
@@ -84,7 +84,7 @@ class Poll extends \Saros\Application\Controller
 				foreach($_POST as $optionId => $priority) {
 					$needle = "option_";
 					if (substr($optionId, 0, strlen($needle)) === $needle) {
-						if(!is_numeric($priority) || $priority <= 0 || $priority > max) {
+						if(!is_numeric($priority) || $priority <= 0 || $priority > $max) {
 							$errors[] = $priority . " is an invalid rating.";
 						}
 					}
