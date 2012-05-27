@@ -43,7 +43,7 @@ This page allows a user to interact with the poll by entering their preferences.
 						<footer>
 							<?php
 								if(!empty($this->Poll->description)) {
-									echo $this->Poll->description . "<br>";
+									echo $this->Poll->description . "<br><br>";
 								}
 							?>
 							<b>DO NOT ENTER ANY PERSONAL INFORMATION INTO THE POLL.  ALL POLLS ARE PUBLICLY VISIBLE.</b>
