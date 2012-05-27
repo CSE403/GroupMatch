@@ -38,18 +38,17 @@ This page allows a user to interact with the poll by entering their preferences.
             ?>
             <form action="<?php echo $link; ?>" method="post" name="participate_form" class="indent">
 				<input type="hidden" name="isUnique" id="isUnique" value="<?php echo ($this->Poll->isUnique == "true" ? 1 : 0); ?>">
-				<?php 
-					if(!empty($this->Poll->description)) { 
-				?>
 					<section>
 						<h1>Description</h1>
 						<footer>
-							<?php echo $this->Poll->description; ?>
+							<?php
+								if(!empty($this->Poll->description)) {
+									echo $this->Poll->description . "<br>";
+								}
+							?>
+							<b>DO NOT ENTER ANY PERSONAL INFORMATION INTO THE POLL.  ALL POLLS ARE PUBLICLY VISIBLE.</b>
 						</footer>
 					</section>
-				<?php 
-					} 
-				?>
                 <section>
                     <h1>Your Name</h1>
                     <footer>
