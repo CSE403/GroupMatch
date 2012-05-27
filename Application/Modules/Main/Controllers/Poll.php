@@ -167,7 +167,7 @@ class Poll extends \Saros\Application\Controller
 	 On the user's poll page, there is a link to generate the current answer. This function
 	 generates that answer, and then displays it on the same page as the "Happiness meter".
 	 */
-	/*public function solutionAction($guid=null)
+	public function solutionAction($guid=null)
 	{
 		$this->view->headStyles()->addStyle("solution");
         $this->view->topBar()->setPage("solution");
@@ -220,14 +220,14 @@ class Poll extends \Saros\Application\Controller
         $this->view->Poll = $poll;
 		$this->view->Solution = $curBestSolution;
 		
-	}*/
+	}
 
 	/**
 	 Private method used by the solution solver, which finds the order of people that generates the
 	 most "happiness", but by moving people from group to group $deptch times.
 	 return \Application\Modules\Main\Models\PollSolution
 	 */
-	/*private function move(\Application\Modules\Main\Models\PollSolution $pollSolution, $depth, $options) {
+	private function move(\Application\Modules\Main\Models\PollSolution $pollSolution, $depth, $options) {
 		// PollSolutions we are working with
 		$toReturn = null;
 		$curBest = null;
@@ -261,7 +261,7 @@ class Poll extends \Saros\Application\Controller
 			}
 		}            
 		return $toReturn;
-	}*/
+	}
 	
 	//returns true if the current person is logged in and is the owner of teh poll,
 	//otherwise returns false;
