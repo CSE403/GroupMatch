@@ -42,6 +42,7 @@ class Account extends \Saros\Application\Controller
     public function createAction()
     {
         $this->view->headStyles()->addStyle("createPoll");
+        $this->view->headScripts()->addScript("jquery_colorbox-min");
         $this->view->topBar()->setPage("createPoll");
         
 		$errors = array();

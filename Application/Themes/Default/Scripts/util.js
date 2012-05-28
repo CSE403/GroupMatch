@@ -158,9 +158,9 @@ $(function() {
 	}
 	
 	/***************************************************************************
-	 * Poll View Scripting
+	 * Colorbox Scripting
 	 **************************************************************************/
-	var colorboxLauncher = $(".inline_colorbox")
+	var colorboxLauncher = $(".inline_colorbox");
 	if (colorboxLauncher) {
 		if (colorboxLauncher.attr("data-href")) {
 			colorboxLauncher.colorbox({
@@ -170,10 +170,14 @@ $(function() {
 				onCleanup:function(){window.stop();;}
 			});
 			colorboxLauncher.click(function(){
-				//window.location.href = colorboxLauncher.attr("data-href");
+				window.location.href = colorboxLauncher.attr("data-href");
 			});
 		}else {
 			colorboxLauncher.colorbox({inline:true, width:"50%", transition:"none"});
+			var buttons = $("#confirm_submit button");
+			buttons.click(function() {
+				$.colorbox.close()
+			});
 		}
 	}
 	

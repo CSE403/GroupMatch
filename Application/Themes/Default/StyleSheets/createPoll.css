@@ -63,6 +63,30 @@ form[name="create_poll"] {
 			margin-bottom: 10px;
 		}
 
+
+#confirm_submit {
+	width: 450px;
+	margin: 0 auto 0 auto;
+}
+
+	#confirm_submit div {
+		margin-top: 10px;
+		margin-bottom: 20px;
+		padding: 0 5px 3px 5px;
+		
+		font-size: 22px;
+		text-align: center;
+		
+		/* border */
+		border-bottom: solid;
+		border-width: 1px;
+		border-color: #AAA;
+	}
+	
+	#confirm_submit button.green {
+		float: right;
+	}
+
 li {
 	margin-bottom: 10px;
 }

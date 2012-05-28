@@ -12,8 +12,17 @@
 <section>
 	<header>
 		<div><h1>Title</h1></div>
-		<button form="create_poll" type="submit" class="green">Create</button>
+		<a class="nav_link inline_colorbox" href="#confirm_submit"><button form="create_poll" type="submit" class="green">Create</button></a>
 		<input form="create_poll" name="title" type="text" placeholder="Tile or Question" required="required"/>
+		<div style="display:none">
+			<div id="confirm_submit">
+				<div>
+					Are you sure all the information is correct?
+				</div>
+				<button class="red">Edit</button>
+				<button form="create_poll" type="submit" class="green">Create</button>
+			</div>
+		</div>
 	</header>
 	 <?php
 			if (count($this->Errors) > 0) {

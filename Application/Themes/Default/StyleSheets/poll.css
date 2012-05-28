@@ -16,12 +16,21 @@
 }
 
 #calculating_solution_message {
-	width: 200px;
+	width: 210px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 20px;
 	line-height: 25px;
 }
+	
+	#calculating_solution_message div {
+		float: left;
+		margin-right: 10px;
+	}
+	
+	#calculating_solution_message img {
+		margin-top: 8px;
+	}
 
 table {
 	margin: 0 auto;	
