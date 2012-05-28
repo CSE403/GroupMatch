@@ -9,10 +9,10 @@
 <section>
 	<header>
 <?php
-    $link = $GLOBALS["registry"]->utils->makeLink("Poll", "index");
+    $link = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $this->Poll->guid);
 ?>
-		<a href="<?php echo $link; ?>"><button class="green">Back to Poll</button></a>
-		<h1>Poll title here</h1>
+		<a class="nav_link" href="<?php echo $link; ?>"><button class="green">Back to Poll</button></a>
+		<h1><?php echo $this->Poll->question?></h1>
 	</header>
     
     <?php
@@ -29,49 +29,73 @@
     ?>
     
 	<section id="report" class="indent">
+		<?php $happinessPercent =  $this->Solution->getHappiness();?>
 		<div id="happy_meter">
-			<h1>Happiness</h1>         
-			<div id="numeric_value"><?php echo $this->Solution->getHappiness();?>%</div>
-			<div id="meter_background"><div id="meter_value"></div></div>
+			<h1>Group Happiness</h1>         
+			<div id="numeric_value"><?php echo $happinessPercent;?>%</div>
+			<div id="meter_background"><div id="meter_value" style="width: <?php echo ($happinessPercent * 99.8/100)?>%"></div></div>
 		</div>
-		<div id="answer">Answer Here</div>
-        <div>
+        <div id="answer">
             <ul>
             <?php
                 $solutionMap = $this->Solution->getSolutionMap();
                 foreach($this->Poll->options as $option) {
-                 ?>   
-                <li><strong><?php echo $option->name ?></strong>
-                    <ul>
-                        <?php
-                
-                        foreach($solutionMap[$option->id] as $person)
-                        {
-                             ?>
-                             <li><?php echo $person->name ?>: Happiness <?php echo $this->Solution->answers[$option->id.",".$person->id]->priority ?></li>
-                             <?php
-                        }
-                    
-                        ?>
-                    </ul>
-                </li>
-                <?php
-                }
+                	if (count($solutionMap[$option->id]) > 0) {
+            ?>   
+	                <li>
+	                	<h1><?php echo $option->name ?></h1>
+	                    <table>
+	                    	<thead>
+	                    		<tr>
+	                    			<th>Name</th>
+	                    			<th>Happiness</th>
+	                    		</tr>
+	                    	</thead>
+	                    	<tbody>
+	                    		<?php
+	                    		$counter = 0;
+		                        foreach($solutionMap[$option->id] as $person)
+		                        {
+		                        	$classStr = "";
+		                        	if ($counter % 2 == 0) {
+		                        		$classStr = "alt";
+		                        	}
+		                        	$counter++;
+								?>
+		                             <tr class="<?php echo $classStr; ?>">
+		                             	<td><?php echo $person->name ?></td>
+		                             	<td class="center"><?php echo $this->Solution->answers[$option->id.",".$person->id]->priority ?></td>
+		                             <tr>
+		                             <?php
+		                        }
+		                        ?>
+	                    	</tbody>
+	                    </table>
+	                </li>
+	                <?php
+	                }
+              	}
             ?>
             </ul>
         </div>
-        <div>
-        <h3>People not placed</h3>
-            <ul>
-            <?php 
-              foreach($this->Solution->getPeopleNotPlaced() as $person) {
-                  ?>
-                  <li><?php echo $person->name?></li>
-                  <?php
-              }
-            ?>
-            </ul>
-        </div>
+        <?php 
+        if (count($this->Solution->getPeopleNotPlaced()) > 0) {
+        ?>
+	        <div id="not_placed">
+	        <h1>People not placed</h1>
+	            <ul>
+	            <?php 
+	              foreach($this->Solution->getPeopleNotPlaced() as $person) {
+	                  ?>
+	                  <li><?php echo $person->name?></li>
+	                  <?php
+	              }
+	            ?>
+	            </ul>
+	        </div>
+	    <?php 
+        }
+	    ?>
 	</section>
     <?php
     }

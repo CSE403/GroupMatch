@@ -14,7 +14,6 @@ This page allows a user to interact with the poll by entering their preferences.
             <header>
                 <h1><?php echo $this->Poll->question; ?></h1>
             </header>
-			
             <?php
 				if (count($this->Errors) > 0) {
 			?>
@@ -46,8 +45,8 @@ This page allows a user to interact with the poll by entering their preferences.
 									echo $this->Poll->description . "<br><br>";
 								}
 							?>
-							<b>DO NOT ENTER ANY PERSONAL INFORMATION INTO THE POLL.  ALL POLLS ARE PUBLICLY VISIBLE.</b>
 						</footer>
+						<div class="warning">DO NOT ENTER ANY PERSONAL INFORMATION INTO THE POLL.  ALL POLLS ARE PUBLICLY VISIBLE.</div>
 					</section>
                 <section>
                     <h1>Your Name</h1>

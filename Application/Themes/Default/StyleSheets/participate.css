@@ -54,6 +54,12 @@ form[name="participate_form"] {
 	}
 
 
+.warning {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+
 li {
 	padding: 7px;
 	margin-bottom: 10px;
