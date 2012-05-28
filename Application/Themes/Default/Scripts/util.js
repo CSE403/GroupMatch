@@ -170,7 +170,7 @@ $(function() {
 				onCleanup:function(){window.stop();;}
 			});
 			colorboxLauncher.click(function(){
-				window.location.href = colorboxLauncher.attr("data-href");
+				//window.location.href = colorboxLauncher.attr("data-href");
 			});
 		}else {
 			colorboxLauncher.colorbox({inline:true, width:"50%", transition:"none"});

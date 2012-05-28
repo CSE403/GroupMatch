@@ -19,7 +19,7 @@
         <div style="display: none;">
 	        <div id="calculating_solution_message" >
 	        	<div>Determining solution</div>
-	        	<img alt="loading gif" src="../../../Images/ajax-loader.gif">
+	        	<img alt="loading gif" src="../../Application/Themes/Default/Images/ajax-loader.gif">
 	        </div>
         </div>
     </header>
