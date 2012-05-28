@@ -75,15 +75,21 @@ class Index extends \Saros\Application\Controller
             $mapper = $this->registry->mapper;
             
             $user->username = $_POST["email"];
-			$user->password = $_POST["password"];
+            
+            // Some salt.
+            $user->salt = "sadf93";
+			$origPassword = $_POST["password"];
+            
+            $user->password = sha1($user->salt.$origPassword);
+            
 			$password2 = $_POST["re_password"];
 			
 			
-			if(strlen($user->password) < $this->view->pw_min_len) {
+			if(strlen($origPassword) < $this->view->pw_min_len) {
 				$errors[] = "Passwords must be at least " . $this->view->pw_min_len . " characters long.";
 			}
 			
-			if($password2 !== $user->password) {
+			if($password2 !== $origPassword) {
 				$errors[] = "Passwords do not match.";
 			}
 			
@@ -98,19 +104,19 @@ class Index extends \Saros\Application\Controller
 			if(empty($errors)) {
 				$result = $mapper->insert($user);
 				
-				$this->login($user->username, $user->password);
+				$this->login($user->username, $origPassword);
 				
 				$auth = \Saros\Auth::getInstance();
 				if ($auth->hasIdentity()) {
 				$to      = $pollOwner->username;
 					$subject = "Welcome to GroupMatch";
 					$message = "Welcome to GroupMatch.  Our website is dedicated to making your " . 
-								"process of matching people to preferences extremely easy.  "
+								"process of matching people to preferences extremely easy.  " .
 								"To get started, login to your account using the following information:" .
 								"\n\n" .
 								"USERNAME: " . $user->username;
 								"\n\n" .
-								"PASSWORD: " . $user->password;
+								"PASSWORD: " . $origPassword;
 								"\n\n" .
 								"(Note: This username and password combination has been sent you for record ".
 								"keeping purposes.  Please save this email.)".

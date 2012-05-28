@@ -11,6 +11,7 @@ class User extends \Spot\Entity
             'id' => array('type' => 'int', 'primary' => true, 'serial' => true),
             'username' => array('type' => 'string'),
             'password' => array('type' => 'string'),
+            'salt' => array('type' => 'string')
         );
     }
     

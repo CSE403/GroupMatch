@@ -43,11 +43,11 @@ class Setup
 
         // We need this auth instance to handle logins
         $auth = \Saros\Auth::getInstance();
-
+          
         // We are doing plain authentication against the User entity with the given fields for security
-        $authAdapter = new \Saros\Auth\Adapter\Spot\Plain($registry->mapper, '\Application\Entities\User', "username", "password");
+        $authAdapter = new \Saros\Auth\Adapter\Spot\Hash($registry->mapper, '\Application\Entities\User', "username", "password", "salt");
         $auth->setAdapter($authAdapter);
-        
+          
         $registry->display->registerHelper("topBar", '\Application\Themes\Helpers\TopBar');
 	}
 }
