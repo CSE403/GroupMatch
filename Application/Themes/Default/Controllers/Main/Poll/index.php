@@ -18,7 +18,8 @@
         <h1><?php echo $this->Poll->question; ?></h1>
         <div style="display: none;">
 	        <div id="calculating_solution_message" >
-	        	Determining solution...
+	        	<div>Determining solution</div>
+	        	<img alt="loading gif" src="../../../Images/ajax-loader.gif">
 	        </div>
         </div>
     </header>

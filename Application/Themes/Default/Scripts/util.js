@@ -15,8 +15,8 @@ $(function() {
 	 **************************************************************************/
 	
 	// universal limit checkbox
-	limitAllCheckbox = $('input[name="option_all_limit"]');
-	limitAllNumberbox = $('input[name="option_all_limit_amount"]');
+	var limitAllCheckbox = $('input[name="option_all_limit"]');
+	var limitAllNumberbox = $('input[name="option_all_limit_amount"]');
 	if (limitAllCheckbox) {
 		// enable/disable input
 		limitAllCheckbox.click(function() {
@@ -41,8 +41,8 @@ $(function() {
 	}
 	
 	// rate on scale radio
-	answerType = $('input[name="answer_type"]');
-	maxScale = $('input[name="scale_max"]');
+	var answerType = $('input[name="answer_type"]');
+	var maxScale = $('input[name="scale_max"]');
 	if (answerType) {
 		answerType.change(function() {
 			if ($(this).attr("value") == 4) {
@@ -77,7 +77,7 @@ $(function() {
 	limitCheckboxSetup();
 	
 	// add more options button
-	addButton = $('button[name="add_more_options"]');
+	var addButton = $('button[name="add_more_options"]');
 	if (addButton) {
 		addButton.click(function(e) {
 			e.preventDefault();
@@ -97,7 +97,7 @@ $(function() {
 		});
 	}
 	
-	createPollForm = $("#create_poll");
+	var createPollForm = $("#create_poll");
 	if(createPollForm) {
 		createPollForm.submit(function() {
 			var errors = false;
@@ -129,7 +129,7 @@ $(function() {
 	 * Poll management scripting
 	 **************************************************************************/
 	
-	deleteButtons = $('button[name="delete_poll"]');
+	var deleteButtons = $('button[name="delete_poll"]');
 	if (deleteButtons) {
 		deleteButtons.click(function() {
 			var li = $(this).closest('li')
@@ -160,7 +160,22 @@ $(function() {
 	/***************************************************************************
 	 * Poll View Scripting
 	 **************************************************************************/
-	$(".inline_colorbox").colorbox({inline:true, width:"50%"});
+	var colorboxLauncher = $(".inline_colorbox")
+	if (colorboxLauncher) {
+		if (colorboxLauncher.attr("data-href")) {
+			colorboxLauncher.colorbox({
+				inline:true, 
+				width:"50%", 
+				transition:"none", 
+				onCleanup:function(){window.stop();;}
+			});
+			colorboxLauncher.click(function(){
+				window.location.href = colorboxLauncher.attr("data-href");
+			});
+		}else {
+			colorboxLauncher.colorbox({inline:true, width:"50%", transition:"none"});
+		}
+	}
 	
 	/***************************************************************************
 	 * Poll Participant Scripting
