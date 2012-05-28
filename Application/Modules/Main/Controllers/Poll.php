@@ -196,7 +196,7 @@ class Poll extends \Saros\Application\Controller
             }
             $options[] = null;       
             
-            $maxSize = $poll->isUnique ? count($realOptions) : 5;
+            $maxSize = $poll->isUnique == "true" ? count($realOptions) : 5;
 		    $pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
 
 		    foreach($people as $person) {
