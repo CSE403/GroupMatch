@@ -31,7 +31,6 @@ class Poll extends \Saros\Application\Controller
 	public function indexAction($guid=null)
 	{
 		$this->view->headStyles()->addStyle("poll");
-		$this->view->headStyles()->addStyle("colorbox");
 		$this->view->headScripts()->addScript("jquery_colorbox-min");
         $this->view->topBar()->setPage("poll");
         

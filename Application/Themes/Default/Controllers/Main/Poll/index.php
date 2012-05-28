@@ -14,8 +14,13 @@
 			
 			$link = $GLOBALS["registry"]->utils->makeLink("Poll","solution",$this->Poll->guid);
 		?>
-        <a class="nav_link" href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
+        <a class="nav_link inline_colorbox" href="#calculating_solution_message" data-href="<?php echo $link; ?>"><button class="green">View Solution</button></a>
         <h1><?php echo $this->Poll->question; ?></h1>
+        <div style="display: none;">
+	        <div id="calculating_solution_message" >
+	        	Determining solution...
+	        </div>
+        </div>
     </header>
     <table>
         <thead>
