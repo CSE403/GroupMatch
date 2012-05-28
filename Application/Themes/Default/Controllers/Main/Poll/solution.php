@@ -14,6 +14,20 @@
 		<a href="<?php echo $link; ?>"><button class="green">Back to Poll</button></a>
 		<h1>Poll title here</h1>
 	</header>
+    
+    <?php
+    if ($this->NoParticipants)
+    {
+        ?>
+             <section>
+                There are no participants for this poll.
+             </section>
+        <?php
+    }
+    else
+    {
+    ?>
+    
 	<section id="report" class="indent">
 		<div id="happy_meter">
 			<h1>Happiness</h1>         
@@ -59,4 +73,7 @@
             </ul>
         </div>
 	</section>
+    <?php
+    }
+    ?>
 </section>

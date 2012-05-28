@@ -182,43 +182,50 @@ class Poll extends \Saros\Application\Controller
         $poll = $mapper->first('\Application\Entities\Poll', array('id' => $pollId));
         
 		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId))->execute();
-		$realOptions = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
-           
-        $options = array();
-        foreach($realOptions as $option) {
-            $options[] = $option;
+		$this->view->NoParticipants = false;
+        if (count($people) == 0) {
+            $this->view->NoParticipants = true;
         }
-        $options[] = null;       
-        
-        $maxSize = $poll->isUnique ? count($realOptions) : 5;
-		$pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
-
-		foreach($people as $person) {
-			$option = $pollSolution->findBestOption($person);
+        else
+        {
+            $realOptions = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
+               
+            $options = array();
+            foreach($realOptions as $option) {
+                $options[] = $option;
+            }
+            $options[] = null;       
             
-			$pollSolution->addPersonToOption($person, $option);
-		}
-             
-		for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
-		{
-			$curBestSolution = null;
-            $j = 0;
-			while (($curBestSolution == null
-					|| $curBestSolution->getStarValue() < $pollSolution->getStarValue()))
-			{
-				$curBestSolution = clone $pollSolution;
-				$pollSolution = $this->move($pollSolution, $i, $options);
-                $j++;
-			}
-		}
+            $maxSize = $poll->isUnique ? count($realOptions) : 5;
+		    $pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
 
-        if ($curBestSolution == null) {
-            $curBestSolution = clone $pollSolution;
+		    foreach($people as $person) {
+			    $option = $pollSolution->findBestOption($person);
+                
+			    $pollSolution->addPersonToOption($person, $option);
+		    }
+                 
+		    for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
+		    {
+			    $curBestSolution = null;
+                $j = 0;
+			    while (($curBestSolution == null
+					    || $curBestSolution->getStarValue() < $pollSolution->getStarValue()))
+			    {
+				    $curBestSolution = clone $pollSolution;
+				    $pollSolution = $this->move($pollSolution, $i, $options);
+                    $j++;
+			    }
+		    }
+
+            if ($curBestSolution == null) {
+                $curBestSolution = clone $pollSolution;
+            }
+            
+		    // Hand it off to the view
+            $this->view->Poll = $poll;
+		    $this->view->Solution = $curBestSolution;
         }
-        
-		// Hand it off to the view
-        $this->view->Poll = $poll;
-		$this->view->Solution = $curBestSolution;
 		
 	}
 
