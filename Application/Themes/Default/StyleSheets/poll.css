@@ -17,8 +17,7 @@
 
 #calculating_solution_message {
 	width: 210px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 15px auto 0 auto;
 	font-size: 20px;
 	line-height: 25px;
 }

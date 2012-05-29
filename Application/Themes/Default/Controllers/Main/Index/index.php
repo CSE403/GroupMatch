@@ -11,10 +11,33 @@
     <header>
         <h1>What is GroupMatch?</h1>
     </header>
-    <p>
-    Too often it is necessary to coordinate large groups of people based on their availabilities and interests. The matching process can be challenging and time-consuming, leading to unnecessary frustration. GroupMatch is created to make this group organization process simple and worry-free. GroupMatch is a polling website that allows users to generate polls of basic preference questions with a limited number of answers (such as What time works for you? or Which group would you like to be in?). 
-    </p>
-    <p>
-    Poll creators can then publish the URL to the poll, allowing other users to specify their preferences, and a ranking of each preference. Once preferences are specified, GroupMatch can provide the poll creator with the optimal way of grouping the users into the desired categories. It can save the poll creator the headache of tracking down each individual person, tallying their input, and then trying to manually assign people to groups. The user-friendly online system of GroupMatch allows each person to provide feedback at their convenience. The program allows the poll creator to easily survey the preferences of everyone that responded, as well as see the computed optimal group assignments. This friendly user interface ultimately creates an easy, stress-free process for all parties. 
-    </p>
+    <div id="about">
+    	<div class="section_frame">
+	    	<div id="section_1_side"></div>
+	    	<section id="section_1">
+	    		<img src="../Application/Themes/Default/Images/section1_anim.gif"><p>This is you.  You have to manage groups of people, fitting their preferences to fulfill your requirements and schedule.</p> 
+	    	</section>
+	    	<div id="section_1_bottom"></div>
+    	</div>
+    	<div class="section_frame">
+	    	<div id="section_2_side"></div>
+	    	<section id="section_2">
+	    		<img src="../Application/Themes/Default/Images/section2_anim.gif"><p>It's not easy to ensure that your needs are met, while trying to please everyone.</p> 
+	    	</section>
+	    	<div id="section_2_bottom"></div>
+    	</div>
+    	<div class="section_frame">
+	    	<div id="section_3_side"></div>
+	    	<section id="section_3">
+	    		 <img src="../Application/Themes/Default/Images/section3_anim.gif"><p>You're a progressive problem solver and your time is valuable.  So you use <span class="title">GroupMatch</span> to poll your group members and allow our <span class="em">tricky maths</span> and <span class="em">algorithmic wizardry</span> to determine the best way to fulfill your needs while making sure participant preferences are accomodated as well as possible.</p>
+	    	</section>
+	    	<div id="section_3_bottom"></div>
+    	</div>
+    	<div class="section_frame">
+    		<div id="section_4_side"></div>
+    		<section id="section_4">
+    			<img src="../Application/Themes/Default/Images/section4_anim.gif"><p>By letting <span class="title">GroupMatch</span> fit your group together, you can focus on what people should be doing and not having to waste time balancing your person resource. That makes you smart, super-hero smart.  Be a hero, try <span class="title">GroupMatch</span> today!</p>
+    		</section>
+    	</div>
+    </div>
 </section> 

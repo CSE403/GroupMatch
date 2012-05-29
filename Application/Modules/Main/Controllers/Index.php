@@ -25,7 +25,8 @@ class Index extends \Saros\Application\Controller
     	Currently does nothing.
     */
     public function indexAction()
-    {      
+    {   
+    	$this->view->headStyles()->addStyle("about");
         $this->view->topBar()->setPage("home");
     }
     
