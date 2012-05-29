@@ -151,8 +151,6 @@ $(function() {
 					  }, 100, function(){}
 					 );
 			    }
-			    
-			    //TODO make call to remove poll here
 			  });
 		});
 	}
@@ -161,7 +159,7 @@ $(function() {
 	 * Colorbox Scripting
 	 **************************************************************************/
 	var colorboxLauncher = $(".inline_colorbox");
-	if (colorboxLauncher) {
+	if (colorboxLauncher.length != 0) {
 		if (colorboxLauncher.attr("data-href")) {
 			colorboxLauncher.colorbox({
 				inline:true, 
