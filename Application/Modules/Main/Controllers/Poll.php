@@ -13,17 +13,17 @@ class Poll extends \Saros\Application\Controller
 	public function init() {
 
 	}
-    
-    // Gets a poll ID given a guid
+
+	// Gets a poll ID given a guid
 	// redirects if invalid guid
-    private function getPollId($guid) {
-        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('guid' => $guid));
+	private function getPollId($guid) {
+		$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('guid' => $guid));
 		if(empty($poll)) {
 			$homePage = $GLOBALS["registry"]->utils->makeLink("Index", "index");
 			$this->redirect($homePage);
 		}
-        return $poll->id;
-    }
+		return $poll->id;
+	}
 
 	/**
 	 Redirected the user to his/her poll page
@@ -32,29 +32,29 @@ class Poll extends \Saros\Application\Controller
 	{
 		$this->view->headStyles()->addStyle("poll");
 		$this->view->headScripts()->addScript("jquery_colorbox-min");
-        $this->view->topBar()->setPage("poll");
-        
-        $pollId = $this->getPollId($guid);
-        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
-        
+		$this->view->topBar()->setPage("poll");
+
+		$pollId = $this->getPollId($guid);
+		$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+
 		$this->view->isOwner = $this->isOwner($pollId);
-        $this->view->Poll = $poll;
+		$this->view->Poll = $poll;
 	}
 
 	/**
 	 Append unique view style
 	 */
 	public function participateAction($guid=null) {
-        $pollId = $this->getPollId($guid);
-		
+		$pollId = $this->getPollId($guid);
+
 		$errors = array();
 		if($_SERVER["REQUEST_METHOD"] == "POST")
-        {	
+		{
 			//check to make sure everything is valid
 			$name =  $_POST["participant_name"];
-			if(empty($name)) 
+			if(empty($name))
 				$errors[] = "Participant name is required";
-				
+
 			$unique = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId))->isUnique;
 			if($unique == "true") {
 				$max = 0;
@@ -64,7 +64,7 @@ class Poll extends \Saros\Application\Controller
 						$max++;
 					}
 				}
-				
+
 				$options = array();
 				foreach($_POST as $optionId => $priority) {
 					$needle = "option_";
@@ -75,7 +75,7 @@ class Poll extends \Saros\Application\Controller
 						$options[] = $priority;
 					}
 				}
-				
+
 				if(count(array_flip($options)) != $max)
 					$errors[] = "Non-unique ratings exist";
 
@@ -97,7 +97,7 @@ class Poll extends \Saros\Application\Controller
 				$person->pollId = $pollId;
 				$person->name = $name;
 				$personId = $this->registry->mapper->insert($person);
-				
+
 				// now lets do all of their priorities.
 				foreach($_POST as $optionId => $priority) {
 					$needle = "option_";
@@ -110,7 +110,7 @@ class Poll extends \Saros\Application\Controller
 						$this->registry->mapper->insert($answer);
 					}
 				}
-				
+
 				//email the poll creator that someone has participated in his poll
 				$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
 				$pollOwner = $this->registry->mapper->first('\Application\Entities\User', array('id' => $poll->userId));
@@ -119,8 +119,8 @@ class Poll extends \Saros\Application\Controller
 				$to      = $pollOwner->username;
 				$subject = "Someone has responded to your poll";
 				$message = $person->name . " has responded to your poll entitled '" . $poll->question . "'."
-							."  To view the response, visit " . $pollLink . ".";
-	
+				."  To view the response, visit " . $pollLink . ".";
+
 				$headers   = array();
 				$headers[] = "MIME-Version: 1.0";
 				$headers[] = "Content-type: text/plain; charset=iso-8859-1";
@@ -129,27 +129,27 @@ class Poll extends \Saros\Application\Controller
 				$headers[] = "X-Mailer: PHP/".phpversion();
 				$headers = implode("\r\n", $headers);
 				mail($to, $subject, $message, $headers);
-				
+
 				//redirect back to poll index page
-				$this->redirect($pollLink);            
+				$this->redirect($pollLink);
 			}
-        }
-        
-        $this->view->headStyles()->addStyle("participate");
-        $this->view->topBar()->setPage("participate");
-        $this->view->Errors = $errors;
-        $poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
-        $this->view->Poll = $poll;
+		}
+
+		$this->view->headStyles()->addStyle("participate");
+		$this->view->topBar()->setPage("participate");
+		$this->view->Errors = $errors;
+		$poll = $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+		$this->view->Poll = $poll;
 	}
-	
+
 	/*
 		Deletes a participant from a poll
-		Does validitiy checking to ensure that only the owner may delete the poll
+	Does validitiy checking to ensure that only the owner may delete the poll
 	*/
 	public function deleteParticipantAction() {
 		$guid = "";
 		if($_SERVER["REQUEST_METHOD"] == "POST")
-        {
+		{
 			$guid = $_POST["guid"];
 			$personId = $_POST["personId"];
 			$pollId = $this->getPollId($guid);
@@ -163,7 +163,7 @@ class Poll extends \Saros\Application\Controller
 		$pollLink = $GLOBALS["registry"]->utils->makeLink("Poll", "index", $guid);
 		$this->redirect($pollLink);
 	}
-	
+
 	/**
 	 On the user's poll page, there is a link to generate the current answer. This function
 	 generates that answer, and then displays it on the same page as the "Happiness meter".
@@ -171,63 +171,63 @@ class Poll extends \Saros\Application\Controller
 	public function solutionAction($guid=null)
 	{
 		$this->view->headStyles()->addStyle("solution");
-        $this->view->topBar()->setPage("solution");
-		
-        $pollId = $this->getPollId($guid);
+		$this->view->topBar()->setPage("solution");
+
+		$pollId = $this->getPollId($guid);
 		// Verify that this exists
-		
-        $pollId = intval($pollId);
-        
+
+		$pollId = intval($pollId);
+
 		$mapper = $this->registry->mapper;
-        
-        $poll = $mapper->first('\Application\Entities\Poll', array('id' => $pollId));
-        
+
+		$poll = $mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+
 		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId))->execute();
 		$this->view->NoParticipants = false;
-        if (count($people) == 0) {
-            $this->view->NoParticipants = true;
-        }
-        else
-        {
-            $realOptions = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
-               
-            $options = array();
-            foreach($realOptions as $option) {
-                $options[] = $option;
-            }
-            $options[] = null;       
-            
-            $maxSize = $poll->isUnique == "true" ? count($realOptions) : 5;
-		    $pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
+		if (count($people) == 0) {
+			$this->view->NoParticipants = true;
+		}
+		else
+		{
+			$realOptions = $mapper->all('\Application\Entities\Option', array('pollId' => $pollId))->execute();
+			 
+			$options = array();
+			foreach($realOptions as $option) {
+				$options[] = $option;
+			}
+			$options[] = null;
 
-		    foreach($people as $person) {
-			    $option = $pollSolution->findBestOption($person);
-                
-			    $pollSolution->addPersonToOption($person, $option);
-		    }
-                 
-		    for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
-		    {
-			    $curBestSolution = null;
-                $j = 0;
-			    while (($curBestSolution == null
-					    || $curBestSolution->getStarValue() < $pollSolution->getStarValue()))
-			    {
-				    $curBestSolution = clone $pollSolution;
-				    $pollSolution = $this->move($pollSolution, $i, $options);
-                    $j++;
-			    }
-		    }
+			$maxSize = $poll->isUnique == "true" ? count($realOptions) : 5;
+			$pollSolution = new \Application\Modules\Main\Models\PollSolution($realOptions, count($people), $maxSize);
 
-            if ($curBestSolution == null) {
-                $curBestSolution = clone $pollSolution;
-            }
-            
-		    // Hand it off to the view
-            $this->view->Poll = $poll;
-		    $this->view->Solution = $curBestSolution;
-        }
-		
+			//set all people into an option
+			foreach($people as $person) {
+				$option = $pollSolution->findBestOption($person);
+
+				$pollSolution->addPersonToOption($person, $option);
+			}
+			//Recursivley shit people at increasing depth with accuracy decreasing with poll size
+			for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
+			{
+				$curBestSolution = null;
+				//repeat untill solution can't be improved at this depth
+				while (($curBestSolution == null
+						|| $curBestSolution->getStarValue() < $pollSolution->getStarValue()))
+				{
+					$curBestSolution = clone $pollSolution;
+					$pollSolution = $this->move($pollSolution, $i, $options);
+				}
+			}
+
+			if ($curBestSolution == null) {
+				$curBestSolution = clone $pollSolution;
+			}
+
+			// Hand it off to the view
+			$this->view->Poll = $poll;
+			$this->view->Solution = $curBestSolution;
+		}
+
 	}
 
 	/**
@@ -240,45 +240,50 @@ class Poll extends \Saros\Application\Controller
 		$toReturn = null;
 		$curBest = null;
 
+		//return if valid solution found
 		if ($depth == 0 && !$pollSolution->hasConflicts()){
 			return clone $pollSolution;
 		}
 
+		//return null if branch is invalid
 		if($depth == 0){
 			return $toReturn;
 		}
 
+		//iterate over every person
 		foreach($options as $option) {
 			foreach($pollSolution->getPeopleForOption($option) as $person) {
 				$pollSolution->removePersonFromOption($person, $option);
 
+				//itereate over every option
 				foreach($options as $optionAdd) {
 					$pollSolution->addPersonToOption($person, $optionAdd);
+					//cut branch if it is impossible
 					if ($pollSolution->possibleToMakeValidIn($depth-1)){
 						$curBest = $this->move($pollSolution, $depth-1, $options);
 						if ($toReturn == null
 								|| ($curBest != null && $curBest->getStarValue() > $toReturn->getStarValue())) {
-                                    $toReturn = $curBest;
+							$toReturn = $curBest;
 						}
 					}
-					 
+
 					$pollSolution->removePersonFromOption($person, $optionAdd);
 				}
 
 				$pollSolution->addPersonToOption($person, $option);
 			}
-		}            
+		}
 		return $toReturn;
 	}
-	
+
 	//returns true if the current person is logged in and is the owner of teh poll,
 	//otherwise returns false;
 	private function isOwner($pollId) {
 		$this->auth = \Saros\Auth::getInstance();
-        
-        if (!$this->auth->hasIdentity())      
-            return false;
-		
+
+		if (!$this->auth->hasIdentity())
+			return false;
+
 		$this->auth = \Saros\Auth::getInstance();
 		$userId = $this->auth->getIdentity()->id;
 		return (bool) $this->registry->mapper->first('\Application\Entities\Poll', array('id' => $pollId, 'userId' => $userId));
