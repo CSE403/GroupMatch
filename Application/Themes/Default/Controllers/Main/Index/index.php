@@ -18,7 +18,7 @@
     	<div class="section_frame">
 	    	<div id="section_1_side"></div>
 	    	<section id="section_1">
-	    		<img src="<?php echo $content; ?>section1_anim.gif"><p>This is you.  You have to manage groups of people, fitting their preferences to fulfill your requirements and schedule.</p> 
+	    		<img src="<?php echo $content; ?>section1_anim.gif"><p>This is you.  You have to manage groups of people, fitting their preferences into groups to fulfill your requirements and schedule.</p> 
 	    	</section>
 	    	<div id="section_1_bottom"></div>
     	</div>
