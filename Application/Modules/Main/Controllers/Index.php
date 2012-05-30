@@ -115,9 +115,9 @@ class Index extends \Saros\Application\Controller
 								"process of matching people to preferences extremely easy.  " .
 								"To get started, login to your account using the following information:" .
 								"\n\n" .
-								"USERNAME: " . $user->username;
+								"USERNAME: " . $user->username .
 								"\n\n" .
-								"PASSWORD: " . $origPassword;
+								"PASSWORD: " . $origPassword .
 								"\n\n" .
 								"(Note: This username and password combination has been sent you for record ".
 								"keeping purposes.  Please save this email.)".
