@@ -181,6 +181,7 @@ class Poll extends \Saros\Application\Controller
 		$mapper = $this->registry->mapper;
 
 		$poll = $mapper->first('\Application\Entities\Poll', array('id' => $pollId));
+		$this->view->Poll = $poll;
 
 		$people = $mapper->all('\Application\Entities\Person', array('pollId' => $pollId))->execute();
 		$this->view->NoParticipants = false;
@@ -224,10 +225,8 @@ class Poll extends \Saros\Application\Controller
 			}
 
 			// Hand it off to the view
-			$this->view->Poll = $poll;
 			$this->view->Solution = $curBestSolution;
 		}
-
 	}
 
 	/**
