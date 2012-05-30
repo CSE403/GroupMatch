@@ -119,7 +119,7 @@
 			<?php
 				$link = $GLOBALS["registry"]->utils->makeLink("Poll","participate",$this->Poll->guid);
 			?>
-            <tr><td><a href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
+            <tr><td><a class="nav_link" "href="<?php echo $link; ?>"><button class="orange">Participate</button></a><td></tr>
         </tfoot>
     </table>
     <footer>
