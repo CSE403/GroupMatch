@@ -109,7 +109,7 @@ class Index extends \Saros\Application\Controller
 				
 				$auth = \Saros\Auth::getInstance();
 				if ($auth->hasIdentity()) {
-				$to      = $pollOwner->username;
+					$to      = $user->username;
 					$subject = "Welcome to GroupMatch";
 					$message = "Welcome to GroupMatch.  Our website is dedicated to making your " . 
 								"process of matching people to preferences extremely easy.  " .
