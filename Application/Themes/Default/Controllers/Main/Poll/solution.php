@@ -43,7 +43,7 @@
             <?php
                 $solutionMap = $this->Solution->getSolutionMap();
                 $divide = $this->Poll->isUnique == "true" ? count($this->Poll->options) : 5;
-                
+
                 foreach($this->Poll->options as $option) {
                     ?>
                         <th><?php echo $option->name; ?></th>
@@ -68,15 +68,20 @@
                         {
                             // Lets see if there should be someone in this cell
                             
-                            $people = array_keys($solutionMap[$option->id]);
+                            $people = $solutionMap[$option->id];
                             if ($i == 0) {
                                 // if we are on the first iteration, we need to figure
                                 // out what the biggest option is.
                                 $biggestPoll = max($biggestPoll, count($people));
                             }
+                            // for some reason the keys for $people is every other ID.
+                            // soo....
                             
-                            if (isset($solutionMap[$option->id][$i])) {
-                                $person = $solutionMap[$option->id][$i];
+                            $peopleKeys = array_keys($people);
+                            //die(var_dump($peopleKeys[$i]));
+                            if (isset($peopleKeys[$i]) && isset($solutionMap[$option->id][$peopleKeys[$i]])) {
+                                $person = $solutionMap[$option->id][$peopleKeys[$i]];
+                                
                                 $percent = (int)(($this->Solution->answers[$option->id.",".$person->id]->priority/$divide)*100);
                                 
                                 $color = "red";
@@ -112,7 +117,6 @@
             </table>
         </div>
         <?php
-        //die(var_dump($biggestPoll)); 
         if (count($this->Solution->getPeopleNotPlaced()) > 0) {
         ?>
 	        <div id="not_placed">
