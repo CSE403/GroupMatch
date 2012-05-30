@@ -1,5 +1,10 @@
 <html>
     <head>
+        <?php
+    	    $content = $this->registry->config->siteUrl.$this->getThemeLocation()."Images/";
+		?>
+		<link rel="shortcut icon" href="<?php echo $content; ?>/favicon.png" />
+		<title>Group Match</title>
         <!-- jQuery -->
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
         <?php 
