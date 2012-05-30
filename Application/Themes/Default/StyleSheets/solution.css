@@ -6,8 +6,7 @@
 		float: right;
 		margin-top: 5px;
 	}
-	
-	
+
 #report {
 	width: 500px;
 	padding-bottom: 10px;
@@ -123,7 +122,7 @@
 	}
 	
 	#answer tbody td {
-		text-align: right;
+		text-align: center;
 	}
 	
 	#answer .center {
