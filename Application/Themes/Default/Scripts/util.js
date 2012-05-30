@@ -120,8 +120,10 @@ $(function() {
 					errors = true;
 				}
 			});
-			if(errors)
+			if(errors) {
+				alert("Invalid Group Size");
 				return false;
+			}
 		});
 	}
 	
@@ -221,8 +223,10 @@ $(function() {
 					}
 				});
 			}
-			if(error)
+			if(error) {
+				alert("Invalid Ratings");
 				return false;
+			}
 		});
 	 }
 	 
