@@ -30,7 +30,7 @@ class Poll extends \Saros\Application\Controller
 	 */
 	public function indexAction($guid=null)
 	{
-		$this->view->headStyles()->addStyle("poll");
+		$this->view->headStyles()->addStyle("poll")->addStyle("meter");
 		$this->view->headScripts()->addScript("jquery_colorbox-min");
 		$this->view->topBar()->setPage("poll");
 
@@ -170,7 +170,8 @@ class Poll extends \Saros\Application\Controller
 	 */
 	public function solutionAction($guid=null)
 	{
-		$this->view->headStyles()->addStyle("solution");
+		$this->view->headStyles()->addStyle("solution")->addStyle("meter");
+        $this->view->headScripts()->addScript("jquery_colorbox-min");
 		$this->view->topBar()->setPage("solution");
 
 		$pollId = $this->getPollId($guid);
@@ -207,10 +208,15 @@ class Poll extends \Saros\Application\Controller
 
 				$pollSolution->addPersonToOption($person, $option);
 			}
+            
+            $curBestSolution = null;
+            
 			//Recursivley shit people at increasing depth with accuracy decreasing with poll size
-			for ($i = 2; $i <= 10/log(count($options)* count($people)+1, M_E); $i++)
+            $math = 11/log(count($options)* count($people)+1, M_E);
+            //die($math);
+			for ($i = 2; $i <= $math; $i++)
 			{
-				$curBestSolution = null;
+				//$curBestSolution = null;
 				//repeat untill solution can't be improved at this depth
 				while (($curBestSolution == null
 						|| $curBestSolution->getStarValue() < $pollSolution->getStarValue()))

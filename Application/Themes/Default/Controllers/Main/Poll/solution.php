@@ -37,49 +37,82 @@
 			<div id="meter_background"><div id="meter_value" style="width: <?php echo ($happinessPercent * 99.8/100); ?>%"></div></div>
 		</div>
         <div id="answer">
-            <ul>
+            <table>
+                <thead>
+                    <tr>
             <?php
                 $solutionMap = $this->Solution->getSolutionMap();
+                $divide = $this->Poll->isUnique == "true" ? count($this->Poll->options) : 5;
+                
                 foreach($this->Poll->options as $option) {
-                	if (count($solutionMap[$option->id]) > 0) {
-            ?>   
-	                <li>
-	                	<h1><?php echo $option->name ?></h1>
-	                    <table>
-	                    	<thead>
-	                    		<tr>
-	                    			<th>Name</th>
-	                    			<th>Happiness</th>
-	                    		</tr>
-	                    	</thead>
-	                    	<tbody>
-	                    		<?php
-	                    		$counter = 0;
-		                        foreach($solutionMap[$option->id] as $person)
-		                        {
-		                        	$classStr = "";
-		                        	if ($counter % 2 == 0) {
-		                        		$classStr = "alt";
-		                        	}
-		                        	$counter++;
-								?>
-		                             <tr class="<?php echo $classStr; ?>">
-		                             	<td><?php echo $person->name ?></td>
-		                             	<td class="center"><?php echo $this->Solution->answers[$option->id.",".$person->id]->priority ?></td>
-		                             <tr>
-		                             <?php
-		                        }
-		                        ?>
-	                    	</tbody>
-	                    </table>
-	                </li>
-	                <?php
-	                }
-              	}
-            ?>
-            </ul>
+                    ?>
+                        <th><?php echo $option->name; ?></th>
+                    <?php
+                }
+                ?>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    $biggestPoll = 1;
+                    // Go through all the people in each poll
+                    // keep going until the biggest poll has no people left
+                    // This is our row (person number)
+                    for($i = 0; $i < $biggestPoll; $i++)
+                    {
+                        ?>
+                        <tr>
+                        <?php
+                        // Lets go through all of our columns
+                        foreach($this->Poll->options as $option)
+                        {
+                            // Lets see if there should be someone in this cell
+                            
+                            $people = array_keys($solutionMap[$option->id]);
+                            if ($i == 0) {
+                                // if we are on the first iteration, we need to figure
+                                // out what the biggest option is.
+                                $biggestPoll = max($biggestPoll, count($people));
+                            }
+                            
+                            if (isset($solutionMap[$option->id][$i])) {
+                                $person = $solutionMap[$option->id][$i];
+                                $percent = (int)(($this->Solution->answers[$option->id.",".$person->id]->priority/$divide)*100);
+                                
+                                $color = "red";
+                                if ($percent >= 67) {
+                                    $color = "green";
+                                }
+                                elseif($percent >= 33) {
+                                    $color = "yellow";
+                                }
+                                
+                                ?>
+                                     <td>
+                                        <div class="meter <?php echo $color; ?>">
+                                            <div class="numeric_value"><?php echo $person->name ?> </div>
+                                            <div class="meter_background"><div class="meter_value" style="width: <?php echo max(0, $percent);?>"></div></div>
+                                        </div>
+                                    </td>
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                     <td></td>
+                                <?php
+                            }
+                        }
+                        ?>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
-        <?php 
+        <?php
+        //die(var_dump($biggestPoll)); 
         if (count($this->Solution->getPeopleNotPlaced()) > 0) {
         ?>
 	        <div id="not_placed">

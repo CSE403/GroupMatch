@@ -19,6 +19,7 @@ class Setup extends \Saros\Application\Controller
     }
     
     public function resetAction() {
+        $this->view->show(false);
         $this->registry->mapper->truncateDatasource('\Application\Entities\Answer');
         $this->registry->mapper->truncateDatasource('\Application\Entities\Option');
         $this->registry->mapper->truncateDatasource('\Application\Entities\Person');
