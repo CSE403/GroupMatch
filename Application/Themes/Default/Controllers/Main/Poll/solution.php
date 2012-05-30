@@ -31,9 +31,10 @@
 	<section id="report" class="indent">
 		<?php $happinessPercent =  $this->Solution->getHappiness();?>
 		<div id="happy_meter">
-			<h1>Group Happiness</h1>         
-			<div id="numeric_value"><?php echo $happinessPercent;?>%</div>
-			<div id="meter_background"><div id="meter_value" style="width: <?php echo ($happinessPercent * 99.8/100)?>%"></div></div>
+			<h1>Group Happiness</h1>    
+			<p>This figure represents the happiness of everyone in the poll, including people not placed in a category.</p>
+			<div id="numeric_value"><?php echo round($happinessPercent);?>%</div>
+			<div id="meter_background"><div id="meter_value" style="width: <?php echo ($happinessPercent * 99.8/100); ?>%"></div></div>
 		</div>
         <div id="answer">
             <ul>
