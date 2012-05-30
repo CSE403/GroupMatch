@@ -19,36 +19,59 @@
 			padding: 105px 0 45px 0;
 		}
 		
-			.section_frame section p span.title {
-				font-weight: 600;
-				font-size: 18px;
+			.section_frame section p {
+				padding-top: 60px;
 			}
-			
-			.section_frame section p span.em {
-				font-style: italic;
-				font-size: 15px;
-			}
+		
+				.section_frame section p span.title {
+					font-weight: 600;
+					font-size: 18px;
+				}
+				
+				.section_frame section p span.em {
+					font-style: italic;
+					font-size: 15px;
+				}
 		
 	
 	#section_1, #section_2, #section_3, #section_4 {
-		/* margin: 10px 0 50px 0; */
 		height: 250px;
+	}
+	
+	#section_1 p {
+		padding-right: 50px;
+	}
+	
+	#section_2 p {
+		padding-left: 80px;
+	}
+	
+	#section_3 p {
+		padding-right: 50px;
+	}
+	
+	#section_4 p {
+		padding-left: 80px;
 	}
 	
 	#section_1 img {
 		float: left;
+		margin-right: 50px;
 	}
 	
 	#section_2 img {
 		float: right;
+		margin-left: 50px;
 	}
 	
 	#section_3 img {
 		float: left;
+		margin-right: 50px;
 	}
 	
 	#section_4 img {
 		float: right;
+		margin-left: 50px;
 	}
 	
 	#section_1_side {
